@@ -1,0 +1,11 @@
+<div class="home">
+    <!-- Latest Animes Header -->
+    <app-latestnews *ngIf="randomAnimes" [randomAnimes]="randomAnimes"></app-latestnews>
+
+    <!-- Latest Episodes -->
+    <app-episodelist [episodes]="latestEpisodes"></app-episodelist>
+
+    <!-- Latest Animes -->
+    <app-animelist [animes]="latestAnimes" *ngIf="latestAnimes"></app-animelist>
+</div>
+

@@ -1,0 +1,40 @@
+<div class="chats" *ngIf="identity && identity !== null && identity !== undefined && identity !== '' && chats && chats.length > 0">
+    <ul class="chat-list" id="ul-chat-list">
+        <li *ngFor="let chat of chats" (click)="readNotify( chat );openChat( chat );$event.stopPropagation();" class="animate__animated animate__tada">
+            <div *ngIf="identity._id !== chat.lastUser && chat.notify" class="notify-chat"></div>
+
+            <img *ngIf="identity._id !== chat.emmiter._id" src="{{ url + '/user/image/' + chat.emmiter.image }}" alt="{{ chat.emmiter.image }}">
+            <img *ngIf="identity._id !== chat.receiver._id" src="{{ url + '/user/image/' + chat.receiver.image }}" alt="{{ chat.receiver.image }}">
+
+            <div class="show-username" *ngIf="identity._id !== chat.emmiter._id">
+                {{ chat.emmiter.username }}
+            </div>
+            <div class="show-username" *ngIf="identity._id !== chat.receiver._id">
+                {{ chat.receiver.username }}
+            </div>
+        </li>
+    </ul>
+
+    <div class="chat-window" id="chat-window" *ngIf="userChatting" (click)="$event.stopPropagation();">
+        <div class="chat-header" routerLink="/{{ userChatting.username }}" (click)="hideChat()">
+            <img src="{{ url + '/user/image/' + userChatting.image }}" alt="{{ userChatting.image }}">
+            <p>{{ userChatting.username }}</p>
+            <i class="caret right icon"></i>
+        </div>
+        <div class="chat-body">
+            <app-commentlist *ngIf="showComments" [type]="'chat'" [chat]="actuallyChat"></app-commentlist>
+        </div>
+    </div>
+
+    <!-- Chat Window Movil -->
+    <div class="chat-window-movil" id="chat-window-movil" *ngIf="userChatting" (click)="$event.stopPropagation();">
+        <div class="chat-header" (click)="hideChat()">
+            <img src="{{ url + '/user/image/' + userChatting.image }}" alt="{{ userChatting.image }}">
+            <p>{{ userChatting.username }}</p>
+            <i class="close icon"></i>
+        </div>
+        <div class="chat-body">
+            <app-commentlist *ngIf="showComments" [type]="'chat'" [chat]="actuallyChat"></app-commentlist>
+        </div>
+    </div>
+</div>

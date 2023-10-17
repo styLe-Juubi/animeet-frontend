@@ -1,0 +1,46 @@
+<ul class="notification-list" #notificationList>
+    <ng-container>
+        <li (click)="setTheme('default');">
+            Modo Dia 
+            <div class="themes">
+                <div class="theme default"></div>
+                <div class="theme default"></div>
+            </div>
+        </li>
+        <li (click)="setTheme('dark');">
+            Modo Oscuro
+            <div class="themes">
+                <div class="theme dark"></div>
+                <div class="theme dark"></div>
+            </div>
+        </li>
+        <li (click)="setTheme('sennin');">
+            Modo Sennin
+            <div class="themes">
+                <div class="theme default"></div>
+                <div class="theme sennin"></div>
+            </div>
+        </li>
+        <li (click)="setTheme('uchiha');">
+            Modo Uchiha
+            <div class="themes">
+                <div class="theme uchiha-blue"></div>
+                <div class="theme uchiha"></div>
+            </div>
+        </li>
+        <li (click)="setTheme('pink');">
+            Modo Pink
+            <div class="themes">
+                <div class="theme default"></div>
+                <div class="theme pink"></div>
+            </div>
+        </li>
+        <li (click)="setTheme('xcentic');">
+            Modo Xcentic
+            <div class="themes">
+                <div class="theme dark"></div>
+                <div class="theme xcentic"></div>
+            </div>
+        </li>
+    </ng-container>
+</ul>

@@ -1,0 +1,406 @@
+@import '../../scss/colors.scss';
+
+.episode {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    margin: 0 auto;
+    justify-content: flex-start;
+
+    h2 {
+        width: 100%;
+        letter-spacing: 1px;
+        background-color: $purple;
+        margin: 0 auto;
+        padding: 8px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        color: $font-white;
+        text-align: center;
+        border-radius: 1px;
+
+        span:nth-of-type(1) {
+            float: left;
+        }
+
+        span:nth-of-type(2) {
+            float: right;
+        }
+    }
+
+    .side-left {
+        width: 75%;
+        margin-right: 10px;
+
+        .episode-video {
+            width: 100%;
+            margin-top: 10px;
+
+            .option-list {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                background-color: $white;
+
+                li {
+                    flex: 1 0 10%;
+                    text-align: center;
+                    padding: 10px;
+                    border: 1px solid $border-light;
+                    border-left: 0;
+                    color: $font-dark;
+                    letter-spacing: 1px;
+                    font-size: 13px;
+                    cursor: pointer;
+                    transition: $transition;
+
+                    &:first-of-type {
+                        border-left: 1px solid $border-light;
+                    }
+
+                    &:hover {
+                        color: $purple;
+                        box-shadow: $shadow;
+                    }
+                }
+            }
+
+            .video {
+                width: 100%;
+                height: 520px;
+                margin-top: 10px;
+                padding: 5px;
+                border: 1px solid $border-light;
+                background-color: $white;
+                
+                iframe {
+                    position: relative;
+                    z-index: 2;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #000;
+                    border: 0;
+                }
+            }
+
+            .next-back-functions {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                width: 100%;
+
+                .back-next {
+                    flex: 0 0 80%;
+                    margin: 0;
+                    padding: 0;
+                    margin-top: 10px;
+                    list-style: none;
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: row;
+                    background-color: $white;
+    
+                    button {
+                        flex: 1 0 30%;
+                        text-align: center;
+                        padding: 10px;
+                        border: 1px solid $border-light;
+                        border-left: 0;
+                        color: $font-dark;
+                        letter-spacing: 1px;
+                        font-size: 13px;
+                        cursor: pointer;
+                        transition: $transition;
+                        background-color: $white;
+    
+                        &:first-of-type {
+                            border-left: 1px solid $border-light;
+    
+                            span {
+                                float: left;
+                            }
+                        }
+    
+                        &:nth-of-type(2) {
+                            flex: 0 0 10%;
+                            border-right: 0;
+                            padding-left: 14px;
+                        }
+    
+                        &:last-of-type {
+                            border-left: 1px solid $border-light;
+    
+                            span {
+                                float: right;
+                            }
+                        }
+    
+                        &:hover {
+                            background-color: $purple;
+                            color: $font-white;
+                            box-shadow: $shadow;
+                            border-color: $purple;
+                        }
+                    }
+                }
+
+                .functions {
+                    flex: 1 0 15%;
+                    list-style: none;
+                    margin: 10px 0 0 10px;
+                    padding: 0;
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: row;
+                    background-color: $white;
+
+                    li {
+                        flex: 1 0 30%;
+                        padding: 10px 7px;
+                        text-align: center;
+                        border: 1px solid $border-light;
+                        cursor: pointer;
+                        transition: $transition;
+                        color: $font-dark;
+
+                        &:nth-of-type(2),
+                        &:nth-of-type(3) {
+                            border-left: 0;
+                        }
+
+                        &:hover {
+                            background-color: $purple;
+                            color: $font-white;
+                            border-color: $purple;
+                            box-shadow: $shadow;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .side-right {
+        flex: 1 0 20%;
+
+        .related-animes {
+            width: 100%;
+            margin-top: 10px;
+            position: sticky;
+            top: 60px;
+            
+            h3 {
+                width: 100%;
+                letter-spacing: 1px;
+                font-size: 14px;
+                font-weight: 500;
+                text-align: left;
+                padding: 10px 20px;
+                border: 1px solid $border-light;
+                margin: 0;
+                background-color: $white;
+                color: $font-dark;
+
+                i {
+                    float: right;
+                }
+            }
+
+            ul {
+                width: 100%;
+                margin: 0;
+                margin-top: 10px;
+                padding: 0;
+                list-style: none;
+
+                li {
+                    width: 100%;
+                    margin-bottom: 10px;
+                    position: relative;
+                    text-align: center;
+                    border: 1px solid $border-light;
+                    padding-bottom: 10px;
+                    background-color: $white;
+                    cursor: pointer;
+                    transition: $transition;
+
+                    &:hover {
+                        box-shadow: $shadow;
+                        border-bottom: 1px solid $purple;
+                    }
+
+                    img {
+                        position: absolute;
+                        width: 100%;
+                        height: 120px;
+                        object-fit: cover;
+                        z-index: 0;
+                        left: 0;
+                        top: 0;
+
+                        &:nth-of-type(2) {
+                            position: relative;
+                            width: 40%;
+                            height: 150px;
+                            margin-top: -85px;
+                            z-index: 3;
+                            border: 3px solid $white;
+                            border-radius: 2px;
+                        }
+                    }
+
+                    .anime-name {
+                        position: relative;
+                        z-index: 2;
+                        width: 100%;
+                        height: 120px;
+                        background-color: rgba(0,0,0,.7);
+
+                        h5 {
+                            width: 100%;
+                            color: $font-white;
+                            font-weight: bold;
+                            letter-spacing: 1px;
+                            font-size: 13px;
+                            padding: 10px 10px 0;
+                            height: 28px;
+                            overflow: hidden;
+                            margin: 0;
+                        }
+                    }
+
+                    p {
+                        width: 100%;
+                        max-height: 152px;
+                        margin-top: 5px;
+                        letter-spacing: 1px;
+                        font-size: 11px;
+                        color: $font-gray;
+                        text-align: justify;
+                        padding: 0 10px 10px;
+                        overflow: hidden;
+                        transition: $transition;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.active-option {
+    border-color: $purple !important;
+    background-color: $purple !important;
+    color: $font-white !important;
+    box-shadow: $shadow !important;
+}
+
+.switch-light {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.8);
+    animation: fadeIn .3s;
+    display: none;
+}
+
+.show {
+    display: block!important;
+}
+.hide {
+    animation: fadeOut .3s;
+}
+
+@media ( max-width: 1013px ) {
+    .episode {
+        width: 95%;
+        display: block;
+        h2 {
+            margin-top: 10px;
+            padding: 8px 5px 8px 10px;
+            font-size: 13px;
+            text-align: left;
+
+            span:nth-of-type(1) {
+                display: none;
+            }
+        }
+        .side-left {
+            width: 100%;
+            .episode-video {
+                .option-list {
+                    justify-content: space-between;
+                    background-color: $body-color;
+                    li {
+                        font-size: 11px;
+                        padding: 5px;
+                        border: 1px solid $border-light;
+                        border-left: 0;
+                        background-color: $white;
+                    }
+                }
+                .video {
+                    margin-top: 0;
+                    border-top: 0;
+                    height: 300px;
+                    background-color: $white;
+                }
+                .next-back-functions {
+                    margin-top: -11px;
+                    .back-next {
+                        flex: 0 0 100%;
+                    }
+                    .functions {
+                        flex: 0 0 100%;
+                        margin: 0;
+                        li {
+                            border-top: 0;
+                            font-size: 13px;
+                            padding: 8px 10px;
+                        }
+                    }
+                }
+            }
+        }
+        .side-right {
+            .related-animes {
+                ul {
+                    li {
+                        p {
+                            max-height: 175px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media ( min-width: 1014px ) {
+    .episode {
+        width: 99%;
+    }
+}
+
+@media ( min-width: 1260px ) {
+    .episode {
+        width: 85%;
+    }
+}
+
+@media ( min-width: 1590px ) {
+    .episode {
+        width: 80%;
+    }
+}
+
+@media ( min-width: 1890px ) {
+    .episode {
+        width: 70%;
+    }
+}

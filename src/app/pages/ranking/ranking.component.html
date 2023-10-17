@@ -1,0 +1,145 @@
+<div class="ranking">
+    <div class="inside">
+        <h2>Usuarios más populares <span><img src="../../../assets/follow.png"></span></h2>
+        <ul class="top-users-ul">
+            <li *ngFor="let user of topFiveUsers" routerLink="/{{ user.username }}">
+                <div class="left-card">
+                    <img class="background-image" src="{{ url + '/user/image/' + user.coverImage }}" alt="{{ user.coverImage }}">
+                    <img class="image-main" src="{{ url + '/user/image/' + user.image }}" alt="{{ user.image }}">
+                </div>
+                <div class="right-card">
+                    <h3>{{ user.username }}</h3>
+                    <ul>
+                        <li>Seguidores <span>{{ user.followers }}</span></li>
+                        <li>Publicaciones <span>{{ user.counters.publicationsCount }}</span></li>
+                        <li>Reviews <span>{{ user.counters.reviewsCount }}</span></li>
+                        <h5>Animes</h5>
+                        <li>Favoritos <span>{{ user.counters.loveCount }}</span></li>
+                        <li>En espera <span>{{ user.counters.waitCount }}</span></li>
+                        <li>Vistos <span>{{ user.counters.watchCount }}</span></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="inside">
+        <h2>Resultados de busqueda <span><i class="caret down icon"></i></span></h2>
+        <ul class="related-search-ul" *ngIf="users">
+            <li *ngFor="let user of users" routerLink="/{{ user.username }}"> 
+                <div class="image-search">
+                    <img src="{{ url + '/user/image/' + user.image }}" alt="{{ user.image }}">
+                </div>
+                <div class="content-search">
+                    <h4>
+                        {{ user.username.substr(0, 40) }}
+                        <span class="color-anime">{{ user.country }}</span>
+                    </h4>
+                    <p>{{ user.description }}</p>
+                </div>
+            </li>
+            <app-notfound *ngIf="!users || users.length === 0" [message]="'No se han encontrado usuarios'"></app-notfound>
+        </ul>
+
+        <!-- Pagination -->
+        <app-pagination 
+            *ngIf="page && totalPages && ( users && users.length > 0)" 
+            [page]="page" 
+            [totalPages]="totalPages" 
+            (back)="changePage($event)" 
+            (next)="changePage($event)"
+            (lastPage)="changePage($event)"
+        >
+        </app-pagination>
+    </div>
+    <div class="inside">
+        <h2>Animes más populares <span><i class="heart outline icon"></i></span></h2>
+        <ul class="top-animes-ul">
+            <li *ngFor="let anime of topFiveAnimes" (click)="watchAnime( anime.name );">
+                <img class="background-anime" src="{{ anime.coverImage }}" alt="{{ anime.coverImage }}">
+                <div class="over-coverImage-anime">
+                    <div class="left-anime">
+                        <img src="{{ anime.image }}" alt="{{ anime.image }}">
+                    </div>
+                    <div class="right-anime">
+                        <h4>{{ anime.name }}</h4>
+                        <p>{{ anime.description }}</p>
+                        <p><span><i class="heart icon"></i>{{ anime.lovers }}</span></p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="ranking-movil">
+    <div class="inside">
+        <h2>Resultados de busqueda <span><i class="caret down icon"></i></span></h2>
+        <ul class="related-search-ul" *ngIf="users">
+            <li *ngFor="let user of users" routerLink="/{{ user.username }}"> 
+                <div class="image-search">
+                    <img src="{{ url + '/user/image/' + user.image }}" alt="{{ user.image }}">
+                </div>
+                <div class="content-search">
+                    <h4>
+                        {{ user.username.substr(0, 40) }}
+                        <span class="color-anime">{{ user.country }}</span>
+                    </h4>
+                    <p>{{ user.description }}</p>
+                </div>
+            </li>
+            <app-notfound *ngIf="!users || users.length === 0" [message]="'No se han encontrado usuarios'"></app-notfound>
+        </ul>
+
+        <!-- Pagination -->
+        <app-pagination 
+            *ngIf="page && totalPages && ( users && users.length > 0)" 
+            [page]="page" 
+            [totalPages]="totalPages" 
+            (back)="changePage($event)" 
+            (next)="changePage($event)"
+            (lastPage)="changePage($event)"
+        >
+        </app-pagination>
+    </div>
+    <div class="inside">
+        <h2>Usuarios más populares <span><img src="../../../assets/follow.png"></span></h2>
+        <ul class="top-users-ul">
+            <li *ngFor="let user of topFiveUsers" routerLink="/{{ user.username }}">
+                <div class="left-card">
+                    <img class="background-image" src="{{ url + '/user/image/' + user.coverImage }}" alt="{{ user.coverImage }}">
+                    <img class="image-main" src="{{ url + '/user/image/' + user.image }}" alt="{{ user.image }}">
+                </div>
+                <div class="right-card">
+                    <h3>{{ user.username }}</h3>
+                    <ul>
+                        <li>Seguidores <span>{{ user.followers }}</span></li>
+                        <li>Publicaciones <span>{{ user.counters.publicationsCount }}</span></li>
+                        <li>Reviews <span>{{ user.counters.reviewsCount }}</span></li>
+                        <h5>Animes</h5>
+                        <li>Favoritos <span>{{ user.counters.loveCount }}</span></li>
+                        <li>En espera <span>{{ user.counters.waitCount }}</span></li>
+                        <li>Vistos <span>{{ user.counters.watchCount }}</span></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="inside">
+        <h2>Animes más populares <span><i class="heart outline icon"></i></span></h2>
+        <ul class="top-animes-ul">
+            <li *ngFor="let anime of topFiveAnimes" (click)="watchAnime( anime.name );">
+                <img class="background-anime" src="{{ anime.coverImage }}" alt="{{ anime.coverImage }}">
+                <div class="over-coverImage-anime">
+                    <div class="left-anime">
+                        <img src="{{ anime.image }}" alt="{{ anime.image }}">
+                    </div>
+                    <div class="right-anime">
+                        <h4>{{ anime.name }}</h4>
+                        <p>{{ anime.description }}</p>
+                        <p><span><i class="heart icon"></i>{{ anime.lovers }}</span></p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

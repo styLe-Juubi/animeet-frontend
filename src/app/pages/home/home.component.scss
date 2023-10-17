@@ -1,0 +1,18 @@
+@import '../../scss/colors.scss';
+
+.home {
+    background-color: $white;
+    border: 1px solid $border-light;
+}
+
+@media ( max-width: 1013px ) {
+    .home {
+        border-top: 0;
+    }
+}
+
+@media ( min-width: 1014px ) {
+    .home {
+        border-top: 1px solid $border-light;
+    }
+}

@@ -1,0 +1,904 @@
+@import '../../scss/colors.scss';
+
+.publications {
+    width: 100%;
+    margin-top: 10px;
+    padding: 0;
+
+    h2 {
+        width: 100%;
+        font-size: 15px;
+        background-color: $white;
+        color: $font-dark;
+        font-weight: 500;
+        letter-spacing: 1px;
+        padding: 10px 0px 10px 15px;
+        border: 1px solid $border-light;
+        margin: 0;
+
+        i {
+            margin-right: 5px;
+        }
+
+        span {
+            float: right;
+
+            &:nth-of-type(1) {
+                float: none;
+            }
+            
+            button {
+                width: 200px;
+                padding: 11px 10px 10px 20px;
+                margin-top: -12px;
+                border: 0;
+                background-color: $white;
+                letter-spacing: 1px;
+                color: $font-gray;
+                letter-spacing: 1px;
+                text-align: left;
+                cursor: pointer;
+                transition: $transition;
+
+                span {
+                    float: right;
+                    color: $font-dark;
+                    transition: $transition;
+                }
+
+                &:hover {
+                    background-color: $purple;
+                    color: $font-white;
+                    box-shadow: $shadow;
+                }
+
+                &:hover span {
+                    color: $font-white;
+                }
+            }
+        }
+        
+    }
+
+    .list-publications {
+        width: 100%;
+        margin: 0;
+        margin-top: 10px;
+        padding: 0;
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .create-publication {
+            width: 100%;
+            background-color: $white;
+            border: 1px solid $border-light;
+            margin-bottom: 10px;
+            padding: 10px 15px;
+
+            form {
+                width: 100%;
+                text-align: center;
+
+                .create-header {
+                    width: 100%;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+    
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                        border: 1px solid $border-light;
+                    }
+    
+                    h3 {
+                        margin: 0;
+                        letter-spacing: 1px;
+                        color: $purple;
+                        font-size: 14px;
+                        margin-left: 10px;
+                        font-weight: 500;
+                    }
+    
+                    p {
+                        margin-left: auto;
+                        color: $font-gray;
+                        letter-spacing: 1px;
+                        font-size: 12px;
+                        cursor: pointer;
+                        transition: $transition;
+
+                        &:hover {
+                            color: $purple;
+                        }
+                    }
+                }
+                
+                textarea {
+                    width: 90%;
+                    margin-left: 5%;
+                    height: 70px;
+                    background-color: $body-color;
+                    border: 0;
+                    border: 1px solid $border-light;
+                    padding: 10px;
+                    outline: none;
+                    resize: none;
+                    transition: $transition;
+                    font-size: 13px;
+                    color: $font-gray;
+                    letter-spacing: 1px;
+                    border-radius: 2px;
+
+                    &:focus {
+                        outline: 1px solid $purple-light;
+                    }
+
+                    &::placeholder {
+                        letter-spacing: 1px;
+                    }
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+
+                img {
+                    max-width: 100%;
+                    max-height: 300px;
+                    cursor: pointer;
+                    object-fit: cover;
+                    transition: $transition;
+
+                    &:hover {
+                        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                    }
+                }
+
+                .create-footer {
+                    width: 100%;
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    flex-direction: row;
+                    position: relative;
+
+                    .review-li {
+                        padding: 4px 5px 1px;
+                    }
+
+                    li {
+                        text-align: left;
+                        flex: 1 0 70%;
+                        color: $purple;
+                        margin: 0;
+                        letter-spacing: 1px;
+                        font-size: 13px;
+                        padding: 8px 5px;
+                        cursor: pointer;
+                        transition: $transition;
+                        display: flex;
+                        flex-wrap: wrap;
+                        flex-direction: row;
+                        align-items: center;
+
+                        .search-to-review {
+                            border: 0;
+                            width: 40%;
+                            height: 35px;
+                            border-radius: 2px;
+                            outline: none;
+                            padding: 5px 35px 5px 20px;
+                            border: 1px solid $border-light;
+                            transition: $transition;
+                            letter-spacing: 1px;
+                            background-color: $white;
+                            color: $font-gray;
+            
+                            &::placeholder {
+                                color: $font-gray;
+                                letter-spacing: 1px;
+                            }
+            
+                            &:focus {
+                                border-color: $purple;
+                            }
+                        }
+    
+                        .btn-search {
+                            margin: 0;
+                            margin-top: -15px;
+                            margin-left: -25px;
+                            border: 0;
+                            cursor: pointer;
+                            width: 20px;
+                            height: 20px;
+                            background-color: transparent;
+                            color: $purple;
+                            border-radius: 2px;
+                            border-top-left-radius: 0;
+                            border-bottom-left-radius: 0;
+                            letter-spacing: 1px;
+                            transition: $transition;
+    
+                            &:hover {
+                                color: $action;
+                                box-shadow: none;
+                            }
+                        }
+
+                        .selectedAnime {
+                           width: 295px !important;
+                           height: 20px;
+                           padding: 0;
+                           border: 0;
+                           overflow: hidden;
+                           text-overflow: ellipsis;
+                           white-space: nowrap;
+                           text-align: left;
+                           margin: 0;
+                           font-size: 12px;
+                        }
+                    }
+                    
+                    .search-list {
+                        position: absolute;
+                        width: 70%;
+                        z-index: 15;
+                        top: 128%;
+                        left: -16px;
+                        background-color: $white;
+                        border: 1px solid $border-light;
+                        border-top: 0;
+                        border-bottom-left-radius: 2px;
+                        border-bottom-right-radius: 2px;
+                        animation: fadeIn .3s;
+
+                        ul {
+                            width: 100%;
+                            max-height: 404px;
+                            overflow-y: scroll;
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            
+                            &::-webkit-scrollbar {
+                                width: 2px;
+                            }
+        
+                            &::-webkit-scrollbar-track {
+                                background: $white;        /* color of the tracking area */
+                            }
+        
+                            &::-webkit-scrollbar-thumb {
+                                background-color: $purple;
+                            }
+        
+                            li {
+                                width: 100%;
+                                border-bottom: 1px solid $border-light;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                flex-wrap: wrap;
+                                padding: 5px 20px;
+                                transition: $transition;
+                                cursor: pointer;
+                                border-radius: 0;
+                                animation: fadeIn .5s;
+        
+                                &:hover {
+                                    background-color: $purple;
+                                    border-color: $purple-light;
+                                }
+        
+                                &:hover .content-search h4 {
+                                    color: $font-white;
+                                }
+        
+                                &:hover .content-search h4 span {
+                                    color: $font-white !important;
+                                }
+        
+                                &:hover .content-search p {
+                                    color: $font-white-light;
+                                }
+        
+                                .image-search {
+                                    width: 60px;
+                                    height: 70px;
+                                    text-align: center;
+        
+                                    img {
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                        background-color: $white;
+                                        border: 1px solid $border-light;
+                                        border-radius: 2px;
+                                    }
+                                }
+        
+                                .content-search {
+                                    flex: 1 0 70%;
+                                    height: 60px;
+                                    padding: 0 10px;
+        
+                                    h4 {
+                                        margin: 0;
+                                        margin-top: -1px;
+                                        letter-spacing: 1px;
+                                        color: $font-dark;
+                                        font-weight: 500;
+                                        line-height: 13px;
+                                        font-size: 13px;
+                                        overflow: hidden;
+                                        height: 13px;
+                                        transition: $transition;
+                                        padding-left: 5px;
+                                        word-wrap: break-word;
+        
+                                        span {
+                                            color: $font-dark;
+                                            float: right;
+                                        }
+                                    }
+        
+                                    p {
+                                        width: 100%;
+                                        height: 40px;
+                                        font-size: 11px;
+                                        line-height: 13px;
+                                        overflow: hidden;
+                                        padding: 0 10px;
+                                        margin-top: 7px;
+                                        text-overflow: clip;
+                                        white-space: normal;
+                                        color: $font-gray;
+                                    }
+                                }
+                            }
+        
+                            button {
+                                width: 180px;
+                                padding: 10px;
+                                border: 0;
+                                border-radius: 2px;
+                                cursor: pointer;
+                                letter-spacing: 1px;
+                                text-align: left;
+                                color: $font-white;
+                                transition: $transition;
+                                background-color: $purple;
+                                margin: 20px auto;
+                                
+                                span {
+                                    margin-left: 10px;
+                                    float: right;
+                                }
+                    
+                                &:hover {
+                                    background-color: $purple !important;
+                                    box-shadow: $shadow !important;
+                                    color: $font-white !important;
+                                    border-color: $purple !important;
+                                }
+                            }
+
+                            h5 {
+                                width: 100%;
+                                padding: 25px;
+                                letter-spacing: 1px;
+                                color: $font-gray;
+                            }
+                        }
+                    }
+
+                    .footer-rightside {
+                        margin-left: auto;
+                        flex: 1 0 30%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: flex-end;
+                        align-items: center;
+
+                        a {
+                            text-decoration: none;
+                            background-color: $white;
+                            padding: 7px;
+                            padding-left: 9px;
+                            text-align: center;
+                            color: $font-gray;
+                            cursor: pointer;
+                            transition: $transition;
+        
+                            &:hover {
+                                color: $purple;
+                            }
+                        }
+
+                        button {
+                            padding: 10px 15px;
+                            margin: 0;
+                            margin-left: 10px;
+                            width: auto;
+                            font-size: 14px;
+                            letter-spacing: 1px;
+                            font-weight: lighter;
+                            background-color: $purple;
+                            transition: $transition;
+
+                            &:hover {
+                                box-shadow: $shadow;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        li {
+            width: 100%;
+            margin-bottom: 10px;
+
+            .publication-header {
+                width: 100%;
+                height: 50px;
+                background-color: $white;
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                position: relative;
+                transition: $transition;
+                cursor: pointer;
+                border: 1px solid $border-light;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-color: $white;
+                    border: 1px solid $border-light;
+                    margin: 0 10px;
+                    object-fit: cover;
+                }
+                
+                a {
+                    letter-spacing: 1px;
+                    color: $purple;
+                    text-decoration: none;
+                    transition: $transition;
+                }
+
+                p {
+                    margin-left: auto;
+                    margin-right: 10px;
+                    font-size: 11px;
+                    letter-spacing: 1px;
+                    color: $font-gray;
+                    margin-top: 0;
+                    transition: $transition;
+
+                    i {
+                        margin: 0;
+                        margin-left: 5px;
+                        font-size: 15px;
+
+                        &:nth-child(2) {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                &:hover {
+                    background-color: $purple;
+                }
+
+                &:hover a,
+                &:hover p,
+                &:hover i {
+                    color: $font-white;
+                }
+            }
+
+            .publication-body {
+                width: 100%;
+                background-color: $white;
+                text-align: center;
+                border: 1px solid $border-light;
+                border-top: 0;
+                position: relative;
+                padding: 20px 20px 30px;
+                position: relative;
+
+                p {
+                    width: 100%;
+                    overflow-y: scroll;
+                    margin: 0;
+                    font-size: 12px;
+                    letter-spacing: 1px;
+                    max-height: 390px;
+                    text-align: left;
+                    color: $font-gray;
+                    position: relative;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+
+                img {
+                    max-width: 90%;
+                    max-height: 400px;
+                    margin: 10px 0;
+                    cursor: pointer;
+                }
+
+                .vertical-line {
+                    position: absolute;
+                    height: 113px;
+                    width: 1px;
+                    background-color: $purple-light;
+                    bottom: -113px;
+                    left: 15px;
+                }
+
+                .horizontal-line {
+                    position: absolute;
+                    height: 1px;
+                    width: 15px;
+                    background-color: $purple-light;
+                    bottom: -58px;
+                    left: 15px;
+
+                    &:nth-of-type(2) {
+                        bottom: -113px;
+                    }
+                }
+            }
+
+            .publication-body-review {
+                width: 100%;
+                background-color: $white;
+                text-align: center;
+                border: 1px solid $border-light;
+                border-top: 0;
+                position: relative;
+                height: 350px;
+                display: flex;
+                flex-wrap: wrap;
+                cursor: pointer;
+                padding-bottom: 12px;
+
+                img {
+                    position: absolute;
+                    z-index: 1;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    padding: 10px;
+                    object-fit: cover;
+                }
+
+                .review-left {
+                    position: relative;
+                    z-index: 2;
+                    height: 100%;
+                    flex: 0 0 70%;
+
+                    h3 {
+                        width: 510px;
+                        font-size: 14px;
+                        letter-spacing: 1px;
+                        height: 30px;
+                        overflow: hidden;
+                        color: $font-dark;
+                        margin: 0;
+                        margin-left: 10px;
+                        margin-top: 20px;
+                        font-weight: 500;
+                        text-align: left;
+                        padding: 0 10px;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        border-bottom: 1px solid $border-light;
+                    }
+
+                    p {
+                        margin-top: 15px;
+                        width: 100%;
+                        letter-spacing: 1px;
+                        height: 242px;
+                        color: $font-gray;
+                        font-size: 12px;
+                        padding: 0 5px 0 15px;
+                        text-align: left;
+                        overflow-y: scroll;
+                        margin-bottom: 20px;
+
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
+                    }
+
+                    .review-tags {
+                        width: 100%;
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        flex-wrap: wrap;
+                        flex-direction: row;
+                        padding: 0 10px;
+                        margin-top: -20px;
+
+                        li {
+                            flex: 0 0 25%;
+                            padding: 7px 20px;
+                            color: $purple;
+                            margin: 0;
+                            font-size: 12px;
+                            letter-spacing: 1px;
+                            text-transform: capitalize;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            display: none;
+
+                            &:nth-child(-n+4) {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+
+                .review-right {
+                    position: relative;
+                    z-index: 2;
+                    height: 100%;
+                    flex: 0 0 30%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    img {
+                        position: relative;
+                        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                        width: 90%;
+                        height: 90%;
+                        object-fit: cover;
+                        padding: 0;
+                        border-radius: 2px;
+                    }
+                }
+                
+                .vertical-line {
+                    position: absolute;
+                    height: 112px;
+                    width: 1px;
+                    background-color: $purple-light;
+                    bottom: -112px;
+                    left: 15px;
+                }
+
+                .horizontal-line {
+                    position: absolute;
+                    height: 1px;
+                    width: 15px;
+                    background-color: $purple-light;
+                    bottom: -58px;
+                    left: 15px;
+                }
+
+                .horizontal-line2 {
+                    position: absolute;
+                    height: 1px;
+                    width: 15px;
+                    background-color: $purple-light;
+                    bottom: -112px;
+                    left: 15px;
+                }
+            }
+
+            .publication-footer {
+                width: 100%;
+                padding: 0 30px;
+                margin-top: 35px;
+            }
+        }
+
+        button {
+            width: 180px;
+            padding: 10px 15px;
+            border: 0;
+            background-color: $purple;
+            color: $font-white;
+            letter-spacing: 1px;
+            font-size: 13px;
+            border-radius: 2px;
+            margin-bottom: 35px;
+            cursor: pointer;
+            transition: $transition;
+            text-align: left;
+
+            i {
+                float: right;
+            }
+
+            &:hover {
+                box-shadow: $shadow;
+            }
+        }
+    }
+
+    .no-publications {
+        width: 100%;
+        height: 300px;
+        margin-top: 10px;
+        background-color: $white;
+        border: 1px solid $border-light;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 70px;
+            height: 70px;
+        }
+
+        p {
+            font-size: 13px;
+            color: $font-dark;
+            letter-spacing: 1px;
+        }
+    }
+}
+
+.wait-submit {
+    background-color: $purple-light !important;
+    box-shadow: $shadow !important;
+    color: $font-white !important;
+}
+
+@media ( max-width: 1013px ) {
+    .publications {
+        display: block;
+        h2 {
+            font-size: 11px;
+            span {
+                button {
+                    width: 160px;
+                    padding-top: 10px;
+                }
+            }
+        }
+        .list-publications {
+            display: block;
+            min-width: 100%;
+            .create-publication {
+                padding: 10px;
+                form {
+                    textarea {
+                        margin-left: 0;
+                        margin-top: 10px;
+                    }
+                    .create-footer {
+                        margin-top: 3px;
+                        li {
+                            display: none;
+                        }
+                        .review-li {
+                            display: block;
+                            flex: 0 0 100%;
+                            position: relative;
+                            margin-bottom: 10px;
+                            .search-to-review {
+                                width: 99%;
+                            }
+                            .btn-search {
+                                position: absolute;
+                                top: 20px;
+                                right: 0;
+                            }
+                            .selectedAnime {
+                                width: 100%;
+                                padding: 5px 20px;
+                            }
+                        }
+                        .search-list {
+                            width: 100%;
+                            top: 45px;
+                            left: 0;
+                            border-top: 1px solid $border-light;
+                        }
+                    }
+                }
+            }
+            li {
+                margin: 0;
+                .publication-body {
+                    p {
+                        padding: 10px;
+                    }
+                    .vertical-line {
+                        left: 2px;
+                    }
+                    .horizontal-line {
+                        left: 2px;
+                        width: 3px;
+                    }
+                    .horizontal-line2 {
+                        left: 2px;
+                    }
+                }
+                .publication-body-review {
+                    height: auto;
+                    .review-left {
+                        flex: 0 0 100%;
+                        h3 {
+                            width: 95%;
+                            overflow: hidden;
+                            white-space: normal;
+                            text-overflow: clip;
+                            padding: 0;
+                            height: 43px;
+                            margin-top: 10px;
+                            display: flex;
+                            align-items: center;
+                            flex-wrap: wrap;
+                        }
+                        p {
+                            height: auto;
+                            max-height: 356px;
+                            margin-bottom: 25px;
+                        }
+                        .review-tags {
+                            li {
+                                flex: 0 0 25%;
+                                margin: 0;
+                                display: none;
+                                padding: 7px 3px;
+                            }
+                        }
+                    }
+                    .review-right {
+                        flex: 0 0 100%;
+                        img {
+                            max-width: 80%;
+                            max-height: 80%;
+                            margin-top: 10px;
+                            margin-bottom: 20px;
+                        }
+                    }
+                    .vertical-line {
+                        left: 2px;
+                    }
+                    .horizontal-line {
+                        left: 2px;
+                        width: 3px;
+                    }
+                    .horizontal-line2 {
+                        left: 2px;
+                    }
+                }
+                .publication-footer {
+                    padding: 0 5px;
+                }
+            }
+        }
+    }
+}

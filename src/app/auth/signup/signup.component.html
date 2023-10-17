@@ -1,0 +1,143 @@
+<div class="sign-in-out">
+    <div class="left">
+        <div class="align-center">
+            <h1 routerLink="/">animeet</h1>
+            <h5>Mira, comparte, conoce y habla sobre anime con la comunidad !</h5>
+        </div>
+    </div>
+    <div class="right">
+        <div class="form-sign">
+            <h2>Bienvenid@ a la mejor comundad de anime !</h2>
+            <form [formGroup]="userForm" (ngSubmit)="signUp()">
+                <input
+                    type="text" 
+                    placeholder="Usuario: xTomioka"
+                    autocomplete="off" 
+                    formControlName="username" 
+                    [classList]="campoNoValido('username') ? 'error-input' : null"
+                    spellcheck="false"
+                />
+
+                <input
+                    type="text" 
+                    placeholder="Nombre: Giyu"
+                    autocomplete="off" 
+                    formControlName="name" 
+                    [classList]="campoNoValido('name') ? 'error-input' : null"
+                    spellcheck="false"
+                />
+
+                <input
+                    type="text" 
+                    placeholder="Apellido: Tomioka"
+                    autocomplete="off" 
+                    formControlName="surname" 
+                    [classList]="campoNoValido('surname') ? 'error-input' : null"
+                    spellcheck="false"
+                />
+
+                <input
+                    type="email" 
+                    placeholder="Email: email@email.com"
+                    autocomplete="off" 
+                    formControlName="email" 
+                    [classList]="campoNoValido('email') ? 'error-input' : null"
+                    spellcheck="false"
+                />
+
+                <input
+                    type="password" 
+                    placeholder="Password: ******"
+                    autocomplete="off" 
+                    formControlName="password" 
+                    [classList]="campoNoValido('password') ? 'error-input' : null"
+                    spellcheck="false"
+                />
+
+                <input 
+                    type="password" 
+                    placeholder="Repite tu password" 
+                    autocomplete="off" 
+                    formControlName="password2"
+                    [classList]="campoNoValido('password2') ? 'error-input' : null"
+                    spellcheck="false"
+                /> 
+                
+                <button type="submit" id="userSubmit">Registrarme <i class="sign in icon"></i></button>
+                <p>¿Ya tienes una cuenta? <span routerLink="/auth/login">Ir a inicio de sesión</span></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="sign-in-out-movil">
+    <div class="welcome">
+        <h1 class="logo-title" routerLink="/">
+            <span>An</span><span>ime</span><span>et</span>
+            <img src="../../../assets/logos/menu.png" alt="logo.png">
+        </h1>
+        <div class="container-form">
+            <img src="../../../assets/2.jpg">
+            <div class="form-sign">
+                <form [formGroup]="userForm" (ngSubmit)="signUp()">
+                    <input
+                        type="text" 
+                        placeholder="Usuario: xTomioka"
+                        autocomplete="off" 
+                        formControlName="username" 
+                        [classList]="campoNoValido('username') ? 'error-input' : null"
+                        spellcheck="false"
+                    />
+    
+                    <input
+                        type="text" 
+                        placeholder="Nombre: Giyu"
+                        autocomplete="off" 
+                        formControlName="name" 
+                        [classList]="campoNoValido('name') ? 'error-input' : null"
+                        spellcheck="false"
+                    />
+    
+                    <input
+                        type="text" 
+                        placeholder="Apellido: Tomioka"
+                        autocomplete="off" 
+                        formControlName="surname" 
+                        [classList]="campoNoValido('surname') ? 'error-input' : null"
+                        spellcheck="false"
+                    />
+    
+                    <input
+                        type="email" 
+                        placeholder="Email: email@email.com"
+                        autocomplete="off" 
+                        formControlName="email" 
+                        [classList]="campoNoValido('email') ? 'error-input' : null"
+                        spellcheck="false"
+                    />
+    
+                    <input
+                        type="password" 
+                        placeholder="Password: ******"
+                        autocomplete="off" 
+                        formControlName="password" 
+                        [classList]="campoNoValido('password') ? 'error-input' : null"
+                        spellcheck="false"
+                    />
+    
+                    <input 
+                        type="password" 
+                        placeholder="Repite tu password" 
+                        autocomplete="off" 
+                        formControlName="password2"
+                        [classList]="campoNoValido('password2') ? 'error-input' : null"
+                        spellcheck="false"
+                    /> 
+                    
+                    <button type="submit" id="userSubmitMovil">Registrarme <i class="sign in icon"></i></button>
+                    <p>¿Ya tienes una cuenta? <span routerLink="/auth/login">Ir a inicio de sesión</span></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="feed">
+    <div class="feed-left">
+        <div class="user" *ngIf="user">
+            <img routerLink="/{{ user.username }}" class="background-user" src="{{ url + '/user/image/' + user.coverImage }}" alt="{{ user.coverImage }}">
+            <img routerLink="/{{ user.username }}" class="user-image" src="{{ url + '/user/image/' + user.image }}" alt="{{ user.image }}">
+            <h3 routerLink="/{{ user.username }}">{{ user.username }}</h3>
+            <h4 routerLink="/{{ user.username }}">{{ user.name }} {{ user.surname }}</h4>
+            <ul>
+                <li>Seguidores <span>{{ followersCount }}</span></li>
+                <li>Publicaciones <span>{{ publicationsCount }}</span></li>
+                <li>Reviews <span>{{ reviewsCount }}</span></li>
+                <h5>Animes</h5>
+                <li>Favoritos <span>{{ loveCount }}</span></li>
+                <li>En espera <span>{{ waitCount }}</span></li>
+                <li>Vistos <span>{{ watchCount }}</span></li>
+            </ul>
+        </div>
+
+        <div class="suggestions">
+            <ul>
+                <h4>Sugerencias de amistad <i class="caret down icon"></i></h4>
+                <li *ngFor="let suggestion of suggestions" routerLink="/{{ suggestion.username }}">
+                    <img src="{{ url + '/user/image/' + suggestion.image }}" alt="{{ suggestion.image }}">
+                    <p>{{ suggestion.username }}</p>
+                    <i class="caret right icon"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="feed-main publications">
+        <ul class="publication-options" #publicationList>
+            <li id="publication-type-todos">Publicación de <span>{{ user?.username }}</span></li>
+        </ul>
+
+        <ul class="list-publications">
+    
+            <!-- Publication type Publication -->
+            <li *ngIf="publication">
+                <div *ngIf="publication.type === 'publication'">
+                    <div class="publication-header">
+                        <img src="{{ url + '/user/image/' + publication.user.image }}" alt="{{ publication.user.image }}" routerLink="/{{ publication.user.username }}">
+                        <a routerLink="/{{ publication.user.username }}">{{ publication.user.username }}</a>
+                        <p>
+                            {{ publication.date }}
+                            <i class="share icon"></i>
+                            <i *ngIf="( user && userLogged._id === user._id ) || userLogged._id === publication.user._id || userLogged.role === 'ADMIN'" (click)="deletePublication( publication._id );" class="close icon"></i>
+                        </p>
+                    </div>
+                    <div class="publication-body">
+                        <p *ngIf="publication.content">{{ publication.content }}</p>
+                        <img 
+                            (click)="openImage( publication.file );$event.stopPropagation();"
+                            *ngIf="publication.file" 
+                            src="{{ url + '/publication/image/' + publication.file }}" alt="{{ publication.file }}">
+                        
+                        <div class="vertical-line"></div>
+                        <div class="horizontal-line"></div>
+                        <div class="horizontal-line"></div>
+    
+                        <!-- Reaction list -->
+                        <app-reactionlist [publication]="publication._id"></app-reactionlist>
+                    </div>
+        
+                    <div class="publication-footer">
+                        <app-commentlist [type]="'publication'" [publication]="publication"></app-commentlist>
+                    </div>
+                </div>
+    
+                <!-- Publication type Review -->
+                <div *ngIf="publication.type === 'review'">
+                    <div class="publication-header">
+                        <img src="{{ url + '/user/image/' + publication.user.image }}" alt="{{ publication.user.image }}" routerLink="/{{ publication.user.username }}">
+                        <a routerLink="/{{ publication.user.username }}">{{ publication.user.username }}</a>
+                        <p>
+                            {{ publication.date }}
+                            <i class="share icon"></i>
+                            <i *ngIf="( user && userLogged._id === user._id ) || userLogged._id === publication.user._id || userLogged.role === 'ADMIN'" (click)="deletePublication( publication._id );" class="close icon"></i>
+                        </p>
+                    </div>
+                    <div class="publication-body-review">
+                        <div class="review-left">
+                            <h3 (click)="watchAnime( publication.anime.name );">{{ publication.anime.name }}</h3>
+                            <p>{{ publication.content }}</p>
+                            <ul class="review-tags">
+                                <li *ngFor="let tag of publication.anime.tags">{{ tag }}</li>
+                            </ul>
+                        </div>
+                        <div class="review-right" (click)="watchAnime( publication.anime.name );">
+                            <img src="{{ url + '/anime/image/' + publication.anime.image }}" alt="{{ publication.anime.image }}">
+                        </div>
+    
+                        <div class="vertical-line"></div>
+                        <div class="horizontal-line"></div>
+                        <div class="horizontal-line2"></div>
+    
+                        <app-reactionlist [publication]="publication._id"></app-reactionlist>
+                    </div>
+        
+                    <div class="publication-footer">
+                        <app-commentlist [type]="'publication'" [publication]="publication"></app-commentlist>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+

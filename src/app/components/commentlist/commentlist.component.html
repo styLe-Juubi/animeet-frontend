@@ -1,0 +1,218 @@
+<!-- Comments in Animes, Episodes & Publications-->
+<div class="comments" *ngIf="type && (type === 'anime' || type === 'episode' || type === 'publication')">
+    <h3><i class="coffee icon"></i>Comentarios <span>{{ totalComments }}<i class="comment icon"></i></span></h3>
+
+    <ul *ngIf="comments && comments.length > 0" #commentList>
+        <div *ngIf="user" class="create-comment">
+            <form [formGroup]="commentForm" (ngSubmit)="createComment();">
+                <input 
+                    type="text" 
+                    placeholder="Escribe tu comentario !"
+                    autocomplete="off" 
+                    formControlName="content" 
+                    [classList]="campoNoValido('content') ? 'error-input' : null"
+                    (click)="setNoScroll();"
+                    spellcheck="false"
+                >
+                <a (click)="uploadFile();"><i class="image icon"></i></a>
+                
+                <div style='height: 0px;width:0px; overflow:hidden;'>
+                    <input *ngIf="type && type === 'anime'" id="upload-file-{{ anime._id }}" type="file" (change)="setImage( $event ); readURL( $event );"/>
+                    <input *ngIf="type && type === 'episode'" id="upload-file-{{ episode._id }}" type="file" (change)="setImage( $event ); readURL( $event );"/>
+                    <input *ngIf="type && type === 'publication'" id="upload-file-{{ publication._id }}" type="file" (change)="setImage( $event ); readURL( $event );"/>
+                    <input *ngIf="type && type === 'chat'" id="upload-file-{{ chat._id }}" type="file" (change)="setImage( $event ); readURL( $event );"/>
+                </div>
+
+                <img *ngIf="type && type === 'anime'" id="image-preview-{{ anime._id }}" class="image-preview" [src]="filePreview" alt="{{ filePreview }}" (click)="removePreview();"/>
+                <img *ngIf="type && type === 'episode'" id="image-preview-{{ episode._id }}" class="image-preview" [src]="filePreview" alt="{{ filePreview }}" (click)="removePreview();"/>
+                <img *ngIf="type && type === 'publication'" id="image-preview-{{ publication._id }}" class="image-preview" [src]="filePreview" alt="{{ filePreview }}" (click)="removePreview();"/>
+                <img *ngIf="type && type === 'chat'" id="image-preview-{{ chat._id }}" class="image-preview" [src]="filePreview" alt="{{ filePreview }}" (click)="removePreview();"/>
+                <button type="submit" id="commentSubmit">Enviar</button>
+            </form>
+        </div>
+        <li *ngFor="let comment of comments">
+            <div class="comment-user" [routerLink]="['/', comment.user.username]">
+                <img src="{{ url + '/user/image/' + comment.user.image }}" alt="comment.user.image">
+            </div>
+            <div class="comment-body" id="comment-body">
+                <div class="comment-header">
+                    <h3>
+                        <r [routerLink]="['/', comment.user.username]">
+                            {{ comment.user.username }}
+                        </r> 
+                        <span>
+                            {{ comment.date }} 
+                            <i  
+                                *ngIf="user && comment.user._id === user._id || user && user.role === 'ADMIN'"
+                                (click)="deleteComment( comment._id );"
+                                class="close icon" 
+                            ></i>
+                        </span>
+                    </h3>
+                </div>
+                <div class="comment-message">
+                   <p *ngIf="comment.content">{{ comment.content }}</p>
+                   <img 
+                        *ngIf="comment.file"
+                        (click)="openImage( comment.file );$event.stopPropagation();"
+                        src="{{ url + '/comment/get/image/' + comment.file }}" 
+                        alt="{{ comment.file }}"
+                    >
+                </div>
+            </div>
+        </li>
+        <button class="btn-load-comments color-anime" *ngIf="!allComments"
+        (click)="loadMoreComments();"
+        >Mas comentarios <span><i class="plus circle icon"></i></span></button>
+    </ul>
+    <ul *ngIf="!comments || comments.length === 0" class="no-comments">
+        <div *ngIf="user" class="create-comment">
+            <form [formGroup]="commentForm" (ngSubmit)="createComment();">
+                <input 
+                    type="text" 
+                    placeholder="Escribe tu comentario !"
+                    autocomplete="off" 
+                    formControlName="content" 
+                    [classList]="campoNoValido('content') ? 'error-input' : null"
+                    (click)="setNoScroll();"
+                    spellcheck="false"
+                >
+                
+                <a (click)="uploadFile();"><i class="image icon"></i></a>
+                <div style='height: 0px;width:0px; overflow:hidden;'>
+                    <input *ngIf="type && type === 'anime'" id="upload-file-{{ anime._id }}" type="file" (change)="setImage( $event ); readURL( $event );"/>
+                    <input *ngIf="type && type === 'episode'" id="upload-file-{{ episode._id }}" type="file" (change)="setImage( $event ); readURL( $event );"/>
+                    <input *ngIf="type && type === 'publication'" id="upload-file-{{ publication._id }}" type="file" (change)="setImage( $event ); readURL( $event );"/>
+                    <input *ngIf="type && type === 'chat'" id="upload-file-{{ chat._id }}" type="file" (change)="setImage( $event ); readURL( $event );"/>
+                </div>
+                
+                <img *ngIf="type && type === 'anime'" id="image-preview-{{ anime._id }}" class="image-preview" [src]="filePreview" alt="{{ filePreview }}" (click)="removePreview();"/>
+                <img *ngIf="type && type === 'episode'" id="image-preview-{{ episode._id }}" class="image-preview" [src]="filePreview" alt="{{ filePreview }}" (click)="removePreview();"/>
+                <img *ngIf="type && type === 'publication'" id="image-preview-{{ publication._id }}" class="image-preview" [src]="filePreview" alt="{{ filePreview }}" (click)="removePreview();"/>
+                <img *ngIf="type && type === 'chat'" id="image-preview-{{ chat._id }}" class="image-preview" [src]="filePreview" alt="{{ filePreview }}" (click)="removePreview();"/> 
+                <button type="submit" id="commentSubmit">Enviar</button>
+            </form>
+        </div>
+        <p *ngIf="type !== 'publication'">No se han encontrado comentarios uwu -</p>
+    </ul>
+</div>
+
+<!-- Messages in chats -->
+<div [ngClass]="[inbox ? 'messages inbox-chat' : 'messages']" *ngIf="type && type === 'chat' && user">
+    <ul class="chat-list" #chatWindow>
+        <button class="btn-load-comments color-anime" *ngIf="!allComments && comments && comments.length > 0"
+            (click)="loadMoreComments();"
+            >Mas comentarios <span><i class="plus circle icon"></i></span>
+        </button>
+        <li *ngFor="let comment of comments">
+            <!-- Message Header Emmiter / Receiver -->
+            <div class="comment-receiver" *ngIf="comment.user._id !== user._id">
+                <img src="{{ url + '/user/image/' + comment.user.image }}" alt="comment.user.image">
+                <h3>
+                    {{ comment.user.username }}
+                    -
+                    <span>
+                        {{ comment.date }} 
+                        <i  
+                            *ngIf="user && comment.user._id === user._id || user && user.role === 'ADMIN'"
+                            (click)="deleteComment( comment._id );"
+                            class="close icon" 
+                        ></i>
+                    </span>
+                </h3>
+            </div>
+            <div class="comment-emmiter" *ngIf="comment.user._id === user._id">
+                <h3>
+                    <span>
+                        <i  
+                            *ngIf="user && comment.user._id === user._id || user && user.role === 'ADMIN'"
+                            (click)="deleteComment( comment._id );"
+                            class="close icon" 
+                        ></i>
+                        {{ comment.date }} 
+                    </span>
+                    -
+                    {{ comment.user.username }}
+                </h3>
+                <img src="{{ url + '/user/image/' + comment.user.image }}" alt="comment.user.image">
+            </div>
+
+            <!-- Message Body Emmiter / Receiver -->
+            <div class="comment-body-emmiter" id="comment-body" *ngIf="comment.user._id === user._id">
+                <div class="comment-message">
+                   <p *ngIf="comment.content">{{ comment.content }}</p>
+                   <img 
+                        *ngIf="comment.file"
+                        (click)="openImage( comment.file );$event.stopPropagation();"
+                        src="{{ url + '/comment/get/image/' + comment.file }}" 
+                        alt="{{ comment.file }}"
+                    >
+                </div>
+            </div>
+            <div class="comment-body-receiver" id="comment-body" *ngIf="comment.user._id !== user._id">
+                <div class="comment-message">
+                   <p *ngIf="comment.content">{{ comment.content }}</p>
+                   <img 
+                        *ngIf="comment.file"
+                        (click)="openImage( comment.file );$event.stopPropagation();"
+                        src="{{ url + '/comment/get/image/' + comment.file }}" 
+                        alt="{{ comment.file }}"
+                    >
+                </div>
+            </div>
+        </li>
+    </ul>
+    <!-- Create Message in PC -->
+    <div class="create-message">
+        <form [formGroup]="commentForm" (ngSubmit)="createComment();">
+            <input 
+                type="text" 
+                placeholder="Escribe tu mensaje !"
+                autocomplete="off" 
+                formControlName="content" 
+                [classList]="campoNoValido('content') ? 'error-input' : null"
+                (click)="setNoScroll();"
+                spellcheck="false"
+            >
+            <a (click)="uploadFile();"><i class="image icon"></i></a>
+            <div style='height: 0px;width:0px; overflow:hidden;'>
+                <input id="upload-file-{{ chat?._id }}" type="file" (change)="setImage( $event ); readURL( $event );"/>
+            </div>
+            <img id="image-preview-{{ chat._id }}" class="image-preview" [src]="filePreview" alt="{{ filePreview }}" (click)="removePreview();"/>
+            <button type="submit" id="commentSubmit-chat">Enviar</button>
+        </form>
+    </div>
+    <!-- Create Message in Movil -->
+    <div class="create-message-movil">
+        <form [formGroup]="commentForm" (ngSubmit)="createComment();">
+            <input 
+                type="text" 
+                placeholder="Escribe tu mensaje !"
+                autocomplete="off" 
+                formControlName="content"
+                [classList]="campoNoValido('content') ? 'error-input' : null"
+                (click)="setNoScroll();"
+                spellcheck="false"
+            >
+            <a (click)="uploadFileMovil();"><i class="image icon"></i></a>
+            <div style='height: 0px;width:0px; overflow:hidden;'>
+                <input id="upload-file-movil-{{ chat._id }}" type="file" (change)="setImage( $event ); readURL( $event ); createComment();"/>
+            </div>
+            <button type="submit" id="commentSubmit-chat">Enviar</button>
+        </form>
+    </div>
+</div>
+
+<div class="comments" *ngIf="!type">
+    <h3><i class="coffee icon"></i>Comentarios <span>{{ totalComments }}<i class="comment icon"></i></span></h3>
+    <ul *ngIf="!comments || comments.length === 0" class="no-comments">
+        <p>No se han encontrado comentarios uwu -</p>
+    </ul>
+</div>
+
+<!-- <div class="modal-image" id="modal-comment-image" (click)="closeImage();">
+    <i class="close icon"></i> 
+    <div>
+        <img id="comment-image" (click)="$event.stopPropagation();">
+    </div>
+</div> -->

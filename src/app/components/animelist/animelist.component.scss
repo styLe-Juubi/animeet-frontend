@@ -1,0 +1,445 @@
+@import '../../scss/colors.scss';
+
+.section-animes {
+    width: 100%;
+    margin-bottom: 0;
+
+    h2 {
+        padding: 10px 25px;
+        background-color: $purple;
+        color: $font-white;
+        letter-spacing: 1px;
+        margin: 0;
+        font-size: 17px;
+        width: 250px;
+        text-align: left;
+        margin-left: -10px;
+        cursor: pointer;
+        transition: $transition;
+
+        &:hover {
+            box-shadow: $shadow;
+        }
+
+        i {
+            float: right;
+        }
+    }
+
+    .animes-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 10px 0 0;
+        width: 100%;
+        padding: 10px;
+        border-top: 1px solid $border-light;
+
+        .anime {
+            width: 14.28%;
+            padding: 0px 10px;
+            height: 300px;
+            position: relative;
+            cursor: pointer;
+            transition: $transition;
+            margin: 20px 0;
+
+            &:nth-child(5) .description-anime, 
+            &:nth-child(6) .description-anime,
+            &:nth-child(7) .description-anime,
+            &:nth-child(12) .description-anime, 
+            &:nth-child(13) .description-anime,
+            &:nth-child(14) .description-anime,
+            &:nth-child(19) .description-anime, 
+            &:nth-child(20) .description-anime,
+            &:nth-child(21) .description-anime {
+                left: -250% !important;
+            }
+
+            &:hover .description-anime {
+                animation: fadeIn .3s;
+                z-index: 10;
+                display: flex;
+            }
+
+            .img-anime {
+                width: 100%;
+                height: 100%;
+                transition: $transition;
+            }
+
+            &:hover .img-anime {
+                box-shadow: 5px 5px 5px $purple;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: relative;
+                z-index: 1;
+                transition: $transition;
+                box-shadow: $shadow;
+            }
+            
+            .name-anime {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                height: 50px;
+                background-color: rgba(0,0,0,.5);
+                margin-top: -50px;
+                z-index: 2;
+                overflow: hidden;
+                position: relative;
+
+                h4 {
+                    color: $font-white;
+                    font-weight: 500;
+                    margin-top: -5px;
+                    font-family: 'Concert One', sans-serif;
+                    letter-spacing: 1px;
+                    font-size: 17px;
+                    width: 100%;
+                    text-align: center;
+                    padding: 8px;
+                }
+            }
+
+            .description-anime {
+                display: flex;
+                flex-wrap: wrap;
+                width: 550px;
+                height: 100%;
+                background-color: $white;
+                margin: 0px 10px 10px;
+                position: relative;
+                z-index: 1;
+                transform: scale(1.1);
+                cursor: pointer;
+                transition: $transition;
+                top: -170%;
+                left: 90%;
+                z-index: 2;
+                display: none;
+                
+                &:hover {
+                    box-shadow: 3px 3px 3px $purple;
+                }
+        
+                .description-absolute-image {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    z-index: 1;
+                    transform: scaleX(-1);
+                }
+        
+                .description-side-left {
+                    position: relative;
+                    z-index: 2;
+                    flex: 0 0 40%;
+                    height: 100%;
+                    overflow: hidden;
+                    background-color: rgba(0,0,0,.7);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+        
+                    img {
+                        width: 85%;
+                        height: 90%;
+                        object-fit: cover;
+                        border: 1px solid $gray;
+                        box-shadow: none;
+                    }
+
+                    .type-anime {
+                        position: absolute;
+                        background-color: $purple;
+                        z-index: 5;
+                        top: -20px;
+                        left: -40px;
+                        letter-spacing: 1px;
+                        font-weight: lighter;
+                        font-size: 13px;
+                        text-transform: uppercase;
+                        color: $font-white;
+                        font-family: 'Concert One', sans-serif;
+                        padding: 35px 33px 10px 30px;
+                        transform: rotate(-45deg);
+                    }
+                    
+                    .type-ova {
+                        position: absolute;
+                        background-color: $action;
+                        z-index: 5;
+                        top: -25px;
+                        left: -35px;
+                        letter-spacing: 1px;
+                        font-weight: lighter;
+                        font-size: 13px;
+                        text-transform: uppercase;
+                        color: $font-white;
+                        font-family: 'Concert One', sans-serif;
+                        padding: 35px 30px 10px 30px;
+                        transform: rotate(-45deg);
+                    }
+
+                    .type-pelicula {
+                        position: absolute;
+                        background-color: $danger;
+                        z-index: 5;
+                        top: -20px;
+                        left: -44px;
+                        letter-spacing: 1px;
+                        font-weight: lighter;
+                        font-size: 11px;
+                        text-transform: uppercase;
+                        color: $font-white;
+                        font-family: 'Concert One', sans-serif;
+                        padding: 35px 35px 10px 30px;
+                        transform: rotate(-45deg);
+                    }
+                }
+        
+                .description-side-right {
+                    display: flex;
+                    flex-wrap: wrap;
+                    position: relative;
+                    z-index: 2;
+                    flex: 0 0 60%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,.7);
+        
+                    h3 {
+                        width: 100%;
+                        margin: 0;
+                        text-align: center;
+                        color: $font-white;
+                        letter-spacing: 1px;
+                        padding: 20px 10px 0;
+                        font-size: 14px;
+                        font-family: 'Concert One', sans-serif;
+                        font-weight: 500;
+                    }
+        
+                    p {
+                        width: 100%;
+                        font-size: 12px;
+                        color: $font-white-light;
+                        padding: 10px 10px 0;
+                        height: 147px;
+                        letter-spacing: 1px;
+                        overflow-y: scroll;
+
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
+                    }
+        
+                    button {
+                        justify-content: flex-end;
+                        height: 36px;
+                        width: 100px;
+                        margin-right: 15px;
+                        margin-left: auto;
+                        margin-bottom: 10px;
+                        border: 0;
+                        color: $font-white;
+                        font-size: 12px;
+                        letter-spacing: 1px;
+                        border-radius: 2px;
+                        cursor: pointer;
+                        transition: $transition;
+        
+                        &:hover {
+                            background: $white;
+                            color: $font-dark;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.btn-watch-anime {
+    background-color: $purple;
+}
+
+.btn-watch-pelicula {
+    background-color: $danger;
+}
+
+.btn-watch-ova {
+    background-color: $action;
+}
+
+@media ( max-width: 1013px ) {
+    .section-animes {
+        h2 {
+            width: 90%;
+            margin: 0 auto;
+        }
+        .animes-container {
+            .anime {
+                width: 50%;
+                height: 250px;
+                &:hover .description-anime {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media ( min-width: 1014px ) {
+    .section-animes {
+        .animes-container {
+            .anime {
+                width: 25%;
+
+                &:nth-child(3) .description-anime, 
+                &:nth-child(4) .description-anime,
+                &:nth-child(7) .description-anime,
+                &:nth-child(8) .description-anime, 
+                &:nth-child(11) .description-anime,
+                &:nth-child(12) .description-anime,
+                &:nth-child(15) .description-anime, 
+                &:nth-child(16) .description-anime,
+                &:nth-child(19) .description-anime,
+                &:nth-child(20) .description-anime {
+                    left: -200% !important;
+                }
+
+                &:nth-child(1) .description-anime, 
+                &:nth-child(2) .description-anime,
+                &:nth-child(5) .description-anime,
+                &:nth-child(6) .description-anime, 
+                &:nth-child(9) .description-anime,
+                &:nth-child(10) .description-anime,
+                &:nth-child(13) .description-anime, 
+                &:nth-child(14) .description-anime,
+                &:nth-child(17) .description-anime,
+                &:nth-child(18) .description-anime,
+                &:nth-child(21) .description-anime {
+                    left: 60% !important;
+                }
+            }
+        }
+    }
+}
+
+@media ( min-width: 1260px ) {
+    .section-animes {
+        .animes-container {
+            .anime {
+                width: 20%;
+
+                &:nth-child(4) .description-anime, 
+                &:nth-child(5) .description-anime,
+                &:nth-child(9) .description-anime,
+                &:nth-child(10) .description-anime, 
+                &:nth-child(14) .description-anime,
+                &:nth-child(15) .description-anime,
+                &:nth-child(19) .description-anime, 
+                &:nth-child(20) .description-anime {
+                    left: -200% !important;
+                }
+
+                &:nth-child(1) .description-anime, 
+                &:nth-child(2) .description-anime,
+                &:nth-child(3) .description-anime,
+                &:nth-child(6) .description-anime, 
+                &:nth-child(7) .description-anime,
+                &:nth-child(8) .description-anime,
+                &:nth-child(11) .description-anime, 
+                &:nth-child(12) .description-anime,
+                &:nth-child(13) .description-anime,
+                &:nth-child(16) .description-anime,
+                &:nth-child(17) .description-anime,
+                &:nth-child(18) .description-anime,
+                &:nth-child(21) .description-anime {
+                    left: 50% !important;
+                }
+            }
+        }
+    }
+}
+
+@media ( min-width: 1590px ) {
+    .section-animes {
+        .animes-container {
+            .anime {
+                width: 16.6%;
+
+                &:nth-child(4) .description-anime, 
+                &:nth-child(5) .description-anime,
+                &:nth-child(6) .description-anime,
+                &:nth-child(10) .description-anime, 
+                &:nth-child(11) .description-anime,
+                &:nth-child(12) .description-anime,
+                &:nth-child(16) .description-anime, 
+                &:nth-child(17) .description-anime,
+                &:nth-child(18) .description-anime {
+                    left: -250% !important;
+                }
+
+                &:nth-child(1) .description-anime, 
+                &:nth-child(2) .description-anime,
+                &:nth-child(3) .description-anime,
+                &:nth-child(7) .description-anime, 
+                &:nth-child(8) .description-anime,
+                &:nth-child(9) .description-anime,
+                &:nth-child(13) .description-anime, 
+                &:nth-child(14) .description-anime,
+                &:nth-child(15) .description-anime,
+                &:nth-child(19) .description-anime,
+                &:nth-child(20) .description-anime,
+                &:nth-child(21) .description-anime {
+                    left: 90% !important;
+                }
+            }
+        }
+    }
+}
+
+@media ( min-width: 1890px ) {
+    .section-animes {
+        .animes-container {
+            .anime {
+                width: 14.28%;
+
+                &:nth-child(5) .description-anime, 
+                &:nth-child(6) .description-anime,
+                &:nth-child(7) .description-anime,
+                &:nth-child(12) .description-anime, 
+                &:nth-child(13) .description-anime,
+                &:nth-child(14) .description-anime,
+                &:nth-child(19) .description-anime, 
+                &:nth-child(20) .description-anime,
+                &:nth-child(21) .description-anime {
+                    left: -250% !important;
+                }
+
+                &:nth-child(1) .description-anime, 
+                &:nth-child(2) .description-anime,
+                &:nth-child(3) .description-anime,
+                &:nth-child(4) .description-anime, 
+                &:nth-child(8) .description-anime,
+                &:nth-child(9) .description-anime,
+                &:nth-child(10) .description-anime, 
+                &:nth-child(11) .description-anime,
+                &:nth-child(15) .description-anime,
+                &:nth-child(16) .description-anime,
+                &:nth-child(17) .description-anime,
+                &:nth-child(18) .description-anime {
+                    left: 90% !important;
+                }
+            }
+        }
+    }
+}

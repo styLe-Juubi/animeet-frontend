@@ -1,0 +1,42 @@
+<div class="sidebar">
+    <div class="fixed-click">
+        <p>Menú</p>
+        <i class="close icon"></i>
+    </div>
+    <!-- Show only if no user online -->
+    <div class="user" *ngIf="!identity">
+        <img src="../../../assets/avatar-default.png" alt="avatar-default.png" routerLink="/auth/login">
+        <h2 routerLink="/auth/login">Iniciar Sesión <i class="sign in icon"></i></h2>
+    </div>
+
+    <!-- Show only if user is online -->
+    <div class="user" *ngIf="identity">
+        <img src="{{ url + '/user/image/' + identity.image }}" alt="identity.image" routerLink="/{{ identity.username }}" (click)="closeSidebarTo();" >
+        <ul class="data-user">
+            <li>Usuario: <span>{{ identity.username }}</span></li>
+            <li>Nombre: <span>{{ identity.name }}</span></li>
+            <li>Apellido: <span>{{ identity.surname }}</span></li>
+            <li>Email: <span>{{ identity.email }}</span></li>
+            <li>País: <span>{{ identity.country }}</span></li>
+            <li>- {{ identity.date }}</li>
+        </ul>
+    </div>
+
+    <div class="urls">
+        <ul class="ul-urls">
+            <li (click)="closeSidebarTo();" routerLink="/episodios">Ultimos Episodios <span><i class="caret right icon"></i></span></li>
+            <li (click)="closeSidebarTo();" routerLink="/animes">Directorio Anime <span><i class="caret right icon"></i></span></li>
+            <li (click)="closeSidebarTo();" [routerLink]="['/animes']" [queryParams]="{ estatus: 'emision' }">Animes en Emisión <span><i class="caret right icon"></i></span></li>
+            <li (click)="closeSidebarTo();" [routerLink]="['/animes']" [queryParams]="{ estatus: 'finalizado' }">Animes Finalizados <span><i class="caret right icon"></i></span></li>
+            <li (click)="closeSidebarTo();" [routerLink]="['/animes']" [queryParams]="{ tipo: 'película' }">Peliculas Anime <span><i class="caret right icon"></i></span></li>
+            <li (click)="closeSidebarTo();" [routerLink]="['/animes']" [queryParams]="{ tipo: 'ova' }">OVAs Anime <span><i class="caret right icon"></i></span></li>
+            <li (click)="closeSidebarTo();" [routerLink]="['/alianzas']">Alianzas <span><i class="caret right icon"></i></span></li>
+            <li (click)="closeSidebarTo();" class="discord-oficial" (click)="goTo('https://discord.gg/gHMypEqGSz');">
+                <div>
+                    Discord Oficial
+                    <img src="../../../assets/discord2.png" alt="discord2.png">
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

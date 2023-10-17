@@ -1,0 +1,211 @@
+@import '../../scss/colors.scss';
+
+.section-episodes {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    h2 {
+        padding: 10px 25px;
+        background-color: $purple;
+        color: $font-white;
+        letter-spacing: 1px;
+        margin: 0;
+        font-size: 17px;
+        width: 250px;
+        text-align: left;
+        margin-left: -10px;
+        cursor: pointer;
+        transition: $transition;
+
+        &:hover {
+            box-shadow: $shadow;
+        }
+
+        i {
+            float: right;
+        }
+    }
+
+    .episodes-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 10px 0;
+        width: 100%;
+        padding: 10px;
+        border-top: 1px solid $border-light;
+        border-bottom: 1px solid $border-light;
+
+        .episode {
+            width: 14.28%;
+            height: 300px;
+            margin: 10px 0;
+            position: relative;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: $transition;
+            padding: 0 10px;
+            overflow: hidden;
+            
+            &:hover .info-episode .fix-center h3 {
+                background-color: $white;
+                color: $font-dark;
+            }
+            
+            img {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 1;
+                padding: 0 10px;
+                margin-left: -10px;
+                filter: blur(2px)
+            }
+
+            .info-episode {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                justify-content: center;
+                position: relative;
+                z-index: 2;
+                width: 100%;
+                height: 70%;
+                padding: 10px;
+                background-color: rgba(0,0,0,.6);
+
+                .fix-center {
+                    margin: 0;
+                    padding: 0;
+                    height: 70%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                    
+                    img {
+                        position: relative;
+                        width: 80%;
+                        height: 100px;
+                        border: 1px solid $border-light;
+                        object-fit: cover;
+                        padding: 0;
+                        border-radius: 2px;
+                        margin: 0;
+                        filter: blur(0);
+                    }
+                    
+                    h3 {
+                        margin: 0;
+                        margin-top: 10px;
+                        width: 80%;
+                        color: $font-white;
+                        border-radius: 2px;
+                        padding: 10px 0;
+                        font-size: 14px;
+                        letter-spacing: 1px;
+                        font-weight: 600;
+                        text-align: center;
+                        background-color: $purple;
+                        font-weight: 500;
+                        transition: $transition;
+                    }
+                }
+            }
+
+            .info-anime {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                z-index: 2;
+                width: 100%;
+                height: 30%;
+                background-color: rgba(0,0,0,.6);
+                box-shadow: $shadow;
+
+                h4 {
+                    width: 100%;
+                    padding: -5px 5px 5px;
+                    font-family: 'Concert One', sans-serif;
+                    color: $font-white;
+                    letter-spacing: 1px;
+                    font-size: 16px;
+                    text-align: center;
+                    font-weight: 500;
+                    max-height: 77px;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}
+
+@media ( max-width: 1013px ) {
+    .section-episodes {
+        padding-top: 10px;
+        h2 {
+            width: 90%;
+            margin: 0px auto;
+        }
+        .episodes-container {
+            .episode {
+                width: 50%;
+                height: 200px;
+                .info-episode {
+                    .fix-center {
+                        img {
+                            height: 50px;
+                        }
+                        h3 {
+                            padding: 5px 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media ( min-width: 1014px ) {
+    .section-episodes {
+        .episodes-container {
+            .episode {
+                width: 25%;
+            }
+        }
+    }
+}
+
+@media ( min-width: 1260px ) {
+    .section-episodes {
+        .episodes-container {
+            .episode {
+                width: 20%;
+            }
+        }
+    }
+}
+
+@media ( min-width: 1590px ) {
+    .section-episodes {
+        .episodes-container {
+            .episode {
+                width: 16.6%;
+            }
+        }
+    }
+}
+
+@media ( min-width: 1890px ) {
+    .section-episodes {
+        .episodes-container {
+            .episode {
+                width: 14.28%;;
+            }
+        }
+    }
+}

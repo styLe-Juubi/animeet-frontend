@@ -1,0 +1,136 @@
+<app-header 
+    [identity]="identity" 
+    [usersOnline]="usersOnline?.length" 
+    [allConnections]="allConnections" 
+    (sendLogout)="logoutHandler($event)"
+    (showUsers)="openUserListHandler($event)"
+    (openSettings)="openSettingsHandler($event)"
+    (openSidebarAction)="openSidebarHandler($event)"
+></app-header>
+<div class="page">
+    <div class="sidebar-left" id="page-left">
+        <app-sidebar [identity]="identity" (closeSidebar)="closeSidebarHandler($event)"></app-sidebar>
+    </div>
+    <div class="main">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="sidebar-right" id="page-right">
+        <app-userlist 
+            [users]="usersOnline" 
+            [usersOnline]="usersOnline?.length" 
+            [allConnections]="allConnections"  
+            (closeSideUsers)="closeSideUsersHandler($event);"
+        ></app-userlist>
+    </div>
+
+    <div class="chat-list-only-pc">
+        <app-chatlist *ngIf="identity && screenWidth > 1013" [identity]="identity"></app-chatlist>
+    </div>
+
+    <div class="modal-image" id="modal-comment-image" (click)="closeImage();">
+        <i class="close icon"></i> 
+        <div>
+            <img id="comment-image" (click)="$event.stopPropagation();">
+        </div>
+    </div>
+
+    <!-- Update user -->
+    <div class="modal-settings" id="modal-settings" *ngIf="showSettings && identity">
+        <div class="user-settings" (click)="$event.stopPropagation();"> 
+            <form [formGroup]="userForm" (ngSubmit)="updateUser();"> 
+                <div class="form-left">
+                    <button type="button" class="toDisable background-image" (click)="openTypeFile('coverImage');">
+                        <div class="background-image">
+                            <img src="{{ url + '/user/image/' + identity.coverImage }}" alt="{{ identity.coverImage }}">
+                            <div style='height: 0px;width:0px; overflow:hidden;'>
+                                <input id="upload-file-coverImage-pc" type="file" (change)="uploadUserFile( $event, 'coverImage' );"/>
+                            </div>
+                            <button type="button"><i class="plus icon"></i></button>
+                        </div>
+                    </button>
+                    <div class="upload-select-image-user">
+                        <button type="button" class="toDisable upload-image" (click)="openTypeFile('image');">
+                                <img src="{{ url + '/user/image/' + identity.image }}" alt="{{ identity.image }}">
+                                <div style='height: 0px;width:0px; overflow:hidden;'>
+                                    <input id="upload-file-image-pc" type="file" (change)="uploadUserFile( $event, 'image' );"/>
+                                </div>
+                                <button type="button"><i class="plus icon"></i></button>
+                        </button>
+                        <div class="select-image">
+                            <h3>Sube una imagen o selecciona tu avatar <i class="user icon"></i></h3>
+                            <button type="button" class="toDisable" (click)="changeAvatar('1.png');"><img src="../../assets/avatares/1.png" alt="1.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('2.png');"><img src="../../assets/avatares/2.png" alt="2.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('3.png');"><img src="../../assets/avatares/3.png" alt="3.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('4.png');"><img src="../../assets/avatares/4.png" alt="4.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('5.png');"><img src="../../assets/avatares/5.png" alt="5.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('6.png');"><img src="../../assets/avatares/6.png" alt="6.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('7.png');"><img src="../../assets/avatares/7.png" alt="7.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('8.png');"><img src="../../assets/avatares/8.png" alt="8.png"></button>
+    
+                            <button type="button" class="toDisable" (click)="changeAvatar('9.png');"><img src="../../assets/avatares/9.png" alt="9.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('10.png');"><img src="../../assets/avatares/10.png" alt="10.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('11.png');"><img src="../../assets/avatares/11.png" alt="11.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('12.png');"><img src="../../assets/avatares/12.png" alt="12.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('13.png');"><img src="../../assets/avatares/13.png" alt="13.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('14.png');"><img src="../../assets/avatares/14.png" alt="14.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('15.png');"><img src="../../assets/avatares/15.png" alt="15.png"></button>
+                            <button type="button" class="toDisable" (click)="changeAvatar('16.png');"><img src="../../assets/avatares/16.png" alt="16.png"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-right">
+                    <h3>Editar perfil <i class="pencil icon"></i></h3>
+                    <input 
+                        type="text" 
+                        placeholder="Usuaro: xTomioka" 
+                        formControlName="username"
+                        [classList]="campoNoValido('username') ? 'error-input' : null"
+                        autocomplete="off"
+                        spellcheck="false"
+                    />
+                    <input 
+                        type="text" 
+                        placeholder="Nombre: Giyu"
+                        formControlName="name"
+                        [classList]="campoNoValido('name') ? 'error-input' : null"
+                        autocomplete="off"
+                        spellcheck="false"
+                    />
+                    <input 
+                        type="text" 
+                        placeholder="Apellido: Tomioka"
+                        formControlName="surname"
+                        [classList]="campoNoValido('surname') ? 'error-input' : null"
+                        autocomplete="off"
+                        spellcheck="false"
+                    />
+                    <input 
+                        type="text" 
+                        placeholder="País: Japón"
+                        formControlName="country"
+                        [classList]="campoNoValido('country') ? 'error-input' : null"
+                        autocomplete="off"
+                        spellcheck="false"
+                    />
+                    <input 
+                        type="email" 
+                        placeholder="Email: email@email.com"
+                        formControlName="email"
+                        [classList]="campoNoValido('email') ? 'error-input' : null"
+                        spellcheck="false"
+                        readonly
+                    />
+                    <textarea 
+                        placeholder="Descripcion: Cuentanos algo sobre ti -"
+                        formControlName="description"
+                        [classList]="campoNoValido('description') ? 'error-input' : null"
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                    </textarea>
+                    <button type="submit" id="userSubmitPage">Editar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+@import '../../scss/colors.scss';
+
+.pagination {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    margin: 5px 0 45px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    
+    ul {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: center;
+  
+      li {
+
+        button {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          width: 60px;
+          height: 100%;
+          border: 1px solid $border-light;
+          margin: 10px;
+          font-size: 13px;
+          color: $font-gray;
+          background-color: $body-color;
+          transition: $transition;
+          cursor: pointer;
+          font-weight: bold;
+          user-select: none;
+
+          i {
+            margin-top: -2px;
+            margin-left: 5px;
+          }
+
+          &:hover {
+            background-color: $purple;
+            border-color: $purple;
+            box-shadow: $shadow;
+            color: $font-white;
+          }
+
+          &:hover i {
+            color: $font-white;
+          }
+          
+        }
+      }
+    }
+}
+
+.wait-submit {
+  transform: scale(.95);
+}
+
+.responsive-buttons {
+  ul li button {
+    width: 40px;
+    height: 35px;
+    margin: 5px;
+  }
+}
+
+@media ( max-width: 1013px ) {
+  .pagination {
+    ul {
+      li {
+        button {
+          width: 45px;
+        }
+      }
+    }
+  }
+}

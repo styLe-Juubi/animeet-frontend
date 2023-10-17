@@ -1,0 +1,284 @@
+<div class="profile">
+
+    <!-- Header Profile, Image and Cover with Data -->
+    <!-- Header in PC -->
+    <div class="header" *ngIf="user">
+        <div class="header-left">
+            <img src="{{ url + '/user/image/' + user.image }}" alt="{{ user.image }}" (click)="openImage( user.image );$event.stopPropagation();">
+        </div>
+        <div class="header-right">
+            <img src="{{ url + '/user/image/' + user.coverImage }}" alt="{{ user.coverImage }}">
+            <div class="over-coverImage" >
+                <div class="description">
+                    <h1>{{ user.username }}<i class="caret down icon"></i></h1>
+                    <p>{{ user.description }}</p>
+                    <ul>
+                        <li>{{ user.country }}</li>
+                        <li (click)="openFollowList('seguidores');$event.stopPropagation();">Seguidores: <span>{{ followersCount }}</span></li>
+                        <li (click)="openFollowList('seguidos');$event.stopPropagation();">Siguiendo: <span>{{ followingCount }}</span></li>
+                        <li>Publicaciones: <span>{{ publicationCount }}</span></li>
+                        <li>Reseñas: <span>{{ reviewCount }}</span></li>
+                    </ul>
+                </div>
+                <div class="btn-follow-message">
+                    <a *ngIf="!following" id="btn-follow" (click)="followUser( user._id );"><img src="../../../assets/follow.png"></a>
+                    <a *ngIf="following" class="already-follow" id="btn-follow" (click)="unfollowUser( user._id );"><img src="../../../assets/follow.png"></a>
+                    <a (click)="sendMessage( user._id );$event.stopPropagation();"><img src="../../../assets/send-message.png"></a>
+                    <a><img src="../../../assets/discord.png"></a>
+                    <a><img src="../../../assets/facebook.png"></a>
+                    <a><img src="../../../assets/instagram.png"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header in Movil -->
+    <div class="header-movil" *ngIf="user">
+        <img routerLink="/{{ user.username }}" class="background-user" src="{{ url + '/user/image/' + user.coverImage }}" alt="{{ user.coverImage }}">
+        <img routerLink="/{{ user.username }}" class="user-image" src="{{ url + '/user/image/' + user.image }}" alt="{{ user.image }}">
+        <h3 routerLink="/{{ user.username }}">{{ user.username }}</h3>
+        <h4 routerLink="/{{ user.username }}">{{ user.name }} {{ user.surname }}</h4>
+        <ul>
+            <h5 *ngIf="user.description && user.description !== ''">Acerca de mi</h5>
+            <p *ngIf="user.description && user.description !== ''">{{ user.description }}</p>
+            <h5 *ngIf="user.description && user.description !== ''">Marcadores</h5>
+            <li>Seguidores <span>{{ followersCount }}</span></li>
+            <li>Siguiendo <span>{{ followingCount }}</span></li>
+            <li>Publicaciones <span>{{ publicationCount }}</span></li>
+            <li>Reviews <span>{{ reviewCount }}</span></li>
+            <h5>Animes</h5>
+            <li>Favoritos <span>{{ loveCount }}</span></li>
+            <li>En espera <span>{{ waitCount }}</span></li>
+            <li>Vistos <span>{{ watchCount }}</span></li>
+        </ul>
+        <div class="btn-follow-message">
+            <a *ngIf="!following" id="btn-follow" (click)="followUser( user._id );"><img src="../../../assets/follow.png"></a>
+            <a *ngIf="following" class="already-follow" id="btn-follow" (click)="unfollowUser( user._id );"><img src="../../../assets/follow.png"></a>
+            <a (click)="sendMessage( user._id );"><img src="../../../assets/send-message.png"></a>
+            <a><img src="../../../assets/discord.png"></a>
+            <a><img src="../../../assets/facebook.png"></a>
+            <a><img src="../../../assets/instagram.png"></a>
+        </div>
+    </div>
+
+    <div class="main">
+        <!-- Lists of Animes in Favorites, Wait and Watch -->
+        <div class="main-left">
+            <ul class="option-list" #optionList id="option-list">
+                <li id="btn-love" (click)="showList('btn-love', 'love-list', 'love');">Favoritos 
+                    <span><i class="heart outline icon"></i></span>
+                </li>
+                <li id="btn-wait" (click)="showList('btn-wait', 'wait-list', 'wait');">En espera 
+                    <span><i class="clock outline icon"></i></span>
+                </li>
+                <li id="btn-watch" (click)="showList('btn-watch', 'watch-list', 'watch');">Vistos 
+                    <span><i class="eye icon"></i></span>
+                </li>
+            </ul>
+            
+            <ul class="list" id="love-list">
+                <li *ngFor="let anime of loveList">
+                    <img src="{{ anime.anime.image }}" alt="{{ anime.anime.image }}">
+                    <a [ngClass]="{
+                        'type-anime': anime.anime.type === 'Anime',
+                        'type-pelicula': anime.anime.type === 'Película',
+                        'type-ova': anime.anime.type === 'OVA'
+                    }">{{ anime.anime.type }}</a>
+                    <button 
+                        *ngIf="userLogged._id === user._id"                
+                        (click)="deleteFromList( anime._id, 'love' );"
+                        class="delete-from-list">
+                        <i class="close icon"></i>
+                    </button>
+                    <div class="anime-description" (click)="watchAnime( anime.anime.name );">
+                        <img src="{{ anime.anime.image }}" alt="{{ anime.anime.image }}">
+                        <h3>{{ anime.anime.name }}</h3>
+                        <p>{{ anime.anime.description }}</p>
+                    </div>
+                </li>
+                <li *ngIf="!loveList">
+                    <img src="../../../assets/rain-cover.gif" alt="rain-cover.gif">
+                    <div class="anime-description">
+                        <img src="../../../assets/rain-image.gif" alt="rain-image.gif">
+                        <h3>No se han encontrado animes</h3>
+                        <p>
+                            “Y una vez que la tormenta termine, no recordarás como lo lograste, como sobreviviste. 
+                            Ni siquiera estarás seguro si la tormenta ha terminado realmente. 
+                            Una cosa es segura. Cuando salgas de esa tormenta, no serás la misma persona que entró en ella. 
+                            De eso se trata esta tormenta ”.
+                        </p>
+                    </div>
+                </li>
+                <li *ngIf="!loveList" class="margin-b-movil">
+                    <img src="../../../assets/rain-cover2.gif" alt="rain-cover2.gif">
+                    <div class="anime-description">
+                        <img src="../../../assets/rain-image2.gif" alt="rain-image2.gif">
+                        <h3>No se han encontrado animes</h3>
+                        <p>
+                            “Nunca dejes que nadie te diga que no puedes hacer algo. 
+                            Ni siquiera yo, ¿vale?. Si tienes un sueño, tienes que protegerlo. 
+                            Las personas que no son capaces de hacer algo te dirán que tú tampoco puedes. 
+                            Si quieres algo ve por ello y punto.”
+                        </p>
+                    </div>
+                </li>
+                <div class="list-pagination" *ngIf="loveList">
+                    <button (click)="listNextBackPage('back', 'love', totalPagesList, optionList )"><i class="caret left icon"></i></button>
+                    <button>{{ pageList }}</button>
+                    <button>/</button>
+                    <button (click)="listNextBackPage('last', 'love', totalPagesList, optionList )">{{ totalPagesList }}</button>
+                    <button (click)="listNextBackPage('next', 'love', totalPagesList, optionList )"><i class="caret right icon"></i></button>
+                </div>
+            </ul>
+
+            <ul class="list" id="wait-list">
+                <li *ngFor="let anime of waitList">
+                    <img src="{{ anime.anime.image }}" alt="{{ anime.anime.image }}">
+                    <a [ngClass]="{
+                        'type-anime': anime.anime.type === 'Anime',
+                        'type-pelicula': anime.anime.type === 'Película',
+                        'type-ova': anime.anime.type === 'OVA'
+                    }">{{ anime.anime.type }}</a>
+                    <button 
+                        *ngIf="userLogged._id === user._id"                
+                        (click)="deleteFromList( anime._id, 'wait' );"
+                        class="delete-from-list">
+                        <i class="close icon"></i>
+                    </button>
+                    <div class="anime-description" (click)="watchAnime( anime.anime.name );">
+                        <img src="{{ anime.anime.image }}" alt="{{ anime.anime.image }}">
+                        <h3>{{ anime.anime.name }}</h3>
+                        <p>{{ anime.anime.description }}</p>
+                    </div>
+                </li>
+                <li *ngIf="!waitList">
+                    <img src="../../../assets/rain-cover.gif" alt="rain-cover.gif">
+                    <div class="anime-description">
+                        <img src="../../../assets/rain-image.gif" alt="rain-image.gif">
+                        <h3>No se han encontrado animes</h3>
+                        <p>
+                            “Y una vez que la tormenta termine, no recordarás como lo lograste, como sobreviviste. 
+                            Ni siquiera estarás seguro si la tormenta ha terminado realmente. 
+                            Una cosa es segura. Cuando salgas de esa tormenta, no serás la misma persona que entró en ella. 
+                            De eso se trata esta tormenta ”.
+                        </p>
+                    </div>
+                </li>
+                <li *ngIf="!waitList" class="margin-b-movil">
+                    <img src="../../../assets/rain-cover2.gif" alt="rain-cover2.gif">
+                    <div class="anime-description">
+                        <img src="../../../assets/rain-image2.gif" alt="rain-image2.gif">
+                        <h3>No se han encontrado animes</h3>
+                        <p>
+                            “Nunca dejes que nadie te diga que no puedes hacer algo. 
+                            Ni siquiera yo, ¿vale?. Si tienes un sueño, tienes que protegerlo. 
+                            Las personas que no son capaces de hacer algo te dirán que tú tampoco puedes. 
+                            Si quieres algo ve por ello y punto.”
+                        </p>
+                    </div>
+                </li>
+                <div class="list-pagination" *ngIf="waitList">
+                    <button (click)="listNextBackPage('back', 'wait', totalPagesList, optionList )"><i class="caret left icon"></i></button>
+                    <button>{{ pageList }}</button>
+                    <button>/</button>
+                    <button (click)="listNextBackPage('last', 'wait', totalPagesList, optionList )">{{ totalPagesList }}</button>
+                    <button (click)="listNextBackPage('next', 'wait', totalPagesList, optionList )"><i class="caret right icon"></i></button>
+                </div>
+            </ul>
+
+            <ul class="list" id="watch-list">
+                <li *ngFor="let anime of watchList">
+                    <img src="{{ anime.anime.image }}" alt="{{ anime.anime.image }}">
+                    <a [ngClass]="{
+                        'type-anime': anime.anime.type === 'Anime',
+                        'type-pelicula': anime.anime.type === 'Película',
+                        'type-ova': anime.anime.type === 'OVA'
+                    }">{{ anime.anime.type }}</a>
+                    <button 
+                        *ngIf="userLogged._id === user._id"                
+                        (click)="deleteFromList( anime._id, 'watch' );"
+                        class="delete-from-list">
+                        <i class="close icon"></i>
+                    </button>
+                    <div class="anime-description" (click)="watchAnime( anime.anime.name );">
+                        <img src="{{ anime.anime.image }}" alt="{{ anime.anime.image }}">
+                        <h3>{{ anime.anime.name }}</h3>
+                        <p>{{ anime.anime.description }}</p>
+                    </div>
+                </li>
+                <li *ngIf="!watchList">
+                    <img src="../../../assets/rain-cover.gif" alt="rain-cover.gif">
+                    <div class="anime-description">
+                        <img src="../../../assets/rain-image.gif" alt="rain-image.gif">
+                        <h3>No se han encontrado animes</h3>
+                        <p>
+                            “Y una vez que la tormenta termine, no recordarás como lo lograste, como sobreviviste. 
+                            Ni siquiera estarás seguro si la tormenta ha terminado realmente. 
+                            Una cosa es segura. Cuando salgas de esa tormenta, no serás la misma persona que entró en ella. 
+                            De eso se trata esta tormenta ”.
+                        </p>
+                    </div>
+                </li>
+                <li *ngIf="!watchList" class="margin-b-movil">
+                    <img src="../../../assets/rain-cover2.gif" alt="rain-cover2.gif">
+                    <div class="anime-description">
+                        <img src="../../../assets/rain-image2.gif" alt="rain-image2.gif">
+                        <h3>No se han encontrado animes</h3>
+                        <p>
+                            “Nunca dejes que nadie te diga que no puedes hacer algo. 
+                            Ni siquiera yo, ¿vale?. Si tienes un sueño, tienes que protegerlo. 
+                            Las personas que no son capaces de hacer algo te dirán que tú tampoco puedes. 
+                            Si quieres algo ve por ello y punto.”
+                        </p>
+                    </div>
+                </li>
+                <div class="list-pagination" *ngIf="watchList">
+                    <button (click)="listNextBackPage('back', 'watch', totalPagesList, optionList )"><i class="caret left icon"></i></button>
+                    <button>{{ pageList }}</button>
+                    <button>/</button>
+                    <button (click)="listNextBackPage('last', 'watch', totalPagesList, optionList )">{{ totalPagesList }}</button>
+                    <button (click)="listNextBackPage('next', 'watch', totalPagesList, optionList )"><i class="caret right icon"></i></button>
+                </div>
+            </ul>
+        </div>
+
+        <!-- Lists of all Publications and Reviews By User -->
+        <div class="main-right">
+            <ul class="publication-options" #publicationList>
+                <li id="publication-type-todos" (click)="changeType('todos', 'publication-type-todos');">Publicaciones</li>
+                <li id="publication-type-review" (click)="changeType('review', 'publication-type-review');">Reseñas</li>
+            </ul>
+
+            <!-- List of Publications -->
+            <app-publicationlist *ngIf="user" [user]="user" [type]="type" (reloadCounters)="reloadCountersHandler()"></app-publicationlist>
+        </div>
+    </div>
+
+    <!-- Lists of Follows -->
+    <div class="follow-list" id="follow-list-profile" *ngIf="typeList && typeList !== ''">
+        <div class="center-list" (click)="$event.stopPropagation();">
+            <h2>{{ typeList }} <span><img src="../../../assets/follow.png" alt="follow.png"></span></h2>
+            <ul>
+                <li *ngFor="let item of followList" routerLink="/{{ item.user.username }}" (click)="closeFollowList();"> 
+                    <div class="image-search">
+                        <img src="{{ url + '/user/image/' + item.user.image }}" alt="{{ item.user.image }}">
+                    </div>
+                    <div class="content-search">
+                        <h4>
+                            {{ item.user.username.substr(0, 40) }}
+                        </h4>
+                        <p>{{ item.user.description }}</p>
+                    </div>
+                </li>
+            </ul>
+            <app-pagination 
+                *ngIf="followPage && totalPagesFollow" 
+                [page]="followPage" 
+                [totalPages]="totalPagesFollow" 
+                (back)="changePageFollow($event)" 
+                (next)="changePageFollow($event)"
+                (lastPage)="changePageFollow($event)"
+            >
+            </app-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,359 @@
+@import '../../scss/colors.scss';
+
+.feed {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items:flex-start;
+
+    .feed-left {
+        flex: 0 0 30%;
+        max-width: 30%;
+        height: 100vh;
+        overflow-y: scroll;
+        top: 60px;
+        position: sticky;
+        margin-bottom: 30px;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .user {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            position: relative;
+            justify-content: center;
+            background-color: $white;
+            border: 1px solid $border-light;
+
+            .background-user {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 120px;
+                object-fit: cover;
+                z-index: 1;
+                cursor: pointer;
+            }
+
+            .user-image {
+                position: relative;
+                z-index: 2;
+                width: 120px;
+                height: 120px;
+                margin-top: 60px;
+                object-fit: cover;
+                border-radius: 50%;
+                border: 3px solid $white;
+                cursor: pointer;
+            }
+
+            h3 {
+                width: 100%;
+                margin: 0;
+                text-align: center;
+                margin-top: 10px;
+                letter-spacing: 1px;
+                padding: 0 15px;
+                color: $font-dark;
+                cursor: pointer;
+                transition: $transition;
+
+                &:hover {
+                    color: $purple;
+                }
+            }
+
+            h4 {
+                width: 100%;
+                text-align: center;
+                margin: 0;
+                margin-top: 5px;
+                letter-spacing: 1px;
+                color: $font-gray;
+                font-size: 13px;
+                padding: 0 20px 10px;
+                border-bottom: 1px solid $border-light;
+                cursor: pointer;
+                transition: $transition;
+
+                &:hover {
+                    color: $purple;
+                }
+            }
+
+            ul {
+                width: 100%;
+                margin: 0;
+                padding: 10px 0;
+                list-style: none;
+
+                li {
+                    width: 100%;
+                    margin: 0;
+                    margin-bottom: 5px;
+                    letter-spacing: 1px;
+                    font-size: 13px;
+                    padding: 0 35px;
+                    text-align: left;
+                    color: $font-gray;
+
+                    span {
+                        float: right;
+                        color: $purple;
+                    }
+                }
+
+                h5 {
+                    width: 100%;
+                    margin: 0;
+                    text-align: center;
+                    letter-spacing: 1px;
+                    color: $purple;
+                    font-size: 14px;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+
+        .suggestions {
+            margin-top: 10px;
+            width: 100%;
+
+            ul {
+                width: 100%;
+                background-color: $white;
+                border: 1px solid $border-light;
+
+                h4 {
+                    width: 100%;
+                    margin: 0;
+                    text-align: left;
+                    padding: 10px;
+                    letter-spacing: 1px;
+                    color: $font-dark;
+                    font-size: 14px;
+                    font-weight: 500;
+                    border-bottom: 1px solid $border-light;
+
+                    i {
+                        float: right;
+                    }
+                }
+
+                li {
+                    position: relative;
+                    width: 100%;
+                    height: 60px;
+                    padding: 10px 15px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: row;
+                    align-items: center;
+                    border-bottom: 1px solid $border-light;
+                    transition: $transition;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $purple;
+                        border-color: $purple;
+                        box-shadow: $shadow;
+                    }
+
+                    &:hover p,
+                    &:hover i {
+                        color: $font-white;
+                    }
+
+                    &:last-child {
+                       border-bottom: 0;
+                    }
+
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        border: 1px solid $border-light;
+                    }
+
+                    p {
+                        margin: 0;
+                        margin-left: 7px;
+                        width: 190px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        letter-spacing: 1px;
+                        color: $font-gray;
+                        font-size: 13px;
+                        transition: $transition;
+                    }
+
+                    i {
+                        margin: 0;
+                        margin-top: -5px;
+                        margin-left: auto;
+                        padding: 0;
+                        color: $purple;
+                        transition: $transition;
+                    }
+                }
+            }
+        }
+    }
+
+    .feed-main {
+        flex: 1 0 60%;
+        max-width: 70%;
+        margin: 0;
+        margin-left: 10px;
+        padding: 0;
+
+        .publication-options {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            list-style: none;
+
+            li {
+                padding: 10px 10px 11px;
+                flex: 1 0 45%;
+                border: 1px solid $border-light;
+                background-color: $white;
+                color: $font-dark;
+                text-align: center;
+                letter-spacing: 1px;
+                font-size: 13px;
+                cursor: pointer;
+                transition: $transition;
+
+                &:nth-of-type(2) {
+                    border-left: 0;
+                }
+
+                &:hover {
+                    background-color: $purple;
+                    box-shadow: $shadow;
+                    color: $font-white;
+                    border-color: $purple;
+                }
+
+                span {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+.active-type-option {
+    color: $purple !important;
+
+    &:hover {
+        color: $font-white !important;
+    }
+}
+
+@media ( max-width: 1013px ) {
+    .feed {
+        width: 95%;
+        margin: 10px auto;
+        display: block;
+        .feed-left {
+            min-width: 100%;
+            display: block;
+            position: relative;
+            height: auto;
+            overflow: auto;
+            top: 0;
+            margin-bottom: 10px;
+        }
+        .feed-main {
+            display: block;
+            min-width: 100%;
+            margin: 0;
+        }
+    }
+}
+
+@media ( min-width: 1014px ) {
+    .feed {
+        width: 100%;
+        .feed-left {
+            flex: 0 0 20%;
+            max-width: 20%;
+            .user {
+                ul {
+                    li {
+                        padding: 0 15px;
+                    }
+                }
+            }
+            .suggestions {
+                ul {
+                    h4 {
+                        font-size: 12px;
+                    }
+                    li {
+                        padding: 10px;
+                        p {
+                            width: 100px;
+                        }
+                    }
+                }
+            }
+        }
+        .feed-main {
+            flex: 1 0 60%;
+            max-width: 80%;
+        }
+    }
+}
+
+@media ( min-width: 1260px ) {
+    .feed {
+        width: 90%;
+    }
+}
+
+@media ( min-width: 1590px ) {
+    .feed {
+        width: 80%;
+        .feed-left {
+            flex: 0 0 30%;
+            max-width: 30%;
+            .user {
+                ul {
+                    li {
+                        padding: 0 35px;
+                    }
+                }
+            }
+            .suggestions {
+                ul {
+                    h4 {
+                        font-size: 15px;
+                    }
+                    li {
+                        padding: 10px 15px;
+                        p {
+                            width: 190px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media ( min-width: 1890px ) {
+    .feed {
+        width: 70%;
+    }
+}

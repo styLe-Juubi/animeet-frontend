@@ -1,0 +1,391 @@
+@import '../../scss/colors.scss';
+
+.sign-in-out {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+
+    .left {
+        flex: 0 0 60%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        background:
+        linear-gradient(
+          rgba(0, 0, 0, 0.1), 
+          rgba(0, 0, 0, 0.1)
+        ),
+        url('../../../assets/animet.jpg');
+        background-repeat: no-repeat;
+
+        .align-center {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 200px;
+            background-color: rgba(0,0,0,.2);
+            padding-bottom: 30px;
+
+            h1 {
+                font-size: 95px;
+                color: $font-white;
+                font-family: 'Courgette', cursive;
+                text-shadow: 0 1px 0 $purple, 
+                            0 2px 0 $purple,
+                            0 3px 0 $purple,
+                            0 4px 0 $purple,
+                            0 5px 0 $purple,
+                            0 6px 1px rgba(0,0,0,.1),
+                            0 0 5px rgba(0,0,0,.1),
+                            0 1px 3px rgba(0,0,0,.3),
+                            0 3px 5px rgba(0,0,0,.2),
+                            0 5px 10px rgba(0,0,0,.25),
+                            0 10px 10px rgba(0,0,0,.2),
+                            0 20px 20px rgba(0,0,0,.15);
+                letter-spacing: 6px;
+                width: 100%;
+                text-align: center;
+                margin: 0;
+                cursor: pointer;
+            }
+
+            h5 {
+                font-size: 25px;
+                color: $font-white;
+                text-shadow: 0 1px 0 $purple, 
+                            0 2px 0 $purple,
+                            0 2px 0 $purple,
+                            0 2px 0 $purple,
+                            0 2px 0 $purple,
+                            0 2px 1px rgba(0,0,0,.1),
+                            0 0 5px rgba(0,0,0,.1),
+                            0 1px 3px rgba(0,0,0,.3),
+                            0 3px 5px rgba(0,0,0,.2),
+                            0 5px 10px rgba(0,0,0,.25),
+                            0 10px 10px rgba(0,0,0,.2),
+                            0 20px 20px rgba(0,0,0,.15);
+                letter-spacing: 2px;
+                width: 100%;
+                text-align: center;
+                margin: 0;
+            }
+        }
+    }
+
+    .right {
+        flex: 0 0 40%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        background-image: url('../../../assets/purple-cover.jpg');
+
+        .form-sign {
+            width: 60%;
+            background-color: $white;
+            box-shadow: $shadow;
+            padding-bottom: 45px;
+            border: 1px solid $border-light;
+
+            h2 {
+                width: 100%;
+                padding: 10px;
+                letter-spacing: 1px;
+                font-size: 20px;
+                text-align: center;
+                color: $font-white;
+                background-color: $purple;
+                font-weight: 500;
+            }
+
+            form {
+                padding-top: 15px;
+                width: 100%;
+                text-align: center;
+
+                input {
+                    padding: 15px;
+                    border: 1px solid $border-light;
+                    outline: none;
+                    width: 80%;
+                    margin: 10px auto;
+                    border-radius: 2px;
+                    letter-spacing: 1px;
+                    background-color: $body-color;
+                    color: $font-gray;
+
+                    &::placeholder {
+                        letter-spacing: 1px;
+                    }
+
+                    &:focus {
+                        border-color: $action;
+                    }
+                }
+
+                button {
+                    padding: 15px;
+                    border: 0;
+                    outline: none;
+                    width: 80%;
+                    margin: 10px auto;
+                    border-radius: 2px;
+                    background-color: $purple;
+                    color: $font-white;
+                    letter-spacing: 1px;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: $transition;
+
+                    &:hover {
+                        box-shadow: $shadow;
+                    }
+                }
+
+                p {
+                    width: 80%;
+                    margin: 10px auto 20px;
+                    color: $font-gray;
+                    text-align: left;
+                    font-size: 14px;
+                    letter-spacing: 1px;
+
+                    span {
+                        float: right;
+                        cursor: pointer;
+                        color: $purple;
+                        text-shadow: 1px 1px 1px $white;
+                        transition: $transition;
+
+                        &:hover {
+                            text-shadow: 1px 1px 1px $purple;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.sign-in-out-movil {
+    width: 100%;
+    height: 100vh;
+    background-color: $white;
+
+    .welcome {
+        width: 100%;
+        background-color: $white;
+        position: relative;
+
+        .logo-title {
+            font-weight: bolder;
+            font-size: 40px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            cursor: pointer;
+            color: transparent;
+            width: 100%;
+            margin: 0;
+            border-bottom: 1px solid $border-light;
+            position: fixed;
+            top: 0;
+            z-index: 4;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            background-color: $white;
+            justify-content: center;
+
+            span {
+                font-family: 'Concert One', cursive;
+
+                &:nth-child(1) {
+                    color: $font-dark;
+                }
+                
+                &:nth-child(2) {
+                    color: $font-dark;
+                }
+
+                &:nth-child(3) {
+                    color: $font-dark;
+                }
+            }
+
+            img {
+                height: 32px;
+                margin-left: 10px;
+            }
+        }
+
+        .container-form {
+            width: 100%;
+            height:  600px;
+            margin-top: 80px;
+            position: relative;
+            padding-top: 180px;
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            .form-sign {
+                width: 95%;
+                margin: 0 auto;
+                background-color: $white;
+                border: 1px solid $border-light;
+                position: relative;
+                z-index: 3;
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+
+                form {
+                    padding-top: 5px;
+                    width: 100%;
+                    text-align: center;
+    
+                    input {
+                        padding: 15px;
+                        border: 1px solid $border-light;
+                        outline: none;
+                        width: 80%;
+                        margin: 10px auto 0;
+                        border-radius: 2px;
+                        letter-spacing: 1px;
+                        font-size: 13px;
+                        background-color: $body-color;
+                        color: $font-dark;
+    
+                        &::placeholder {
+                            letter-spacing: 1px;
+                        }
+    
+                        &:focus {
+                            border-color: $action;
+                        }
+                    }
+    
+                    button {
+                        padding: 15px;
+                        border: 0;
+                        outline: none;
+                        width: 80%;
+                        margin: 10px auto;
+                        border-radius: 2px;
+                        background-color: $purple;
+                        color: $font-white;
+                        letter-spacing: 1px;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: $transition;
+    
+                        &:hover {
+                            box-shadow: $shadow;
+                        }
+                    }
+    
+                    p {
+                        width: 85%;
+                        margin: 10px auto 20px;
+                        color: $font-gray;
+                        text-align: left;
+                        font-size: 11px;
+                        letter-spacing: 1px;
+    
+                        span {
+                            float: right;
+                            cursor: pointer;
+                            color: $purple;
+                            text-shadow: 1px 1px 1px $white;
+                            transition: $transition;
+    
+                            &:hover {
+                                text-shadow: 1px 1px 1px $purple;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.wait-submit {
+    background-color: $purple-light !important;
+}
+
+.error-input {
+    border-color: $red !important;
+}
+
+@media ( max-width: 1013px ) {
+    .sign-in-out {
+        display: none;
+    }
+}
+
+@media ( min-width: 1014px ) {
+    .sign-in-out-movil {
+        display: none;
+    }
+    .sign-in-out {
+        display: block;
+        .left {
+            display: none;
+        }
+    }
+} 
+
+@media ( min-width: 1340px ) {
+    .sign-in-out {
+        display: flex;
+        .left {
+            display: flex;
+        }
+        .right {
+            .form-sign {
+                width: 90%;
+            }
+        }
+    }
+} 
+
+@media ( min-width: 1590px ) {
+    .sign-in-out {
+        .right {
+            .form-sign {
+                width: 75%;
+            }
+        }
+    }
+} 
+
+@media ( min-width: 1890px ) {
+    .sign-in-out {
+        .right {
+            .form-sign {
+                width: 65%;
+            }
+        }
+    }
+} 
+
+@media ( min-width: 1921px ) {
+    .sign-in-out {
+        margin: 0 auto;
+        max-width: 1920px;
+    }
+}

@@ -1,0 +1,24 @@
+<div class="latest-animes">
+    <div class="anime" *ngFor="let anime of randomAnimes" (click)="watchAnime( anime.name )">
+        <img 
+            *ngIf="anime.coverImage !== 'coverImage-default.png'"    
+            class="absolute-image" 
+            src="{{ anime.image }}" 
+            alt="{{ anime.image }}"
+        />
+        <img 
+            *ngIf="anime.coverImage === 'coverImage-default.png'"    
+            class="absolute-image" 
+            src="../../../assets/purple-cover.jpg" 
+            alt="purple-cover.jpg"
+        />
+        <div class="side-left">
+            <img src="{{ anime.image }}" alt="{{ anime.image }}">
+        </div>
+        <div class="side-right">
+            <h3>{{ anime.name }}</h3>
+            <p>{{ anime.description }}</p>
+            <button>Ver anime</button>
+        </div>
+    </div>
+</div>

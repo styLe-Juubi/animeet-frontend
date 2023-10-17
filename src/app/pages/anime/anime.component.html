@@ -1,0 +1,122 @@
+<div class="anime" *ngIf="anime">
+    <!-- Header of Anime -->
+    <div class="header">
+        <img src="{{ anime.image }}" alt="{{ anime.image }}">
+        <div class="side-left">
+            <img src="{{ anime.image }}" alt="anime.image">
+            <div [ngClass]="{
+                'type-anime': anime.type === 'Anime',
+                'type-pelicula': anime.type === 'Pelicula',
+                'type-ova': anime.type === 'OVA'
+            }">
+                {{ anime.type }}
+            </div>
+        </div>
+        <div class="side-right">
+            <h1><span>{{ anime.name }}</span></h1>
+            <p>{{ anime.description }}</p>
+            <div class="side-right-bottom">
+                <ul>
+                    <li 
+                        [ngClass]="{ 'color-anime': anime.type === 'Anime', 
+                            'color-pelicula': anime.type === 'Pelicula', 
+                            'color-ova': anime.type === 'OVA'}"
+                        *ngFor="let tag of anime.tags"
+                        [routerLink]="['/animes']" [queryParams]="{ orden: '-1', etiquetas: tag }"
+                    >{{ tag }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main of the anime -->
+    <div class="main-anime">
+
+        <!-- Actions to add in users List -->
+        <div class="anime-lists">
+            <div class="btns-action">
+                <button [ngClass]="{ 
+                    'color-anime': anime.type === 'Anime',
+                    'color-pelicula': anime.type === 'Pelicula',
+                    'color-ova': anime.type === 'OVA'
+                }">{{ anime.status }}</button>
+                <button (click)="addToList( 'love', anime._id )" [ngClass]="{ 'inLoveList': animeInLove }">Agregar a Favoritos <span><i class="heart icon"></i></span></button>
+                <button (click)="addToList( 'wait', anime._id )" [ngClass]="{ 'inWaitList': animeInWait }">Agregar a Espera <span><i class="clock icon"></i></span></button>
+                <button (click)="addToList( 'watch', anime._id )" [ngClass]="{ 'inWatchList': animeInWatch }">Agregar a Vistos <span><i class="eye icon"></i></span></button>
+            </div>
+            <div class="lover-users">
+                <h4 [ngClass]="{'no-lovers': !loveList || loveList.length === 0 }">Seguidores 
+                    <span *ngIf="loveList">
+                        {{ countLovers }} <i class="heart icon"></i>
+                    </span>
+                    <span *ngIf="!loveList">
+                        0 <i class="heart icon"></i>
+                    </span>
+                </h4>
+                <ul *ngIf="loveList && loveList.length > 0">
+                    <li *ngFor="let item of loveList" [routerLink]="['/', item.user.username]">
+                        <img src="{{ url + '/user/image/' + item.user.coverImage }}" alt="{{ item.user.coverImage }}">
+                        <div class="user-image">
+                            <img src="{{ url + '/user/image/' + item.user.image }}" alt="{{ item.user.image }}">
+                        </div>
+                        <div class="username">
+                            <h5>{{ item.user.username }}</h5>
+                            <span><i class="caret right icon"></i></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Episode List-->
+        <div class="main-right">
+            <div class="episode-list">
+                <h2>
+                    <i class="play icon"></i> Lista de Episodios 
+                    <span *ngIf="episodes && episodes.length > 0">
+                        <button (click)="episodesOrder( order )" id="episodes-order">
+                            Orden: 
+                                <span *ngIf="order === -1">Recientes <i class="caret down icon"></i></span>
+                                <span *ngIf="order === 1">Primeros <i class="caret down icon"></i></span>
+                        </button>
+                    </span>
+                </h2>
+                
+    
+                <ul *ngIf="episodes && episodes.length > 0" #episodeList>
+                    <li *ngFor="let episode of episodes" (click)="watchEpisode( anime.name, episode.number );">
+                        <img src="{{ url + '/episode/image/' + episode.image }}" alt="{{ episode.image }}">
+                        
+                        <div class="episode-title-number">
+                            <h5>{{ episode.title }}</h5>
+                            <p>Episodio {{ episode.number }}</p>
+                        </div>
+                        <i class="caret right icon"></i>
+                    </li>
+                    <button *ngIf="!allEpisodes"
+                    [ngClass]="{
+                        'color-anime': anime.type === 'Anime',
+                        'color-pelicula': anime.type === 'Pelicula',
+                        'color-ova': anime.type === 'OVA'
+                    }"
+                    (click)="loadMoreEpisodes();"
+                    >Mas episodios <span><i class="plus circle icon"></i></span></button>
+                </ul>
+                <ul *ngIf="!episodes" class="ul-no-episodes">
+                    <div class="proximamente" [ngClass]="{
+                        'color-anime': anime.type === 'Anime',
+                        'color-pelicula': anime.type === 'Pelicula',
+                        'color-ova': anime.type === 'OVA'
+                    }">
+                        <img src="../../../assets/hi-girl.png">
+                        <h3>Ups... No hay episodios subidos, pero proximamente estaran listos -</h3>
+                        <img src="../../../assets/yei-girl.png">
+                    </div>
+                </ul>
+            </div>
+
+            <!-- Comentarios -->
+            <app-commentlist *ngIf="anime" [anime]="anime" [type]="'anime'"></app-commentlist>
+        </div>
+    </div>
+</div>

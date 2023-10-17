@@ -1,0 +1,27 @@
+<div [ngClass]="[responsive ? 'pagination responsive-buttons' : 'pagination']">
+    <ul>
+        <li>
+            <button id="btnBack" (click)="changePage('back', 'btnBack');">
+                <i class="caret left icon"></i>
+            </button>
+        </li>
+        <li>
+            <button>{{ page }}</button>
+        </li>
+        <li>
+            <button>
+                <span>/</span>
+            </button>
+        </li>
+        <li>
+            <button id="btnTotalpages" (click)="changePage('lastPage', 'btnTotalpages');">
+                {{ totalPages }}
+            </button>
+        </li>
+        <li>
+            <button id="btnNext" (click)="changePage('next', 'btnNext');">
+                <i class="caret right icon"></i>
+            </button>
+        </li>
+    </ul>
+</div>

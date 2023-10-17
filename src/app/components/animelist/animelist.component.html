@@ -1,0 +1,42 @@
+<section class="section-animes" *ngIf="animes">
+    <h2 routerLink="/animes">Lista de Animes <i class="caret right icon"></i></h2>
+    <div class="animes-container">
+        <div class="anime" *ngFor="let anime of animes">
+            <div class="img-anime">
+                <img 
+                    (click)="watchAnime( anime.name );" 
+                    [src]="anime.image"
+                />
+            </div>
+            <div class="name-anime">
+                <h4>{{ anime.name }}</h4>
+            </div>
+
+            <!-- Hover effect to see description -->
+            <div class="description-anime">
+                <img 
+                    class="description-absolute-image" 
+                    src="{{ anime.image }}" 
+                    alt="{{ anime.image }}"
+                />
+                <div class="description-side-left">
+                    <img src="{{ anime.image }}" alt="{{ anime.image }}">
+                    <p *ngIf="anime.type === 'Anime'" class="type-anime">{{ anime.type }}</p>
+                    <p *ngIf="anime.type === 'OVA'" class="type-ova">{{ anime.type }}</p>
+                    <p *ngIf="anime.type === 'Película'" class="type-pelicula">{{ anime.type }}</p>
+                </div>
+
+                <div class="description-side-right">
+                    <h3>{{ anime.name }}</h3>
+                    <p>{{ anime.description }}</p>
+                    <button 
+                        [ngClass]="{ 'btn-watch-anime': anime.type === 'Anime',
+                            'btn-watch-pelicula': anime.type === 'Película',
+                            'btn-watch-ova': anime.type === 'OVA'}"
+                        (click)="watchAnime( anime.name );"
+                    >Ver anime</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

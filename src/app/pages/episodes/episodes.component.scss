@@ -1,0 +1,348 @@
+@import '../../scss/colors.scss';
+
+.episodes {
+  background-color: $white;
+  border: 1px solid $border-light;
+
+  .episodes-header {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: right;
+
+    h1 {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        letter-spacing: 1px;
+        font-weight: 500;
+        font-size: 20px;
+        text-transform: uppercase;
+        padding: 10px;
+        background-color: $purple;
+        color: $font-white;
+    }
+
+    .filter-container {
+        width: 70%;
+        margin-top: 10px;
+        padding-top: 25px;
+        text-align: right;
+        position: relative;
+
+        a {
+          padding: 10px 20px;
+          letter-spacing: 1px;
+          border: 0;
+          background-color: $white;
+          margin: 0px 10px;
+          cursor: pointer;
+          color: $font-gray;
+          border-radius: 2px;
+          border: 1px solid $border-light;
+          box-shadow: $shadow;
+          transition: $transition;
+          text-transform: capitalize;
+          user-select: none;
+          
+          span {
+              margin-left: 10px;
+              color: $font-dark;
+              transition: $transition;
+
+              i {
+                  color: $purple;
+                  transition: $transition;
+              }
+          }
+
+          &:hover {
+              background-color: $purple;
+              color: $font-white;
+              border-color: $purple;
+          }
+
+          &:hover span i, &:hover span {
+              color: $font-white;
+          }
+      }
+
+        button {
+            padding: 10px 20px;
+            letter-spacing: 1px;
+            border: 0;
+            background-color: $white;
+            margin: 0px 10px;
+            cursor: pointer;
+            color: $font-gray;
+            border-radius: 2px;
+            border: 1px solid $border-light;
+            box-shadow: $shadow;
+            transition: $transition;
+            user-select: none;
+            
+            span {
+                margin-left: 10px;
+                color: $font-dark;
+                transition: $transition;
+
+                i {
+                    color: $purple;
+                    transition: $transition;
+                }
+            }
+
+            &:hover {
+                background-color: $purple;
+                color: $font-white;
+                border-color: $purple;
+            }
+
+            &:hover span i, &:hover span {
+                color: $font-white;
+            }
+        }
+
+      .order-filters {
+        position: absolute;
+        z-index: 11;
+        width: 201px;
+        height: 100px;
+        left: 841px;
+        top: 110%;
+        background-color: $white;
+        border: 1px solid $border-light;
+        box-shadow: $shadow;
+        border-radius: 2px;
+        display: none;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+
+        .input-container {
+            flex: 0 0 100%;
+            text-align: left;
+            height: 20px;
+        }
+      }
+    }
+  }
+}
+
+
+.cbx {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  .cbx span {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translate3d(0, 0, 0);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: $font-dark;
+  }
+  .cbx span:first-child {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    transform: scale(1);
+    vertical-align: middle;
+    border: 1px solid #B9B8C3;
+    transition: all 0.2s ease;
+  }
+  .cbx span:first-child svg {
+    position: absolute;
+    z-index: 1;
+    top: 2px;
+    left: 1px;
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 12px;
+    stroke-dashoffset: 10px;
+    transition: all 0.3s ease;
+    transition-delay: 0.1s;
+    transform: translate3d(0, 0, 0);
+  }
+  .cbx span:first-child:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: $dark;
+    display: block;
+    transform: scale(0);
+    opacity: 1;
+    border-radius: 50%;
+    transition-delay: 0.2s;
+  }
+  .cbx span:last-child {
+    margin-left: 8px;
+  }
+  .cbx span:last-child:after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: #B9B8C3;
+    transform-origin: 0 0;
+    transform: scaleX(0);
+  }
+  .cbx:hover span:first-child {
+    border-color: $purple;
+  }
+  
+  .inp-cbx:checked + .cbx span:first-child {
+    border-color: $purple;
+    background: $purple;
+    animation: check 0.6s ease;
+  }
+  .inp-cbx:checked + .cbx span:first-child svg {
+    stroke-dashoffset: 0;
+  }
+  .inp-cbx:checked + .cbx span:first-child:before {
+    transform: scale(2.2);
+    opacity: 0;
+    transition: all 0.6s ease;
+  }
+  .inp-cbx:checked + .cbx span:last-child {
+    color: #B9B8C3;
+    transition: all 0.3s ease;
+  }
+  .inp-cbx:checked + .cbx span:last-child:after {
+    transform: scaleX(1);
+    transition: all 0.3s ease;
+  }
+  
+  @keyframes check {
+    50% {
+      transform: scale(1.2);
+    }
+  }
+
+.active {
+  animation: fadeIn .3s !important;
+  z-index: 11 !important;
+  display: flex !important;
+}
+
+.unactive {
+  animation: fadeOut .3s !important;
+}
+
+.wait-submit {
+  background-color: $purple-light!important;
+  border-color: $purple-light !important;
+  color: $font-white !important;
+}
+
+@media ( max-width: 1013px ) {
+  .episodes {
+    border-top: 0;
+    .episodes-header {
+      h1 {
+          width: 90%;
+          margin: 0px auto;
+          margin-top: 10px;
+          background-color: $purple;
+          color: $font-white;
+          font-size: 15px;
+          font-weight: bold;
+      }
+      .filter-container {
+        width: 100%;
+        form {
+          margin-top: -40px;
+          padding: 10px;
+          a {
+            float: left;
+            padding: 10px;
+            margin: 0;
+            margin-left: 10px;
+            padding: 8px 8px 9px;
+          }
+        }
+        .order-filters {
+          left: 12px;
+          top: 100%;
+        }
+      }
+    }
+  }
+} 
+
+@media ( min-width: 1014px ) {
+  .episodes {
+    .episodes-header {
+      .filter-container {
+        form {
+          a {
+            padding: 10px;
+          }
+        }
+        .order-filters {
+          left: 49.2%;
+          top: 110%;
+        }
+      }
+    }
+  }
+}
+
+@media ( min-width: 1260px ) {
+  .episodes {
+    .episodes-header {
+      .filter-container {
+        .order-filters {
+          left: 59.4%;
+        }
+      }
+    }
+  }
+}
+
+@media ( min-width: 1350px ) {
+  .episodes {
+    .episodes-header {
+      .filter-container {
+        .order-filters {
+          left: 60.6%;
+        }
+      }
+    }
+  }
+}
+
+@media ( min-width: 1590px ) {
+  .episodes {
+    .episodes-header {
+      .filter-container {
+        .order-filters {
+          left: 64.6%;
+        }
+      }
+    }
+  }
+}
+
+@media ( min-width: 1890px ) {
+  .episodes {
+    .episodes-header {
+      .filter-container {
+        .order-filters {
+          left: 841px;
+        }
+      }
+    }
+  }
+}

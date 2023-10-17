@@ -1,0 +1,17 @@
+<section class="section-episodes" *ngIf="episodes">
+    <h2 routerLink="/episodios">Ultimos Episodios <i class="caret right icon"></i></h2>
+    <div class="episodes-container">
+        <div class="episode" *ngFor="let episode of episodes" (click)="watchEpisode( episode.anime.name, episode.number );">
+            <img src="{{ episode.anime.image }}" alt="{{ episode.image }}">
+            <div class="info-episode">
+                <div class="fix-center">
+                    <img src="{{ episode.anime.image }}" alt="{{ episode.anime.image }}">
+                    <h3>Episodio Numero - {{ episode.number }}</h3>
+                </div>
+            </div>
+            <div class="info-anime">
+                <h4>{{ episode.anime.name }}</h4>
+            </div>
+        </div>
+    </div>
+</section>

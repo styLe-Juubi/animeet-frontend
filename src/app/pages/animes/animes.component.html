@@ -1,0 +1,184 @@
+<div class="animes">
+    <!-- Filters to Search Animes -->
+    <div class="animes-header">
+        <h1>Directorio Anime</h1>
+        <div class="filter-container">
+            <form [formGroup]="filterForm" (ngSubmit)="filterAnimes();">
+                <a type="menu"(click)="openCloseFilters('genre-filters');">Genero: 
+                    <span *ngIf="!tags || tags === 'all'">
+                        Todos <i class="caret down icon"></i>
+                    </span>
+                    <span *ngIf="tags && tags !== 'all'">
+                        Seleccionado<i class="caret down icon"></i>
+                    </span>
+                </a>
+
+                <a type="menu"(click)="openCloseFilters('type-filters');">Tipo: 
+                    <span *ngIf="!type || type === 'all'">
+                    Todos <i class="caret down icon"></i>
+                    </span>
+                    <span *ngIf="type && type !== 'all'">
+                        {{ type }} <i class="caret down icon"></i>
+                    </span>
+                </a>
+
+                <a type="menu" (click)="openCloseFilters('status-filters');">Estatus: 
+                    <span *ngIf="!status || status === 'all'">
+                        Todos <i class="caret down icon"></i>
+                    </span>
+                    <span *ngIf="status && status !== 'all'">
+                        {{ status }} <i class="caret down icon"></i>
+                    </span>
+                </a>
+
+                <a type="menu" (click)="openCloseFilters('order-filters');">Orden: 
+                    <span *ngIf="order === '1'">
+                        Antiguos <i class="caret down icon"></i>
+                    </span>
+                    <span *ngIf="order !== '1'">
+                        Recientes <i class="caret down icon"></i>
+                    </span>
+                </a>
+
+                <button type="submit" id="filter-submit">Filtrar: <span><i class="filter icon"></i></span></button>
+
+                <div class="list-filters genre-filters" id="genre-filters">
+                    <div class="input-container" *ngFor="let tag of tagsArray; let i=index">
+                        <input class="inp-cbx" type="checkbox" id="tag{{ i }}"[value]="tag.value" (change)="onCheckChange($event)"  style="display: none;">
+                        <label class="cbx" for="tag{{ i }}">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>{{ tag.description }}</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="list-filters type-filters" id="type-filters">
+                    <div class="input-container">
+                        <input class="inp-cbx" id="type-anime" type="radio" formControlName="type" value="anime" style="display: none;"/>
+                        <label class="cbx" for="type-anime">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>Anime</span>
+                        </label>
+                    </div>
+                    <div class="input-container">
+                        <input class="inp-cbx" id="type-pelicula" type="radio" formControlName="type" value="película" style="display: none;"/>
+                        <label class="cbx" for="type-pelicula">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>Pelicula</span>
+                        </label>
+                    </div>
+                    <div class="input-container">
+                        <input class="inp-cbx" id="type-ova" type="radio" formControlName="type" value="ova" style="display: none;"/>
+                        <label class="cbx" for="type-ova">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>OVA</span>
+                        </label>
+                    </div>
+                    <div class="input-container">
+                        <input class="inp-cbx" id="type-todos" type="radio" formControlName="type" value="all"  style="display: none;"/>
+                        <label class="cbx" for="type-todos">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>Todos</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="list-filters status-filters" id="status-filters">
+                    <div class="input-container">
+                        <input class="inp-cbx" id="status-emision" type="radio" formControlName="status" value="emision" style="display: none;"/>
+                        <label class="cbx" for="status-emision">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>En Emisión</span>
+                        </label>
+                    </div>
+                    <div class="input-container">
+                        <input class="inp-cbx" id="status-finalizado" type="radio" formControlName="status" value="finalizado" style="display: none;"/>
+                        <label class="cbx" for="status-finalizado">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>Finalizado</span>
+                        </label>
+                    </div>
+                    <div class="input-container">
+                        <input class="inp-cbx" id="status-todos" type="radio" formControlName="status" value="all" style="display: none;"/>
+                        <label class="cbx" for="status-todos">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>Todos</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="list-filters order-filters" id="order-filters">
+                    <div class="input-container">
+                        <input class="inp-cbx" id="order-antiguo" type="radio" formControlName="order" value="1" style="display: none;"/>
+                        <label class="cbx" for="order-antiguo">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>Antiguo</span>
+                        </label>
+                    </div>
+                    <div class="input-container">
+                        <input class="inp-cbx" id="order-reciente" type="radio" formControlName="order" value="-1" style="display: none;"/>
+                        <label class="cbx" for="order-reciente">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>Reciente</span>
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Anime List -->
+    <app-animelist *ngIf="animes" [animes]="animes"></app-animelist>
+    <app-notfound *ngIf="!animes" [message]="'No se han encontrado Animes'"></app-notfound>
+
+    <!-- Pagination -->
+    <app-pagination 
+        *ngIf="page && totalPages" 
+        [page]="page" 
+        [totalPages]="totalPages" 
+        (back)="changePage($event)" 
+        (next)="changePage($event)"
+        (lastPage)="changePage($event)"
+    >
+    </app-pagination>
+</div>

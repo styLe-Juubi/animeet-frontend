@@ -1,0 +1,20 @@
+<div class="user-list">
+    <div class="users-connections" (click)="closeSideUsersTo();">
+        <p>
+            <span>
+                <i class="users icon" id="icon-menu-users">
+                    <div class="dot-online"></div>
+                </i> En linea: {{ usersOnline }}
+                <span *ngIf="identity && identity.role === 'ADMIN'">- {{ allConnections }}</span>
+            </span>
+        </p>
+    </div>
+    
+    <ul>
+        <li *ngFor="let user of users" (click)="closeSideUsersTo();" routerLink="/{{ user.username }}">
+            <img class="image" src="{{ url + '/user/image/' + user.image }}" alt="{{ user.image }}" />
+            <p>{{ user.username }}</p>
+            <i class="caret right icon"></i>
+        </li>
+    </ul>
+</div>

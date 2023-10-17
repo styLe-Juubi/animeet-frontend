@@ -1,0 +1,90 @@
+@import '../../scss/colors.scss';
+
+.notification-list {
+    width: 220px;
+    background-color: $white;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    z-index: 5;
+    border: 1px solid $border-light;
+    border-radius: 2px;
+    transform: scaleY(0);
+    transform-origin: top;
+    list-style: none;
+
+    li {
+        width: 100%;
+        background-color: $body-color;
+        padding: 0 10px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        transition: $transition;
+        font-size: 13px;
+        letter-spacing: 1px;
+        color: $font-dark;
+
+        &:nth-of-type(odd) {
+            background-color: $white;
+        }
+
+        &:hover {
+            background-color: $purple;
+            color: $font-white;
+        }
+
+        .themes {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-direction: row;
+
+            .theme {
+                width: 20px;
+                height: 20px;
+                border-radius: 3px;
+                margin-left: 3px;
+                box-shadow: $box-shadow;
+            }
+
+            .default {
+                background-color: #fff;
+            }
+
+            .dark {
+                background-color: #000;
+            }
+            
+            .sennin {
+                background-color: #EA7B44;
+            }
+
+            .uchiha-blue {
+                background-color: #131829;
+            }
+
+            .uchiha {
+                background-color: #8C1414;
+            }
+
+            .pink {
+                background-color: #FDB3E8;
+            }
+
+            .xcentic {
+                background-color: #acebe2;
+            }
+        }
+    }
+}
+
+@media ( max-width: 1014px ) {
+    .notification-list {
+        width: 100%;
+        top: 0;
+        position: relative;
+    }
+}

@@ -1,0 +1,487 @@
+<div class="header">
+    <div class="navbar-main">
+        <div class="side">
+            <h1 class="logo-title" routerLink="/">
+                <span>An</span><span>ime</span><span>et</span>
+                <img src="../../../assets/logos/menu.png" alt="logo.png">
+            </h1>
+        </div>
+        <div class="side">
+            <form [formGroup]="searchForm" (ngSubmit)="search();" *ngIf="showSearchAnimes">
+                <input 
+                    type="text"
+                    formControlName="search"
+                    placeholder="Encuentra tu anime favorito" 
+                    (keypress)="searchFastF( $event );"
+                    (keydown.backspace)="searchFastF( $event );"
+                    (click)="showList();$event.stopPropagation();"
+                    spellcheck="false"
+                    autocomplete="off"
+                >
+                <button class="btn-search" type="submit"><i class="search icon"></i></button>
+            </form>
+            <form [formGroup]="searchForm" (ngSubmit)="searchUsers();" *ngIf="!showSearchAnimes">
+                <input 
+                    type="text"
+                    formControlName="search"
+                    placeholder="Encuentra a tus amigos" 
+                    (keypress)="searchFastUsersF( $event );"
+                    (keydown.backspace)="searchFastUsersF( $event );"
+                    (click)="showList();$event.stopPropagation();"
+                    spellcheck="false"
+                    autocomplete="off"
+                >
+                <button class="btn-search" type="submit"><i class="search icon"></i></button>
+            </form>
+            <p class="btn-switch">
+                <input type="radio" id="yes" name="switch" class="btn-switch__radio btn-switch__radio_yes" (click)="showSearchUsers( false );"/>
+                <input type="radio" checked id="no" name="switch" class="btn-switch__radio btn-switch__radio_no" (click)="showSearchUsers( true );"/>
+                <label for="yes" class="btn-switch__label btn-switch__label_yes"><span class="btn-switch__txt fadeinoutusuariosLabel">usuarios</span></label>
+                <label for="no" class="btn-switch__label btn-switch__label_no"><span class="btn-switch__txt">animes</span></label>
+            </p>
+            <div class="search-list" id="search-list" (click)="$event.stopPropagation();">
+                <ul *ngIf="showSearchAnimes">
+                    <li *ngFor="let anime of animes" (click)="watchAnime( anime.name );closeList();">
+                        <div class="image-search">
+                            <img src="{{ anime.image }}" alt="{{ anime.image }}">
+                        </div>
+                        <div class="content-search">
+                            <h4>
+                                {{ anime.name.substr(0, 40) }}
+                                <span [ngClass]="{
+                                    'color-anime': anime.type === 'anime',
+                                    'color-pelicula': anime.type === 'pelicula',
+                                    'color-ova': anime.type === 'ova'
+                                }">{{ anime.type }}</span>
+                            </h4>
+                            <p>{{ anime.description }}</p>
+                        </div>
+                    </li>
+                    <button 
+                        *ngIf="showMore"
+                        (click)="showMoreAnimes();"
+                    >Mas animes <span><i class="plus circle icon"></i></span></button>
+                </ul>
+                <ul *ngIf="!showSearchAnimes">
+                    <li *ngFor="let user of users" (click)="closeList();" routerLink="/{{ user.username }}"> 
+                        <div class="image-search">
+                            <img src="{{ url + '/user/image/' + user.image }}" alt="{{ user.image }}">
+                        </div>
+                        <div class="content-search">
+                            <h4>
+                                {{ user.username.substr(0, 40) }}
+                                <span class="color-anime">{{ user.country }}</span>
+                            </h4>
+                            <p>{{ user.description }}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Show only if no user online -->
+        <div class="side" *ngIf="!identity">
+            <button class="sign-btn" routerLink="/auth/login">Iniciar Sesión <i class="sign in icon"></i></button>
+            <button class="sign-btn" routerLink="/auth/registro">Registrarse</button>
+            <button class="settings-out" (click)="$event.stopPropagation();">
+                <span (click)="openThemes( !showThemelist );">
+                    <i class="moon icon"></i>
+                </span>
+                <app-themelist
+                    [show]="showThemelist"
+                ></app-themelist>
+            </button>
+        </div>
+
+        <!-- Show only if user is online -->
+        <div class="side" *ngIf="identity">
+            <img routerLink="/{{ identity.username }}" class="user-image" src="{{ url + '/user/image/' + identity.image }}" alt="{{ identity.image }}">
+            <h3 routerLink="/{{ identity.username }}">{{ identity.username }}</h3>
+            <button class="settings-out" (click)="$event.stopPropagation();">
+                <span (click)="openNotifications( !showNotifications );">
+                    <i class="bell icon"></i>
+                    <div class="notification-count" #notificationCounterDiv>
+                        <span>{{ notificationsCounter }}</span>
+                    </div>
+                </span>
+                <app-notificationlist
+                    [show]="showNotifications"
+                    (showEvent)="showNotificationsHandler($event);"
+                    (getCounters)="getCounterNotificationHandler($event);"
+                ></app-notificationlist>
+            </button>
+            <button class="settings-out" (click)="$event.stopPropagation();" routerLink="/mensajes">
+                <span>
+                    <i class="envelope icon"></i>
+                    <div class="notification-count" #chatNotificationCounterDiv>
+                        <span>{{ chatsCounter }}</span>
+                    </div>
+                </span>
+            </button>
+            <button class="settings-out" (click)="openUserList();$event.stopPropagation();">
+                <span>
+                    <i class="users icon"></i>
+                    <div class="notification-count">
+                        <span>
+                            {{ usersOnline }}
+                        </span>
+                    </div>
+                </span>
+            </button>
+            <button routerLink="/feed" class="settings-out"><i class="home icon"></i></button>
+            <button class="settings-out" (click)="openSettingsOptions();$event.stopPropagation();"><i class="settings icon"></i></button>
+            <button class="settings-out" (click)="$event.stopPropagation();">
+                <span (click)="openThemes( !showThemelist );">
+                    <i class="moon icon"></i>
+                </span>
+                <app-themelist
+                    [show]="showThemelist"
+                ></app-themelist>
+            </button>
+            <button class="settings-out" (click)="logout()"><i class="sign out icon"></i></button>
+        </div>
+    </div>
+    
+    <!-- Menu Movil -->
+    <div class="navbar-movil">
+        <h1>
+            <span class="title-movil-logo" routerLink="/">
+                Animeet
+                <img routerLink="/" src="../../../assets/logos/menu.png" alt="logo.png">
+            </span>
+            <span class="bars-span" (click)="openMenuMovil( !showMenu )"><i class="bars icon"></i></span>
+        </h1>
+        
+        <!-- Sidebar menu Movil -->
+        <div class="menu-movil" id="menu-movil">
+            <h1>
+                <span class="title-movil-logo" routerLink="/">
+                    Animeet
+                    <img routerLink="/" src="../../../assets/logos/menu.png" alt="logo.png">
+                </span>
+                <span class="bars-span" (click)="openMenuMovil( !showMenu )"><i class="close icon"></i></span>
+            </h1>
+            <!-- Show only if no user online -->
+            <div class="user-movil" *ngIf="!identity">
+                <img src="../../../assets/avatar-default.png" alt="avatar-default.png" routerLink="/auth/login">
+                <h2 routerLink="/auth/login">Iniciar Sesión <i class="sign in icon"></i></h2>
+            </div>
+
+            <!-- Show only if user is online -->
+            <div class="user-movil" *ngIf="identity">
+                <button class="logout-movil" (click)="logout();"><i class="sign out icon"></i></button>
+                <button class="users-online">
+                    <i class="users icon"></i>: {{ usersOnline }}
+                    <div class="dot-online-movil"></div>
+                </button>
+                <img 
+                    (click)="openMenuMovil( false );" 
+                    routerLink="/{{ identity.username }}"
+                    src="{{ url + '/user/image/' + identity.image }}" 
+                    alt="{{ identity.image }}"
+                >
+                <ul class="data-user-movil">
+                    <li>Usuario: <span>{{ identity.username }}</span></li>
+                    <li>Nombre: <span>{{ identity.name }}</span></li>
+                    <li>Apellido: <span>{{ identity.surname }}</span></li>
+                    <li>Email: <span>{{ identity.email }}</span></li>
+                    <li>País: <span>{{ identity.country }}</span></li>
+                    <li>- {{ identity.date }}</li>
+                </ul>
+            </div>
+
+            <!-- Search bar Movil -->
+            <div class="search-movil">
+                <form [formGroup]="searchForm" (ngSubmit)="searchMovil();" *ngIf="showSearchAnimes">
+                    <input 
+                    type="text"
+                    formControlName="search"
+                    placeholder="Encuentra tu anime favorito"
+                    spellcheck="false"
+                    autocomplete="off"
+                    >
+                    <button type="submit"><i class="search icon"></i></button>
+                </form>
+                <form [formGroup]="searchForm" (ngSubmit)="searchUsers();" *ngIf="!showSearchAnimes">
+                    <input 
+                        type="text"
+                        formControlName="search"
+                        placeholder="Encuentra a tus amigos" 
+                        (keypress)="searchFastUsersF( $event );"
+                        (keydown.backspace)="searchFastUsersF( $event );"
+                        (click)="showList();$event.stopPropagation();"
+                        spellcheck="false"
+                        autocomplete="off"
+                    >
+                    <button class="btn-search" type="submit"><i class="search icon"></i></button>
+                </form>
+                <!-- <p class="btn-switch">
+                    <input type="radio" id="yes-movil" name="switch" class="btn-switch__radio btn-switch__radio_yes" (click)="showSearchUsers( false );"/>
+                    <input type="radio" checked id="no-movil" name="switch" class="btn-switch__radio btn-switch__radio_no" (click)="showSearchUsers( true );"/>
+                    <label for="yes-movil" class="btn-switch__label btn-switch__label_yes"><span class="btn-switch__txt fadeinoutusuariosLabel">usuarios</span></label>
+                    <label for="no-movil" class="btn-switch__label btn-switch__label_no"><span class="btn-switch__txt">animes</span></label>
+                </p> -->
+            </div>
+            <!-- Access Urls -->
+            <div class="urls">
+                <ul class="ul-urls">
+                    <li *ngIf="identity" class="only-redsocial" (click)="openMenuMovil( false );" routerLink="/feed">Inicio <span><i class="home icon"></i></span></li>
+                    <li 
+                        *ngIf="identity" 
+                        class="only-redsocial" 
+                        (click)="
+                            openNotificationsMovil( !showNotificationsMovil );
+                            openNotifications( !showNotifications );
+                            $event.stopPropagation();
+                        ">
+                            Notificaciones 
+                        <span class="notify-count-movil-span">
+                            <i class="bell icon"></i>
+                            <div class="notification-count" #notificationCounterDiv>
+                                <span>{{ notificationsCounter }}</span>
+                            </div>
+                        </span>
+                    </li>
+                    <li 
+                        *ngIf="identity" 
+                        class="only-redsocial" 
+                        (click)="openMessenger( true );">
+                            Mensajes 
+                        <span class="notify-count-movil-span">
+                            <i class="envelope icon"></i>
+                            <div class="notification-count" #chatNotificationCounterDiv>
+                                <span>{{ chatsCounter }}</span>
+                            </div>
+                        </span>
+                    </li>
+                    <li *ngIf="identity" class="only-redsocial" (click)="openFollowList( true, 'seguidos' );">Seguidos <span><i class="long arrow alternate right icon"></i></span></li>
+                    <li *ngIf="identity" class="only-redsocial" (click)="openFollowList( true, 'seguidores' );">Seguidores <span><i class="long arrow alternate left icon"></i></span></li>
+                    <li *ngIf="identity" class="only-redsocial" (click)="openSettingsMovil( true );">Editar Perfil <span><i class="settings icon"></i></span></li>
+                    <li (click)="openThemesMovil( !showThemelist );$event.stopPropagation();">Temas de fondo <span><i class="moon icon"></i></span></li>
+                    <li (click)="openMenuMovil( false );" routerLink="/episodios">Ultimos Episodios <span><i class="caret right icon"></i></span></li>
+                    <li (click)="openMenuMovil( false );" routerLink="/animes">Directorio Anime <span><i class="caret right icon"></i></span></li>
+                    <li (click)="openMenuMovil( false );" [routerLink]="['/animes']" [queryParams]="{ estatus: 'emision' }">Animes en Emisión <span><i class="caret right icon"></i></span></li>
+                    <li (click)="openMenuMovil( false );" [routerLink]="['/animes']" [queryParams]="{ estatus: 'finalizado' }">Animes Finalizados <span><i class="caret right icon"></i></span></li>
+                    <li (click)="openMenuMovil( false );" [routerLink]="['/animes']" [queryParams]="{ tipo: 'pelicula' }">Peliculas Anime <span><i class="caret right icon"></i></span></li>
+                    <li (click)="openMenuMovil( false );" [routerLink]="['/animes']" [queryParams]="{ tipo: 'ova' }">OVAs Anime <span><i class="caret right icon"></i></span></li>
+                    <li (click)="openMenuMovil( false );" [routerLink]="['/alianzas']">Alianzas <span><i class="caret right icon"></i></span></li>
+                    <li (click)="openMenuMovil( false );" class="discord-oficial" (click)="goTo('https://discord.gg/gHMypEqGSz');">
+                        <div class="discord-div-movil">
+                            Discord Oficial
+                            <img src="../../../assets/discord2.png" alt="discord2.png">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- Temas de fondo-->
+            <div class="messenger" id="themes-movil" (click)="$event.stopPropagation();">
+                <h1>
+                    <span class="title-movil-logo" routerLink="/">
+                        Animeet
+                        <img routerLink="/" src="../../../assets/logos/menu.png" alt="logo.png">
+                    </span>
+                    <span class="bars-span" (click)="openThemesMovil( !showThemelist );"><i class="close icon"></i></span>
+                </h1>
+                <div class="inbox">
+                    <h2>
+                        Temas de fondo
+                        <i class="moon icon"></i>
+                    </h2>
+                    <app-themelist
+                        [show]="showThemelist"
+                    ></app-themelist>
+                </div>
+            </div>
+            <!-- Notifications -->
+            <div class="messenger" id="notifications-movil" *ngIf="identity" (click)="$event.stopPropagation();">
+                <h1>
+                    <span class="title-movil-logo" routerLink="/">
+                        Animeet
+                        <img routerLink="/" src="../../../assets/logos/menu.png" alt="logo.png">
+                    </span>
+                    <span class="bars-span" (click)="openNotificationsMovil( !showNotificationsMovil );openNotifications( !showNotifications );"><i class="close icon"></i></span>
+                </h1>
+                <div class="inbox">
+                    <h2>
+                        Notificaciones 
+                        <i class="bell icon">
+                            <div class="notification-count" #notificationCounterDiv>
+                                <span>{{ notificationsCounter }}</span>
+                            </div>
+                        </i>
+                    </h2>
+                    <app-notificationlist
+                        *ngIf="showNotificationsMovil"
+                        [show]="showNotifications"
+                        [movil]="showNotificationsMovil"
+                        (showEvent)="showNotificationsHandler($event);"
+                        (getCounters)="getCounterNotificationHandler($event);"
+                    ></app-notificationlist>
+                </div>
+            </div>
+            <!-- Messenger -->
+            <div class="messenger" id="messenger-movil" *ngIf="identity">
+                <h1>
+                    <span class="title-movil-logo" routerLink="/">
+                        Animeet
+                        <img routerLink="/" src="../../../assets/logos/menu.png" alt="logo.png">
+                    </span>
+                    <span class="bars-span" (click)="openMessenger( false );"><i class="close icon"></i></span>
+                </h1>
+                <div class="inbox">
+                    <h2>
+                        Mensajes 
+                        <i class="envelope icon">
+                            <div class="notification-count" #chatNotificationCounterDiv>
+                                <span>{{ chatsCounter }}</span>
+                            </div>
+                        </i>
+                    </h2>
+                    <app-chatlist *ngIf="identity && screenWidth < 1014" [identity]="identity" type="'chat'"></app-chatlist>
+                </div>
+            </div>
+            <!-- Edit User Settings -->
+            <div class="user-settings-movil" id="user-settings-movil" *ngIf="identity">
+                <h1>
+                    <span class="title-movil-logo" routerLink="/">
+                        Animeet
+                        <img routerLink="/" src="../../../assets/logos/menu.png" alt="logo.png">
+                    </span>
+                    <span class="bars-span" (click)="openSettingsMovil( false );"><i class="close icon"></i></span>
+                </h1>
+                <form [formGroup]="userForm" (ngSubmit)="updateUser();"> 
+                    <div class="form-left">
+                        <button type="button" class="toDisable background-image" (click)="openTypeFile('coverImage');">
+                                <img src="{{ url + '/user/image/' + identity.coverImage }}" alt="{{ identity.coverImage }}">
+                                <div style='height: 0px;width:0px; overflow:hidden;'>
+                                    <input id="upload-file-coverImage" type="file" (change)="uploadUserFile( $event, 'coverImage' );"/>
+                                </div>
+                                <button type="button"><i class="plus icon"></i></button>
+                        </button>
+                        <div class="upload-select-image-user">
+                            <button type="button" class="toDisable upload-image" (click)="openTypeFile('image');">
+                                    <img src="{{ url + '/user/image/' + identity.image }}" alt="{{ identity.image }}">
+                                    <div style='height: 0px;width:0px; overflow:hidden;'>
+                                        <input id="upload-file-image" type="file" (change)="uploadUserFile( $event, 'image' );"/>
+                                    </div>
+                                    <button type="button"><i class="plus icon"></i></button>
+                            </button>
+                            <div class="select-image">
+                                <h3>Sube una imagen o selecciona tu avatar <i class="user icon"></i></h3>
+                                <button type="button" class="toDisable" (click)="changeAvatar('1.png');"><img src="../../assets/avatares/1.png" alt="1.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('2.png');"><img src="../../assets/avatares/2.png" alt="2.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('3.png');"><img src="../../assets/avatares/3.png" alt="3.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('4.png');"><img src="../../assets/avatares/4.png" alt="4.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('5.png');"><img src="../../assets/avatares/5.png" alt="5.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('6.png');"><img src="../../assets/avatares/6.png" alt="6.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('7.png');"><img src="../../assets/avatares/7.png" alt="7.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('8.png');"><img src="../../assets/avatares/8.png" alt="8.png"></button>
+        
+                                <button type="button" class="toDisable" (click)="changeAvatar('9.png');"><img src="../../assets/avatares/9.png" alt="9.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('10.png');"><img src="../../assets/avatares/10.png" alt="10.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('11.png');"><img src="../../assets/avatares/11.png" alt="11.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('12.png');"><img src="../../assets/avatares/12.png" alt="12.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('13.png');"><img src="../../assets/avatares/13.png" alt="13.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('14.png');"><img src="../../assets/avatares/14.png" alt="14.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('15.png');"><img src="../../assets/avatares/15.png" alt="15.png"></button>
+                                <button type="button" class="toDisable" (click)="changeAvatar('16.png');"><img src="../../assets/avatares/16.png" alt="16.png"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-right">
+                        <h3>Editar perfil <i class="pencil icon"></i></h3>
+                        <input 
+                            type="text" 
+                            placeholder="Usuaro: xTomioka" 
+                            formControlName="username"
+                            [classList]="campoNoValido('username') ? 'error-input' : null"
+                            autocomplete="off"
+                            spellcheck="false"
+                        />
+                        <input 
+                            type="text" 
+                            placeholder="Nombre: Giyu"
+                            formControlName="name"
+                            [classList]="campoNoValido('name') ? 'error-input' : null"
+                            autocomplete="off"
+                            spellcheck="false"
+                        />
+                        <input 
+                            type="text" 
+                            placeholder="Apellido: Tomioka"
+                            formControlName="surname"
+                            [classList]="campoNoValido('surname') ? 'error-input' : null"
+                            autocomplete="off"
+                            spellcheck="false"
+                        />
+                        <input 
+                            type="text" 
+                            placeholder="País: Japón"
+                            formControlName="country"
+                            [classList]="campoNoValido('country') ? 'error-input' : null"
+                            autocomplete="off"
+                            spellcheck="false"
+                        />
+                        <input 
+                            type="email" 
+                            placeholder="Email: email@email.com"
+                            formControlName="email"
+                            [classList]="campoNoValido('email') ? 'error-input' : null"
+                            spellcheck="false"
+                            readonly
+                        />
+                        <textarea 
+                            placeholder="Descripcion: Cuentanos algo sobre ti -"
+                            formControlName="description"
+                            [classList]="campoNoValido('description') ? 'error-input' : null"
+                            autocomplete="off"
+                            spellcheck="false"
+                        >
+                        </textarea>
+                        <button type="submit" id="userSubmitPage">Editar</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Follow Lists -->
+            <div class="follow-list-movil" id="follow-list-movil" *ngIf="identity">
+                <h1>
+                    <span class="title-movil-logo" routerLink="/">
+                        Animeet
+                        <img routerLink="/" src="../../../assets/logos/menu.png" alt="logo.png">
+                    </span>
+                    <span class="bars-span" (click)="openFollowList( false );"><i class="close icon"></i></span>
+                </h1>
+                <ul>
+                    <h2>{{ typeList }} <span><img src="../../../assets/follow.png" alt="follow.png"></span></h2>
+                    <li *ngFor="let item of followList" routerLink="/{{ item.user.username }}" (click)="openFollowList( false );openMenuMovil( false );"> 
+                        <div class="image-search">
+                            <img src="{{ url + '/user/image/' + item.user.image }}" alt="{{ item.user.image }}">
+                        </div>
+                        <div class="content-search">
+                            <h4>
+                                {{ item.user.username.substr(0, 40) }}
+                            </h4>
+                            <p>{{ item.user.description }}</p>
+                        </div>
+                    </li>
+                </ul>
+                <app-pagination 
+                    *ngIf="followPage && totalPagesFollow" 
+                    [page]="followPage" 
+                    [totalPages]="totalPagesFollow" 
+                    (back)="changePageFollow($event)" 
+                    (next)="changePageFollow($event)"
+                    (lastPage)="changePageFollow($event)"
+                >
+                </app-pagination>
+            </div>
+        </div>
+    </div>
+
+    <div class="open-sidebar-pc" (click)="openSidebar();$event.stopPropagation();">
+        <img src="../../../assets/bars.png" alt="bars.png">
+    </div>
+</div>
+
+<div class="header-simulator"></div>
+

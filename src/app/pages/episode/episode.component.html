@@ -1,0 +1,53 @@
+<div class="episode">
+    <h2>
+        <span><i class="pause icon"></i></span>
+        {{ episode?.title }}
+        <span><i class="play icon"></i></span>
+    </h2>
+    <div class="side-left" *ngIf="episode">
+        <div class="episode-video">
+            <ul class="option-list">
+                <li 
+                    class="option"
+                    *ngFor="let video of episode.video"
+                    (click)="showVideo( video );"
+                    id="{{ video.server.split(' ').join('-') }}"
+                >{{ video.server.split(' ')[1] }}</li>
+            </ul>
+            <div class="video">
+                <iframe id="video" allowfullscreen></iframe>
+            </div>
+            <div class="next-back-functions">
+                <ul class="back-next">
+                    <button (click)="nextBack( 'back', episode.anime.name );"><span><i class="caret left icon"></i></span>Anterior</button>
+                    <button (click)="watchAnime( episode.anime.name );"><i class="bars icon"></i></button>
+                    <button (click)="nextBack( 'next', episode.anime.name );">Siguiente<span><i class="caret right icon"></i></span></button>
+                </ul>
+                <ul class="functions">
+                    <li><i class="pencil alternate icon"></i></li>
+                    <li id="btn-switch-light" (click)="switchLight('off')"><i class="lightbulb outline icon"></i></li>
+                    <li><i class="flag outline icon"></i></li>
+                </ul>
+            </div>
+        </div>
+        <app-commentlist *ngIf="episode" [type]="'episode'" [episode]="episode"></app-commentlist>
+    </div>
+    <div class="side-right">
+        <div class="related-animes">
+            <h3>Animes relacionados <i class="caret down icon"></i></h3>
+            <ul *ngIf="animes">
+                <li *ngFor="let anime of animes" (click)="watchAnime( anime.name );">
+                    <img src="{{ anime.image }}" alt="{{ anime.image }}">
+                    <div class="anime-name">
+                        <h5>{{ anime.name }}</h5>
+                    </div>
+                    <img src="{{ anime.image }}" alt="{{ anime.image }}">
+                    <p>{{ anime.description }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Turn On / Off Light -->
+<div id="switch-light" class="switch-light" (click)="switchLight('on')"></div>

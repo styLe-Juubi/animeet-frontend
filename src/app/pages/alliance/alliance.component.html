@@ -1,0 +1,134 @@
+<div class="alliance">
+    <div class="alliance-side-left">
+        <div class="animeet-host-name">
+            <div class="letter-host">a</div>
+            <div class="letter-host">n</div>
+            <div class="letter-host">i</div>
+            <div class="letter-host">m</div>
+            <div class="letter-host">e</div>
+            <div class="letter-host">e</div>
+            <div class="letter-host">t</div>
+            <div class="letter-host">
+                <img src="../../../assets/logos/menu.png" alt="menu.png">
+            </div>
+        </div>
+        <div class="animeet-host-image" >
+            <img src="../../../assets/alliance/host.png" alt="host">
+            <div class="animeet-host-stand">Alice</div>
+            <div 
+                class="animeet-create-alliance" 
+                *ngIf="identity && ( identity.role === 'ADMIN' || identity.role === 'MODERATOR' )"
+                (click)="openNewAlliance( !showCreateAlliance );$event.stopPropagation();"
+            >
+                Crear nueva alianza
+                <i class="plus icon"></i>
+            </div>
+        </div>
+        
+    </div>
+    <div class="alliance-side-right">
+        <h1>En alianzas con <i class="level down alternate icon"></i></h1>
+
+        <ul class="alliances" *ngIf="alliances && alliances.length > 0">
+            <li (click)="goTo('https://discord.com/invite/FeYrNMacrN');">
+                <img class="alliance-banner" src="../../../assets/alliance/anime-stay-banner.gif" alt="banner.png">
+                <div class="alliance-container">
+                    <div class="alliance-left">
+                        <img src="../../../assets/alliance/anime-stay.gif" alt="cover.png">
+                    </div>
+                    <div class="alliance-center">
+                        <h4>Anime Stay</h4>
+                        <p>— 𝐁𝐈𝐄𝐍𝐕𝐄𝐍𝐈𝐃𝐎 a Anime Stay, tenemos sorteos, podcast, eventos, bots como UnbelievaBoat, Mudae y karuta, esperamos que te sientas cómodo en este servidor, ¡ somos una comunidad 0% tóxica !</p>
+                    </div>
+                    <div class="alliance-right">
+                        <img src="../../../assets/discord2.png" alt="discord.png">
+                    </div>
+                </div>
+
+                <div class="alliance-hover-name">
+                    <div class="triangle"></div>
+                    <p>Anime Stay</p>
+                </div>
+            </li>
+            <li *ngFor="let alliance of alliances" (click)="goTo( alliance.url );">
+                <img class="alliance-banner" src="{{ url + '/alliance/image/' + alliance.coverImage.filename }}" alt="banner.png">
+                <div class="alliance-container">
+                    <div class="alliance-left">
+                        <img src="{{ url + '/alliance/image/' + alliance.image.filename }}" alt="cover.png">
+                    </div>
+                    <div class="alliance-center">
+                        <h4>{{ alliance.name }}</h4>
+                        <p>{{ alliance.description }}</p>
+                    </div>
+                    <div class="alliance-right">
+                        <img src="../../../assets/discord2.png" alt="discord.png">
+                    </div>
+                </div>
+
+                <div class="alliance-hover-name">
+                    <div class="triangle"></div>
+                    <p>{{ alliance.name }}</p>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Pagination -->
+        <app-pagination 
+            *ngIf="alliances"
+            [page]="page"
+            [totalPages]="totalPages" 
+            (back)="changePage($event)" 
+            (next)="changePage($event)"
+            (lastPage)="changePage($event)"
+        >
+        </app-pagination>
+    </div>
+</div>
+
+<div class="alliance-modal" *ngIf="showCreateAlliance && identity" id="alliance-modal">
+    <div class="alliance-modal-create" (click)="$event.stopPropagation();">
+        <form [formGroup]="allianceForm" (ngSubmit)="createAlliance()">
+            <div class="alliance-modal-banner">
+                <img src="../../../assets/rain-cover2.gif" alt="banner.png" id="alliance-coverImage">
+                <button type="button" (click)="setAllianceImage('coverImage');"><i class="plus icon"></i></button>
+            </div>
+            <div class="alliance-modal-image-data">
+                <div class="alliance-modal-image">
+                    <img src="../../../assets/rain-image.gif" alt="profile.png" id="alliance-image">
+                    <button type="button" (click)="setAllianceImage('image');"><i class="plus icon"></i></button>
+                </div>
+                <div class="alliance-modal-data">
+                    <h2>Centro de creación de alianzas !</h2>
+                    <input
+                        type="text" 
+                        placeholder="Nombre: Server name"
+                        autocomplete="off" 
+                        formControlName="name" 
+                        [classList]="campoNoValido('name') ? 'error-input' : null"
+                        spellcheck="false"
+                    />
+
+                    <input
+                        type="text" 
+                        placeholder="Descripción: Te damos la bienvenida . . ."
+                        autocomplete="off" 
+                        formControlName="description" 
+                        [classList]="campoNoValido('description') ? 'error-input' : null"
+                        spellcheck="false"
+                    />
+
+                    <input
+                        type="text" 
+                        placeholder="Invitación: https://discord.gg/gHMypEqGSz"
+                        autocomplete="off" 
+                        formControlName="url" 
+                        [classList]="campoNoValido('url') ? 'error-input' : null"
+                        spellcheck="false"
+                    />
+
+                    <button type="submit" id="allianceSubmit">Enviar <i class="sign in icon"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

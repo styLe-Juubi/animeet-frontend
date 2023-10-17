@@ -1,0 +1,890 @@
+@import '../../scss/colors.scss';
+
+.comments {
+    width: 100%;
+    margin-top: 10px;
+    height: auto;
+
+    h3 {
+        width: 100%;
+        letter-spacing: 1px;
+        padding: 10px 20px;
+        font-size: 15px;
+        background-color: $white;
+        border: 1px solid $border-light;
+        font-weight: 500;
+        margin: 0;
+        color: $font-dark;
+
+        i {
+            margin-right: 10px;
+        }
+
+        span {
+            float: right;
+            color: $font-gray;
+
+            i {
+                margin: 0 0 0 10px;
+                color: $font-dark;
+            }
+        }
+    }
+
+    ul {
+        padding: 0;
+        list-style: none;
+        margin: 10px 0;
+        max-height: 91.4vh;
+        overflow-y: scroll;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .create-comment {
+            width: 100%;
+            background-color: $white;
+            margin-bottom: 10px;
+            border: 1px solid $border-light;
+
+            form {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                position: relative;
+
+                input {
+                    width: 80%;
+                    border: 0;
+                    padding: 15px 20px;
+                    outline: none;
+                    letter-spacing: 1px;
+                    color: $font-gray;
+                    transition: $transition;
+                    background-color: $white;
+
+                    &::placeholder {
+                        letter-spacing: 1px;
+                        color: $font-gray;
+                    }
+
+                    &:focus {
+                        box-shadow: $shadow;
+                    }
+                }
+
+                a {
+                    width: 7%;
+                    text-decoration: none;
+                    background-color: $white;
+                    padding: 14px 0 13px;
+                    text-align: center;
+                    border-left: 1px solid $border-light;
+                    border-right: 1px solid $border-light; 
+                    color: $font-gray;
+                    cursor: pointer;
+                    transition: $transition;
+
+                    &:hover {
+                        background-color: $purple;
+                        color: $font-white;
+                        box-shadow: $shadow;
+                    }
+                }   
+
+                .image-preview {
+                    position: absolute;
+                    height: 100%;
+                    object-fit: cover;
+                    right: 13%;
+                    width: 7%;
+                    animation: fadeIn .3s;
+                    background-color: $white;
+                    display: none;
+                    cursor: pointer;
+                    transition: $transition;
+                    
+                    &:hover {
+                        box-shadow: $shadow;
+                    }
+                }
+
+                button {
+                    width: 13%;
+                    border: 0;
+                    background-color: $white;
+                    color: $font-gray;
+                    letter-spacing: 1px;
+                    padding: 16px 0 15px;
+                    transition: $transition;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $purple;
+                        color: $font-white;
+                        box-shadow: $shadow;
+                    }
+                }
+            }
+        }
+
+        li {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+            
+            .comment-user {
+                width: 70px;
+                height: 70px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 5px;
+                background-color: $white;
+                border: 1px solid $border-light;
+                border-radius: 2px;
+                cursor: pointer;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 2px;
+                }
+            }
+            
+            .comment-body {
+                margin-left: 20px;
+                flex: 50%;
+                background-color: $white;
+                border: 1px solid $border-light;
+                position: relative;
+                
+                .comment-header {
+                    width: 100%;
+                    cursor: pointer;
+
+                    h3 {
+                        margin: 0;
+                        border: 0;
+                        padding: 8px 20px;
+                        color: $purple;
+                        border-bottom: 1px solid $border-light;
+                        cursor: pointer;
+                        font-size: 13px;
+                        transition: $transition;
+
+                        span {
+                            float: right;
+                            font-size: 11px;
+                            color: $font-gray;
+                            position: relative;
+
+                            i {
+                                position: absolute;
+                                right: -18px;
+                                top: -7px;
+                                transition: $transition;
+                                color: $purple;
+                            }
+                        }
+                    }
+
+                    &:hover h3{
+                        background-color: $purple;
+                        color: $font-white;
+                    }
+
+                    &:hover h3 span{
+                        color: $font-white;
+                    }
+
+                    &:hover h3 span i{
+                        color: $font-white;
+                    }
+
+                    &:hover:after {
+                        border-right-color: $purple;
+                    }
+
+                    &:after, &:before {
+                        right: 100%;
+                        top: 17px;
+                        border: solid transparent;
+                        content: "";
+                        height: 0;
+                        width: 0;
+                        position: absolute;
+                        pointer-events: none;
+                    }
+                    
+                    &:after {
+                        border-color: rgba(136, 183, 213, 0);
+                        border-right-color: $white;
+                        border-width: 10px;
+                        margin-top: -10px;
+                        transition: $transition;
+                    }
+
+                    &:before {
+                        border-color: rgba(194, 225, 245, 0);
+                        border-right-color: $border-light;
+                        border-width: 12px;
+                        margin-top: -12px;
+                    }
+                }
+
+                .comment-message {
+                    width: 100%;
+                    padding: 10px 20px;
+                    text-align: center;
+
+                    p {
+                        letter-spacing: 1px;
+                        font-size: 12px;
+                        color: $font-gray;
+                        width: 100%;
+                        max-height: 307px;
+                        overflow-y: scroll;
+                        text-align: left;
+                        word-break: break-word;
+
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
+                    }
+
+                    img {
+                        max-width: 100%;
+                        max-height: 600px;
+                        border-radius: 2px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .btn-load-comments {
+            width: 180px;
+            margin-top:5px;
+            padding: 10px;
+            border: 0;
+            border-radius: 2px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-align: left;
+            color: $font-white;
+            background-color: $purple;
+            transition: $transition;
+            margin-bottom: 20px;
+            
+            span {
+                margin-left: 10px;
+                float: right;
+            }
+
+            &:hover {
+                background-color: $purple !important;
+                box-shadow: $shadow !important;
+                color: $font-white !important;
+                border-color: $purple !important;
+            }
+        }
+    }
+
+    ul.no-comments {
+        width: 100%;
+        display: block;
+        
+        p {
+            background-color: $white;
+            border: 1px solid $border-light;
+            width: 100%;
+            padding: 90px 0;
+            letter-spacing: 1px;
+            font-size: 15px;
+            font-weight: 500;
+            text-align: center;
+            color: $font-dark;
+        }
+    }
+}
+
+.messages {
+    width: 100%;
+    height: 370px;
+
+    .chat-list {
+        width: 100%;
+        height: 330px;
+        background-color: $white;
+        overflow-y: scroll;
+        padding: 10px;
+        list-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        li {
+            width: 100%;
+            margin-bottom: 5px;
+
+            .comment-emmiter {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                cursor: pointer;
+                transition: $transition;
+                justify-content: right;
+                align-items: center;
+
+                img {
+                    width: 25px;
+                    height: 25px;
+                    border: 1px solid $border-light;
+                    border-radius: 3px;
+                    background-color: $white;
+                    object-fit: cover;
+                }
+                
+                h3 {
+                    width: 80%;
+                    font-size: 10px;
+                    color: $font-gray;
+                    margin-top: 0px;
+                    letter-spacing: 1px;
+                    text-align: right;
+                    padding-right: 5px;
+                    margin: 0;
+
+                    span i {
+                        color: $purple;
+                    }
+                }
+            }
+            
+            .comment-receiver {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                cursor: pointer;
+                transition: $transition;
+                align-items: center;
+
+                img {
+                    width: 25px;
+                    height: 25px;
+                    border: 1px solid $border-light;
+                    border-radius: 3px;
+                    background-color: $white;
+                    object-fit: cover;
+                    margin-right: 5px;
+                }
+                
+                h3 {
+                    width: 80%;
+                    font-size: 10px;
+                    color: $font-gray;
+                    margin-top: 0px;
+                    letter-spacing: 1px;
+
+                    span i {
+                        color: $purple;
+                    }
+                }
+            }
+
+            .comment-body-emmiter {
+                width: 80%;
+                margin-left: 20%;
+                margin-top: 10px;
+                background-color: $body-color;
+                border-radius: 3px;
+                position: relative;
+                text-align: center;
+                padding: 10px;
+
+                p {
+                    width: 100%;
+                    background-color: $body-color;
+                    border-radius: 3px;
+                    font-size: 11px;
+                    letter-spacing: 1px;
+                    color: $font-dark;
+                    text-align: left;
+                }
+
+                img {
+                    max-width: 90%;
+                    max-height: 400px;
+                    margin: 0;
+                    margin-top: 5px;
+                    object-fit: cover;
+                    text-align: center;
+                    cursor: pointer;
+                }
+
+                &:after, &:before {
+                    bottom: 100%;
+                    right: 7px;
+                    border: solid transparent;
+                    content: "";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                }
+                
+                &:after {
+                    border-color: rgba(136, 183, 213, 0);
+                    border-bottom-color: $body-color;
+                    border-width: 5px;
+                    margin-left: -5px;
+                }
+                &:before {
+                    border-color: rgba(194, 225, 245, 0);
+                    border-bottom-color: $body-color;
+                    border-width: 5px;
+                    margin-left: -5px;
+                }
+            }
+
+            .comment-body-receiver {
+                width: 80%;
+                margin-top: 10px;
+                background-color: $body-color;
+                border-radius: 3px;
+                position: relative;
+                text-align: center;
+
+                p {
+                    width: 100%;
+                    background-color: $body-color;
+                    border-radius: 3px;
+                    padding: 10px;
+                    font-size: 11px;
+                    letter-spacing: 1px;
+                    color: $font-dark;
+                    word-break: break-word;
+                    text-align: left;
+                }
+
+                img {
+                    max-width: 90%;
+                    max-height: 400px;
+                    margin: 0;
+                    margin-top: 5px;
+                    object-fit: cover;
+                    text-align: center;
+                    cursor: pointer;
+                }
+
+                &:after, &:before {
+                    bottom: 100%;
+                    left: 12.5px;
+                    border: solid transparent;
+                    content: "";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                }
+                
+                &:after {
+                    border-color: rgba(136, 183, 213, 0);
+                    border-bottom-color: $body-color;
+                    border-width: 5px;
+                    margin-left: -5px;
+                }
+                &:before {
+                    border-color: rgba(194, 225, 245, 0);
+                    border-bottom-color: $body-color;
+                    border-width: 5px;
+                    margin-left: -5px;
+                }
+            }
+        }
+
+        .btn-load-comments {
+            width: 180px;
+            margin: 0 0 10px;
+            padding: 10px;
+            border: 0;
+            border-radius: 2px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-align: left;
+            color: $font-white;
+            background-color: $purple;
+            transition: $transition;
+            
+            span {
+                margin-left: 10px;
+                float: right;
+            }
+
+            &:hover {
+                background-color: $purple !important;
+                box-shadow: $shadow !important;
+                color: $font-white !important;
+                border-color: $purple !important;
+            }
+        }
+    }
+
+    .create-message {
+        width: 100%;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        background-color: $white;
+        border-top: 1px solid $border-light;
+        border-bottom: 1px solid $border-light;
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            position: relative;
+
+            input {
+                width: 70%;
+                border: 0;
+                padding: 15px 20px;
+                outline: none;
+                letter-spacing: 1px;
+                color: $font-gray;
+                transition: $transition;
+                background-color: $white;
+
+                &::placeholder {
+                    letter-spacing: 1px;
+                    color: $font-gray;
+                }
+            }
+
+            a {
+                width: 12%;
+                text-decoration: none;
+                background-color: $white;
+                padding: 14px 0 13px;
+                text-align: center;
+                border-left: 1px solid $border-light;
+                border-right: 1px solid $border-light; 
+                color: $font-gray;
+                cursor: pointer;
+                transition: $transition;
+
+                &:hover {
+                    background-color: $purple;
+                    color: $font-white;
+                    box-shadow: $shadow;
+                }
+            }   
+
+            .image-preview {
+                position: absolute;
+                height: 100%;
+                object-fit: cover;
+                right: 18%;
+                width: 12%;
+                animation: fadeIn .3s;
+                background-color: $white;
+                display: none;
+                cursor: pointer;
+                transition: $transition;
+                
+                &:hover {
+                    box-shadow: $shadow;
+                }
+            }
+
+            button {
+                width: 18%;
+                border: 0;
+                background-color: $white;
+                color: $font-gray;
+                letter-spacing: 1px;
+                padding: 16px 0 15px;
+                transition: $transition;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $purple;
+                    color: $font-white;
+                    box-shadow: $shadow;
+                }
+            }
+        }
+    }
+
+    .create-message-movil {
+        width: 100%;
+        height: 50px;
+        display: none;
+        align-items: center;
+        flex-wrap: wrap;
+        background-color: $white;
+        border-top: 1px solid $border-light;
+        border-bottom: 1px solid $border-light;
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            position: relative;
+
+            input {
+                width: 70%;
+                border: 0;
+                padding: 15px 20px;
+                outline: none;
+                letter-spacing: 1px;
+                color: $font-gray;
+                transition: $transition;
+                background-color: $white;
+
+                &::placeholder {
+                    letter-spacing: 1px;
+                    color: $font-gray;
+                }
+            }
+
+            a {
+                width: 12%;
+                text-decoration: none;
+                background-color: $white;
+                padding: 14px 0 13px;
+                text-align: center;
+                border-left: 1px solid $border-light;
+                border-right: 1px solid $border-light; 
+                color: $font-gray;
+                cursor: pointer;
+                transition: $transition;
+
+                &:hover {
+                    background-color: $purple;
+                    color: $font-white;
+                    box-shadow: $shadow;
+                }
+            }   
+
+            .image-preview {
+                position: absolute;
+                height: 100%;
+                object-fit: cover;
+                right: 18%;
+                width: 12%;
+                animation: fadeIn .3s;
+                background-color: $white;
+                display: none;
+                cursor: pointer;
+                transition: $transition;
+                
+                &:hover {
+                    box-shadow: $shadow;
+                }
+            }
+
+            button {
+                width: 18%;
+                border: 0;
+                background-color: $white;
+                color: $font-gray;
+                letter-spacing: 1px;
+                padding: 16px 0 15px;
+                transition: $transition;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $purple;
+                    color: $font-white;
+                    box-shadow: $shadow;
+                }
+            }
+        }
+    }
+}
+
+.inbox-chat {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    overflow: hidden;
+
+    .chat-list {
+        width: 100%;
+        height: calc( 100vh - 272px);
+        background-color: $white;
+        overflow-y: scroll;
+        padding: 10px;
+        list-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .create-message {
+        height: 70px;
+    }
+}
+
+// .modal-image {
+//     position: fixed;
+//     width: 100vw;
+//     height: 100vh;
+//     background-color: rgba(0,0,0,.5);
+//     top: 0;
+//     left: 0;
+//     z-index: 1000;
+//     display: flex;
+//     align-items: center;
+//     flex-wrap: wrap;
+//     justify-content: center;
+//     animation: fadeIn .3s;
+//     display: none;
+
+//     i {
+//         position: absolute;
+//         top: 20px;
+//         right: 30px;
+//         font-size: 30px;
+//         cursor: pointer;
+//         color: $white;
+//         transition: $transition;
+
+//         &:hover {
+//             color: $dark;
+//         }
+//     }
+
+//     div {
+//         width: 70%;
+//         text-align: center;
+
+//         img {
+//             max-width: 100%;
+//         }
+//     }
+// }
+
+.color-anime {
+    background-color: $purple;
+}
+
+.color-pelicula {
+    background-color: $danger;
+}
+
+.color-ova {
+    background-color: $action;
+}
+
+.wait-submit {
+    background-color: $purple-light !important;
+    box-shadow: $shadow !important;
+    color: $font-white !important;
+}
+
+.error-input {
+    border: 1px solid $red !important;
+}
+
+// .show-modal {
+//     display: flex !important;
+//     z-index: 1000 !important;
+// }
+
+.show-preview {
+    display: block !important;
+}
+
+@media ( max-width: 1013px ) {
+    .comments {
+        ul {
+            max-height: 700px;
+            .create-comment{
+                form {
+                    input {
+                        width: 70%;
+                    }
+                    a {
+                        width: 12%;
+                    }
+                    .image-preview {
+                        width: 12%;
+                        right: 18%;
+                    }
+                    button {
+                        width: 18%;
+                    }
+                }
+            }
+            li {
+                .comment-user {
+                    width: 50px;
+                    height: 50px;
+                    padding: 3px;
+                }
+                .comment-body {
+                    margin-left: 15px;
+                    .comment-header {
+                        h3 {
+                            padding: 8px 5px;
+                            span {
+                                font-size: 9px;
+                                letter-spacing: 1px;
+                                i {
+                                    right: -4px;
+                                    top: -9px;
+                                }
+                            }
+                        }
+                    }
+                    .comment-message {
+                        padding: 10px;
+                        text-align: center;
+                        p{
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+        }
+        ul.no-comments {
+            max-height: 50px;
+            p {
+                font-size: 13px;
+                padding: 10px 0;
+            }
+        }
+    }
+    .messages {
+        height: 100%;
+        .chat-list {
+            height: calc(100% - 115px);
+        }
+        .create-message {
+            display: none;
+        }
+        .create-message-movil {
+            display: flex;
+        }
+    }
+    .show-preview {
+        display: block !important;
+    }
+}

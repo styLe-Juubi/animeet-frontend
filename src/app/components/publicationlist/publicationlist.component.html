@@ -1,0 +1,309 @@
+<div class="publications">
+    <h2>
+        <i class="book icon"></i>
+        <span *ngIf="type === 'todos'">Publicaciones</span> 
+        <span *ngIf="type === 'review'">Reseñas</span>
+        <span>
+            <button id="publications-order" (click)="publicationOrder( order )">Orden: 
+                <span *ngIf="order === -1">Recientes <i class="caret down icon"></i></span>
+                <span *ngIf="order === 1">Antiguas <i class="caret down icon"></i></span>
+            </button>
+        </span>
+    </h2>
+
+    <!-- List of all publications -->
+    <ul class="list-publications" *ngIf="publications && publications.length > 0">
+
+        <!-- Create Publication Form Div -->
+        <div class="create-publication" *ngIf="( user && userLogged._id === user._id ) || feed">
+            <form [formGroup]="publicationForm" (ngSubmit)="createPublication();">
+                <div class="create-header">
+                    <img src="{{ url + '/user/image/' + userLogged.image }}" alt="{{ userLogged.image }}">
+                    <h3>{{ userLogged.username }}</h3>
+                    <p *ngIf="!review" (click)="setTypePublication( !review )">Crear publicacion <i class="caret down icon"></i></p>
+                    <p *ngIf="review" (click)="setTypePublication( !review )">Crear reseña <i class="caret down icon"></i></p>
+                </div>
+
+                <textarea *ngIf="!review"
+                    formControlName="content"
+                    placeholder="Crea una publicacion">
+                </textarea>
+                <textarea *ngIf="review"
+                    formControlName="content"
+                    placeholder="Crea una reseña">
+                </textarea>
+
+                <img *ngIf="!review" id="publication-image-preview" class="image-preview" [src]="filePreview" alt="{{ filePreview }}" (click)="removePreview();"/>
+                
+                <ul *ngIf="!review" class="create-footer">
+                    <li><i class="cloud icon"></i></li>
+                    <div class="footer-rightside">
+
+                        <!-- Upload Image -->
+                        <a (click)="uploadFile();"><i class="image icon"></i></a>
+                        <div style='height: 0px;width:0px; overflow:hidden;'>
+                            <input id="publication-upload-file" type="file" (change)="setImage( $event ); readURL( $event );"/>
+                        </div>
+                        <button type="submit" id="btn-publication-submit">Publicar</button>
+                    </div>
+                </ul>
+
+                <!-- Create a Review publication -->
+                <ul *ngIf="review" class="create-footer">
+                    <li class="review-li">
+                        <input 
+                            id="search-to-review"
+                            class="search-to-review"
+                            (click)="showAnimeList( !showAnimes );$event.stopPropagation();"
+                            type="text"
+                            placeholder="Selecciona el anime" 
+                            (keyup)="searchFastF( $event );"
+                            (keydown.backspace)="searchFastF( $event );"
+                            autocorrect="off" 
+                            autocomplete="off"
+                        >
+                        <button class="btn-search"><i class="search icon"></i></button>
+                        <h2 class="selectedAnime" *ngIf="selectedAnime">{{ selectedAnime }}</h2>
+                    </li>
+  
+                    <div *ngIf="showAnimes" class="search-list" id="animes-list-div" (click)="$event.stopPropagation();">
+                        <ul>
+                            <li *ngFor="let anime of animes" (click)="setAnimeToReview( anime._id, anime.name );showAnimeList( !showAnimes );">
+                                <div class="image-search">
+                                    <img src="{{ anime.image }}" alt="{{ anime.image }}">
+                                </div>
+                                <div class="content-search">
+                                    <h4>
+                                        {{ anime.name.substr(0, 40) }}
+                                        <span [ngClass]="{
+                                            'color-anime': anime.type === 'anime',
+                                            'color-pelicula': anime.type === 'pelicula',
+                                            'color-ova': anime.type === 'ova'
+                                        }">{{ anime.type }}</span>
+                                    </h4>
+                                    <p>{{ anime.description }}</p>
+                                </div>
+                            </li>
+                            <h5 *ngIf="!animes">Ingresa tu busqueda</h5>
+                        </ul>
+                    </div>
+
+                    <div class="footer-rightside">
+                        <button type="submit" id="btn-publication-submit">Publicar</button>
+                    </div>
+                </ul>
+            </form>
+        </div>
+
+        <!-- Publication type Publication -->
+        <li *ngFor="let publication of publications">
+            <div *ngIf="publication.type === 'publication'">
+                <div class="publication-header">
+                    <img src="{{ url + '/user/image/' + publication.user.image }}" alt="{{ publication.user.image }}" routerLink="/{{ publication.user.username }}">
+                    <a routerLink="/{{ publication.user.username }}">{{ publication.user.username }}</a>
+                    <p>
+                        {{ publication.date }}
+                        <i class="share icon" (click)="openPublication( publication.user.username, publication._id );"></i>
+                        <i *ngIf="( user && userLogged._id === user._id ) || userLogged._id === publication.user._id || userLogged.role === 'ADMIN'" (click)="deletePublication( publication._id );" class="close icon"></i>
+                    </p>
+                </div>
+                <div class="publication-body">
+                    <p *ngIf="publication.content">{{ publication.content }}</p>
+                    <img 
+                        (click)="openImage( publication.file );$event.stopPropagation();"
+                        *ngIf="publication.file" 
+                        src="{{ url + '/publication/image/' + publication.file }}" alt="{{ publication.file }}">
+                    
+                    <div class="vertical-line"></div>
+                    <div class="horizontal-line"></div>
+                    <div class="horizontal-line"></div>
+
+                    <!-- Reaction list -->
+                    <app-reactionlist [publication]="publication._id"></app-reactionlist>
+                </div>
+    
+                <div class="publication-footer">
+                    <app-commentlist [type]="'publication'" [publication]="publication"></app-commentlist>
+                </div>
+            </div>
+
+            <!-- Publication type Review -->
+            <div *ngIf="publication.type === 'review'">
+                <div class="publication-header">
+                    <img src="{{ url + '/user/image/' + publication.user.image }}" alt="{{ publication.user.image }}" routerLink="/{{ publication.user.username }}">
+                    <a routerLink="/{{ publication.user.username }}">{{ publication.user.username }}</a>
+                    <p>
+                        {{ publication.date }}
+                        <i class="share icon" (click)="openPublication( publication.user.username, publication._id );"></i>
+                        <i *ngIf="( user && userLogged._id === user._id ) || userLogged._id === publication.user._id || userLogged.role === 'ADMIN'" (click)="deletePublication( publication._id );" class="close icon"></i>
+                    </p>
+                </div>
+                <div class="publication-body-review">
+                    <div class="review-left">
+                        <h3 (click)="watchAnime( publication.anime.name );">{{ publication.anime.name }}</h3>
+                        <p>{{ publication.content }}</p>
+                        <ul class="review-tags">
+                            <li *ngFor="let tag of publication.anime.tags">{{ tag }}</li>
+                        </ul>
+                    </div>
+                    <div class="review-right" (click)="watchAnime( publication.anime.name );">
+                        <img src="{{ publication.anime.image }}" alt="{{ publication.anime.image }}">
+                    </div>
+
+                    <div class="vertical-line"></div>
+                    <div class="horizontal-line"></div>
+                    <div class="horizontal-line2"></div>
+
+                    <app-reactionlist [publication]="publication._id"></app-reactionlist>
+                </div>
+    
+                <div class="publication-footer">
+                    <app-commentlist [type]="'publication'" [publication]="publication"></app-commentlist>
+                </div>
+            </div>
+        </li>
+
+        <button *ngIf="!feed && page !== totalPages"
+            (click)="loadMorePublications( user._id, page + 1, order, type, feed );"
+        >Cargar mas <i class="plus circle icon"></i></button>
+
+        <button *ngIf="feed && page !== totalPages"
+            (click)="loadMorePublications( 'none', page + 1, order, type, feed );"
+        >Cargar mas <i class="plus circle icon"></i></button>
+
+    </ul>
+
+    <ul class="list-publications" *ngIf="!publications">
+        
+        <!-- Create Publication -->
+        <div class="create-publication" *ngIf="( user && userLogged._id === user._id ) || feed">
+            <form [formGroup]="publicationForm" (ngSubmit)="createPublication();">
+                <div class="create-header">
+                    <img src="{{ url + '/user/image/' + userLogged.image }}" alt="{{ userLogged.image }}">
+                    <h3>{{ userLogged.username }}</h3>
+                    <p *ngIf="!review" (click)="setTypePublication( !review )">Crear publicacion <i class="caret down icon"></i></p>
+                    <p *ngIf="review" (click)="setTypePublication( !review )">Crear reseña <i class="caret down icon"></i></p>
+                </div>
+
+                <textarea *ngIf="!review"
+                    formControlName="content"
+                    placeholder="Crea una publicacion">
+                </textarea>
+                <textarea *ngIf="review"
+                    formControlName="content"
+                    placeholder="Crea una reseña">
+                </textarea>
+
+                <img *ngIf="!review" id="publication-image-preview" class="image-preview" [src]="filePreview" alt="{{ filePreview }}" (click)="removePreview();"/>
+                
+                <ul *ngIf="!review" class="create-footer">
+                    <li><i class="cloud icon"></i></li>
+                    <div class="footer-rightside">
+
+                        <!-- Upload Image -->
+                        <a (click)="uploadFile();"><i class="image icon"></i></a>
+                        <div style='height: 0px;width:0px; overflow:hidden;'>
+                            <input id="publication-upload-file" type="file" (change)="setImage( $event ); readURL( $event );"/>
+                        </div>
+                        <button type="submit" id="btn-publication-submit">Publicar</button>
+                    </div>
+                </ul>
+
+                <!-- Create a Review publication -->
+                <ul *ngIf="review" class="create-footer">
+                    <li class="review-li">
+                        <input 
+                            id="search-to-review"
+                            class="search-to-review"
+                            (click)="showAnimeList( !showAnimes );$event.stopPropagation();"
+                            type="text"
+                            placeholder="Selecciona el anime" 
+                            (keypress)="searchFastF( $event );"
+                            (keydown.backspace)="searchFastF( $event );"
+                            autocorrect="off" 
+                            autocomplete="off"
+                        >
+                        <button class="btn-search"><i class="search icon"></i></button>
+                        <h2 class="selectedAnime" *ngIf="selectedAnime">{{ selectedAnime }}</h2>
+                    </li>
+  
+                    <div *ngIf="showAnimes" class="search-list" id="animes-list-div" (click)="$event.stopPropagation();">
+                        <ul>
+                            <li *ngFor="let anime of animes" (click)="setAnimeToReview( anime._id, anime.name );showAnimeList( !showAnimes );">
+                                <div class="image-search">
+                                    <img src="{{ anime.image }}" alt="{{ anime.image }}">
+                                </div>
+                                <div class="content-search">
+                                    <h4>
+                                        {{ anime.name.substr(0, 40) }}
+                                        <span [ngClass]="{
+                                            'color-anime': anime.type === 'anime',
+                                            'color-pelicula': anime.type === 'pelicula',
+                                            'color-ova': anime.type === 'ova'
+                                        }">{{ anime.type }}</span>
+                                    </h4>
+                                    <p>{{ anime.description }}</p>
+                                </div>
+                            </li>
+                            <h5 *ngIf="!animes">Ingresa tu busqueda</h5>
+                        </ul>
+                    </div>
+
+                    <div class="footer-rightside">
+                        <button type="submit" id="btn-publication-submit">Publicar</button>
+                    </div>
+                </ul>
+            </form>
+        </div>
+        
+        <li *ngIf="!feed">
+            <div class="publication-header">
+                <img src="../../../assets/hi-girl.png" alt="hi-girl.png">
+                <a>anime uwu</a>
+                <p>{{ user.date }}</p>
+            </div>
+            <div class="publication-body">
+                <p>Hola, Bienvenid@ al perfil de {{ user.username }}, al parecer aun no ha creado
+                    ni una 
+                    <span *ngIf="type === 'todos'">publicacion</span>
+                    <span *ngIf="type === 'review'">reseña</span>
+                , esperemos que pronto nos cuente lo que piensa :3
+                </p>
+                <img src="../../../assets/yei-girl.png" alt="yei-girl.png">
+                
+                <div class="vertical-line"></div>
+                <div class="horizontal-line"></div>
+                <div class="horizontal-line"></div>
+            </div>
+
+            <div class="publication-footer">
+                <app-commentlist></app-commentlist>
+            </div>
+        </li>
+
+        <li *ngIf="feed">
+            <div class="publication-header">
+                <img src="../../../assets/hi-girl.png" alt="hi-girl.png">
+                <a>anime uwu</a>
+                <p>{{ userLogged.date }}</p>
+            </div>
+            <div class="publication-body">
+                <p>Hola, Bienvenid@ {{ userLogged.username }} a tu inicio, donde encontraras las Publicaciones
+                    de aquellas personas que hayas seguido en la plataforma, al parecer aun no hay
+                    <span *ngIf="type === 'todos'">publicaciones</span>
+                    <span *ngIf="type === 'review'">reseñas</span>
+                por ver, esperemos que pronto los usuarios cuenten lo que piensan :3
+                </p>
+                <img src="../../../assets/yei-girl.png" alt="yei-girl.png">
+                
+                <div class="vertical-line"></div>
+                <div class="horizontal-line"></div>
+                <div class="horizontal-line"></div>
+            </div>
+
+            <div class="publication-footer">
+                <app-commentlist></app-commentlist>
+            </div>
+        </li>
+    </ul>
+</div>

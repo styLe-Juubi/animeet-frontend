@@ -1,0 +1,802 @@
+@import '../../scss/colors.scss';
+
+.anime {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    margin: 0 auto;
+
+    .header {
+        width: 100%;
+        margin: 0 auto;
+        height: 450px;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        border: 1px solid $border-light;
+        overflow: hidden;
+
+        img {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(3px);
+        }
+
+        .side-left {
+            position: relative;
+            flex: 0 0 31%;
+            z-index: 2;
+            height: 100%;
+            background-color: rgba(0,0,0,.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            overflow: hidden;
+            border: 7px solid $white;
+            border-right: 0;
+
+            img {
+                width: 80%;
+                height: 90%;
+                object-fit: cover;
+                border: 1px solid $gray;
+                filter: blur(0);
+            }
+
+            .type-anime {
+                position: absolute;
+                top: -20px;
+                left: -74px;
+                transform: rotate(-45deg);
+                color: $font-white;
+                background-color: $purple;
+                padding: 40px 70px 20px;
+                z-index: 3;
+                text-align: center;
+                font-size: 16px;
+                font-weight: 500;
+                font-family: 'Concert One', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .type-pelicula {
+                position: absolute;
+                top: -16px;
+                left: -78px;
+                transform: rotate(-45deg);
+                color: $font-white;
+                background-color: $danger;
+                padding: 40px 70px 20px;
+                z-index: 3;
+                text-align: center;
+                font-size: 16px;
+                font-weight: 500;
+                font-family: 'Concert One', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .type-ova {
+                position: absolute;
+                top: -26px;
+                left: -70px;
+                transform: rotate(-45deg);
+                color: $font-white;
+                background-color: $action;
+                padding: 40px 70px 20px;
+                z-index: 3;
+                text-align: center;
+                font-size: 16px;
+                font-weight: 500;
+                font-family: 'Concert One', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+        }
+
+        .side-right {
+            position: relative;
+            flex: 0 0 69%;
+            max-width: 69%;
+            z-index: 2;
+            height: 100%;
+            background-color: rgba(0,0,0,.6);
+            border: 7px solid $white;
+            border-left: 0;
+
+            h1 {
+                color: $font-white;
+                letter-spacing: 1px;
+                text-align: left;
+                padding: 10px;
+                margin-top: 25px;
+                font-size: 18px;
+
+                span {
+                    padding: 11px 25px;
+                    border-radius: 2px;
+                }
+            }
+
+            p {
+                width: 100%;
+                height: 250px;
+                padding-right: 30px;
+                text-align: justify;
+                color: $font-white;
+                letter-spacing: 1px;
+                font-size: 14px;
+                overflow-y: scroll;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+
+            .side-right-bottom {
+                margin-top: 27px;
+                width: 100%;
+
+                ul {
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    display: flex;
+                    flex-direction: row;
+
+                    li {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 35px;
+                        color: $font-white;
+                        letter-spacing: 1px;
+                        margin-right: 10px;
+                        font-size: 12px;
+                        padding: 8px 20px;
+                        border-radius: 2px;
+                        text-transform: capitalize;
+                        box-shadow: $shadow;
+                        cursor: pointer;
+                        transition: $transition;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+
+                        &:hover {
+                            background-color: $white;
+                            color: $font-dark;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .main-anime {
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .anime-lists {
+            flex: 0 0 31%;
+            position: sticky;
+            position: -webkit-sticky;
+            top: 60px;
+
+            .btns-action {
+                width: 100%;
+                background-color: $white;
+                border: 1px solid $border-light;
+
+                button {
+                    width: 95%;
+                    margin: 0px auto;
+                    margin-left: 2.5%;
+                    border: 0;
+                    color: $font-gray;
+                    font-size: 13px;
+                    font-weight: 500;
+                    letter-spacing: 1px;
+                    border-radius: 2px;
+                    border: 1px solid $border-light;
+                    cursor: pointer;
+                    padding: 15px;
+                    margin-bottom: 10px;
+                    text-align: left;
+                    transition: $transition;
+                    background-color: $body-color;
+    
+                    &:nth-child(1) {
+                        text-transform: uppercase;
+                        font-family: 'Concert One', sans-serif;
+                        margin-top: 10px;
+                        color: $font-white;
+                        font-size: 18px;
+                        text-align: center;
+                        font-weight: 100;
+                        border: 0;
+                        background-color: $purple;
+                    }
+    
+                    span {
+                        float: right;
+                    }
+
+                    &:nth-child(2) {
+                        span i {
+                            color: $font-dark;
+                        }
+
+                        &:hover {
+                            background-color: $dark;
+                            color: $love;
+                            box-shadow: $shadow;
+                            border-color: $dark;
+                        }
+
+                        &:hover span i {
+                            color: $love;
+                        }
+                    }
+
+                    &:nth-child(3) {
+                        span i {
+                            color: $font-dark;
+                        }
+
+                        &:hover {
+                            background-color: $dark;
+                            color: $wait;
+                            box-shadow: $shadow;
+                            border-color: $dark;
+                        }
+
+                        &:hover span i {
+                            color: $wait;
+                        }
+                    }
+
+                    &:nth-child(4) {
+                        span i {
+                            color: $font-dark;
+                        }
+
+                        &:hover {
+                            background-color: $dark;
+                            color: $watch;
+                            box-shadow: $shadow;
+                            border-color: $dark;
+                        }
+
+                        &:hover span i {
+                            color: $watch;
+                        }
+                    }
+                }
+            }
+
+            .lover-users {
+                width: 100%;
+                margin-top: 10px;
+                background-color: $white;
+                border: 1px solid $border-light;
+
+                h4 {
+                    width: 95%;
+                    background-color: $white;
+                    color: $love;
+                    border-bottom: 1px solid $border-light;
+                    letter-spacing: 1px;
+                    padding: 10px 25px 20px;
+                    margin: 10px 2.5%;
+                    font-weight: 500;
+                    font-size: 15px;
+                    border-radius: 2px;
+
+                    span {
+                        float: right;
+                    }
+                }
+
+                ul {
+                    width: 95%;
+                    padding: 0;
+                    margin: 0;
+                    list-style: none;
+
+                    li {
+                        width: 100%;
+                        margin: 0 2.5% 10px;
+                        border-radius: 2px;
+                        border-radius: 2px;
+                        overflow: hidden;
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        position: relative;
+                        height: 50px;
+                        cursor: pointer;
+                        transition: $transition;
+
+                        &:hover {
+                            box-shadow: $shadow;
+                            border-color: $purple;
+                        }
+
+                        img {
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            z-index: 1;
+                            background-color: $white;
+                        }
+
+                        .user-image {
+                            position: relative;
+                            z-index: 2;
+                            flex: 0 0 21%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background-color: rgba(0,0,0,.3);
+
+                            img {
+                                width: 44px;
+                                height: 44px;
+                                border-radius: 100%;
+                                object-fit: cover;
+                                border: 1px solid $border-light;
+                            }
+                        }
+
+                        .username {
+                            position: relative;
+                            z-index: 2;
+                            flex: 0 0 79%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            flex-direction: row;
+                            background-color: rgba(0,0,0,.3);
+
+                            h5 {
+                                width: 80%;
+                                padding: 0px 10px;
+                                overflow: hidden;
+                                letter-spacing: 1px;
+                                margin: 0;
+                                color: $font-white;
+                            }
+
+                            span {
+                                width: 20%;
+                                text-align: right;
+                                padding-right: 10px;
+                                color: $font-white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .main-right {
+            flex: 0 0 68.1%;
+
+            .episode-list {
+                width: 100%;
+                background-color: $white;
+                border: 1px solid $border-light;
+
+                h2 {
+                    width: 100%;
+                    padding: 10px 0px 10px 20px;
+                    font-size: 16px;
+                    letter-spacing: 1px;
+                    font-weight: 500;
+                    margin: 0;
+                    color: $font-dark;
+                    border-bottom: 1px solid $border-light;
+    
+                    span {
+                        float: right;
+    
+                        button {
+                            width: 200px;
+                            text-align: left;
+                            border: 0;
+                            font-size: 15px;
+                            letter-spacing: 1px;
+                            color: $font-gray;
+                            padding: 11px 20px 12px;
+                            margin-top: -11px;
+                            background-color: $white;
+                            cursor: pointer;
+                            transition: $transition;
+    
+                            span {
+                                color: $font-dark
+                            }
+    
+                            &:hover {
+                                background-color: $purple;
+                                color: $font-white;
+                                box-shadow: $shadow;
+                            }
+    
+                            &:hover span {
+                                color: $font-white;
+                            }
+                        }
+                    }
+                }
+    
+                ul {
+                    padding: 20px 0;
+                    list-style: none;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    max-height: 730px;
+                    overflow-y: scroll;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+    
+                    li {
+                        width: 97%;
+                        padding: 7px 20px;
+                        background-color: $white;
+                        border: 1px solid $border-light;
+                        margin-bottom: 10px;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        cursor: pointer;
+                        transition: $transition;
+                        color: $font-dark;
+
+                        &:hover {
+                            background-color: $purple;
+                            box-shadow: $shadow;
+                            border-color: $purple;
+                        }
+
+                        &:hover .episode-title-number h5,
+                        &:hover .episode-title-number p,
+                        &:hover i {
+                            color: $font-white;
+                        }
+
+                        img {
+                            width: 15%;
+                            height: 60px;
+                            border-radius: 2px;
+                            object-fit: cover;
+                            border: 1px solid $border-light;
+                        }
+
+                        .episode-title-number {
+                            padding: 0 10px;
+                            width: 75%;
+                            height: 50px;
+
+                            h5 {
+                                width: 100%;
+                                overflow: hidden;
+                                padding-top: 3px;
+                                height: 25px;
+                                margin: 0;
+                                font-size: 14px;
+                                letter-spacing: 1px;
+                                transition: $transition;
+                                color: $font-dark;
+                            }
+
+                            p {
+                                font-size: 11px;
+                                height: 23px;
+                                letter-spacing: 1px;
+                                color: $font-gray;
+                                transition: $transition;
+                            }
+                        }
+
+                        i {
+                            margin-top: -3px;
+                            width: 10%;
+                            font-size: 20px;
+                            text-align: right;
+                            transition: $transition;
+                        }
+                    }
+
+                    button {
+                        width: 180px;
+                        margin-top:5px;
+                        padding: 10px;
+                        border: 0;
+                        border-radius: 2px;
+                        cursor: pointer;
+                        letter-spacing: 1px;
+                        text-align: left;
+                        color: $font-white;
+                        transition: $transition;
+                        
+                        span {
+                            margin-left: 10px;
+                            float: right;
+                        }
+
+                        &:hover {
+                            background-color: $purple;
+                            box-shadow: $shadow;
+                            color: $font-white;
+                            border-color: $purple;
+                        }
+                    }
+                }
+
+                .ul-no-episodes {
+                    padding: 20px 0;
+                    list-style: none;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    height: 350px;
+                    overflow-y: scroll;
+                    align-items: center;
+
+                    .proximamente {
+                        width: 98%;
+                        display: flex;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                        padding: 20px;
+                        align-items: center;
+                        border-radius: 2px;
+                        box-shadow: $shadow;
+
+                        img {
+                            width: 100px;
+                            height: 100px;
+                            object-fit: cover;
+                        }
+
+                        h3 {
+                            letter-spacing: 1px;
+                            color: $font-white;
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.color-anime {
+    background-color: $purple !important;
+}
+
+.color-pelicula {
+    background-color: $danger !important;
+}
+
+.color-ova {
+    background-color: $action !important;
+}
+
+.wait-submit {
+    background-color: $purple-light !important;
+    box-shadow: $shadow !important;
+}
+
+.no-lovers {
+    border-bottom: 0!important;
+    padding: 10px 25px 10px !important;
+}
+
+.inLoveList {
+    background-color: $purple-light !important;
+    color: $font-white!important;
+    box-shadow: $shadow!important;
+    border-color: $purple-light!important;
+    transform: scale(.99);
+
+    span i {
+        color: $love !important;
+    }
+}
+
+.inWaitList {
+    background-color: $purple-light !important;
+    color: $font-white!important;
+    box-shadow: $shadow!important;
+    border-color: $purple-light!important;
+    transform: scale(.99);
+
+    span i {
+        color: $wait !important;
+    }
+}
+
+.inWatchList {
+    background-color: $purple-light !important;
+    color: $font-white!important;
+    box-shadow: $shadow!important;
+    border-color: $purple-light!important;
+    transform: scale(.99);
+
+    span i {
+        color: $watch !important;
+    }
+}
+
+// .arrow_box {
+// 	position: relative;
+// }
+// .arrow_box:after, .arrow_box:before {
+// 	right: 100%;
+// 	top: 18px;
+// 	border: solid transparent;
+// 	content: "";
+// 	height: 0;
+// 	width: 0;
+// 	position: absolute;
+// 	pointer-events: none;
+// }
+
+// .arrow_box:after {
+// 	border-color: rgba(136, 183, 213, 0);
+// 	border-right-color: $white;
+// 	border-width: 10px;
+// 	margin-top: -10px;
+// }
+// .arrow_box:before {
+// 	border-color: rgba(194, 225, 245, 0);
+// 	border-right-color: #d4d4d4;
+// 	border-width: 11px;
+// 	margin-top: -11px;
+// }
+
+@media ( max-width: 1013px ) {
+    .anime {
+        width: 100%;
+        .header {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            display: block;
+            padding: 10px;
+            height: auto;
+            img {
+                display: none;
+            }
+            .side-left {
+                height: 450px;
+                border: 0;
+                border: 1px solid $border-light;
+                background-color: $white;
+                margin-bottom: 0;
+                img {
+                    width: 90%;
+                    height: 94%;
+                    display: block;
+                    border: 1px solid $border-light;
+                }
+            }
+            .side-right {
+                height: auto;
+                max-width: 100%;
+                background-color: $white;
+                padding: 0;
+                border: 0;
+                margin-top: 10px;
+                border: 1px solid $border-light;
+                h1 {
+                    color: $font-dark;
+                    margin: 0;
+                    text-align: center;
+                    width: 100%;
+                    font-size: 16px;
+                    padding: 10px 20px;
+                    span {
+                        padding: 0;
+                    }
+                }
+                p {
+                    padding: 0 10px;
+                    color: $font-gray;
+                    font-size: 12px;
+                    height: auto;
+                    max-height: 255px;
+                }
+                .side-right-bottom {
+                    margin-top: -5px;
+                    height: auto;
+                    ul {
+                        flex-wrap: wrap;
+                        padding-bottom: 10px;
+                        justify-content: center;
+                        li {
+                            font-size: 11px;
+                            margin: 3px;
+                        }
+                    }
+                }
+            }
+        }
+        .main-anime {
+            display: block;
+            margin-top: 0px;
+            .anime-lists {
+                display: block;
+                width: 95%;
+                margin: 0 auto;
+                margin-top: -60px;
+                position: relative;
+                .lover-users {
+                    display: none;
+                }
+            }
+            .main-right {
+                display: block;
+                width: 95%;
+                margin: 0 auto;
+                margin-top: 70px;
+                .episode-list {
+                    h2 {
+                        padding: 10px;
+                        font-size: 14px;
+                        padding-right: 0;
+                        span {
+                            button {
+                                width: 150px;
+                                font-size: 13px;
+                                padding: 13px 5px 9px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media ( min-width: 1014px ) {
+    .anime {
+        width: 99%;
+    }
+}
+
+@media ( min-width: 1260px ) {
+    .anime {
+        width: 85%;
+    }
+}
+
+@media ( min-width: 1590px ) {
+    .anime {
+        width: 80%;
+    }
+}
+
+@media ( min-width: 1890px ) {
+    .anime {
+        width: 70%;
+    }
+}

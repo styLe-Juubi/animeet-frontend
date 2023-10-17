@@ -1,0 +1,63 @@
+@import '../../scss/colors.scss';
+
+.not-found {
+    width: 100%;
+    border-top: 1px solid $border-light;
+    border-bottom: 1px solid $border-light;
+    height: 60vh;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 40px;
+    background-color: $white;
+
+    .image-notfound {
+        width: 350px;
+        height: 350px;
+        border-radius: 100%;
+        background-color: $purple-light;
+        border: 3px solid $purple;
+        position: relative;
+        cursor: pointer;
+        transition: $transition;
+
+        img {
+            width: 100%;
+            margin-top: -40px;
+        }
+
+        h2 {
+            position: absolute;
+            top: 54.2%;
+            width: 100%;
+            text-align: center;
+            letter-spacing: 1px;
+            color: #000;
+            font-family: 'Concert One', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        &:hover {
+            background-color: $font-white;
+            box-shadow: $shadow;
+        }
+    }
+}
+
+@media ( max-width: 1013px ) {
+    .not-found {
+        .image-notfound {
+            background-color: $white;
+            border: 0;
+            h2 {
+                top: 39%;
+                font-size: 13px;
+            }
+        }
+    }
+}
+

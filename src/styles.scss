@@ -1,0 +1,51 @@
+@import './app/scss/colors.scss';
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Glory:wght@100&display=swap');
+// font-family: 'Glory', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap');
+// font-family: 'Signika Negative', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+// font-family: 'Courgette', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+// font-family: 'Concert One', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap%27');
+// font-family: 'Josefin Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap%27');
+// font-family: 'Quicksand', sans-serif;
+
+body, * {
+    font-family: 'Quicksand', sans-serif;
+    padding: 0;
+    margin: 0;
+
+    ::-webkit-scrollbar {
+        width: 5px;
+      }
+      
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+      }
+       
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: $purple-light; 
+      }
+      
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: $purple;
+      }
+}
+
+.toast-success{
+    background-color: $purple !important;
+}
+
+.toast-info{
+    background-color: $danger !important;
+}
+  
+.toast-message{
+    letter-spacing: 1px !important;
+}

@@ -1,0 +1,114 @@
+<div class="inbox">
+    <div class="messages-left">
+        <h1 class="messages-left-tittle">
+            Lista de mensajes <img src="../../../assets/email.png" alt="email.png">
+        </h1>
+        <div class="messages-left-main">
+            <form class="messages-left-form">
+                <input 
+                    type="text"
+                    placeholder="Busqueda de conversaciones"
+                    spellcheck="false"
+                    autocomplete="off"
+                    (input)="searchTypping($event);"
+                    #searchConversation
+                >
+                <button type="submit" class="btn-search"><i class="search icon"></i></button>
+            </form>
+            <ul class="messages-list">
+                <li *ngFor="let chat of chats" (click)="selectChat( chat );readNotify( chat );">
+                    <ng-container *ngIf="chat.emmiter._id === identity._id">
+                        <div class="image-border">
+                            <img src="{{ url + '/user/image/' + chat.receiver.image }}" alt="user.png">
+                        </div>
+                        <h4>{{ chat.receiver.username }}</h4>
+                        <i class="clock icon"></i>
+                        <p>{{ chat.lastComment.date }}</p>
+                        <div class="notify-inbox" *ngIf="identity._id !== chat.lastUser && chat.notify"></div>
+                    </ng-container>
+                    <ng-container *ngIf="chat.emmiter._id !== identity._id">
+                        <div class="image-border">
+                            <img src="{{ url + '/user/image/' + chat.emmiter.image }}" alt="user.png">
+                        </div>
+                        <h4>{{ chat.emmiter.username }}</h4>
+                        <i class="clock icon"></i>
+                        <p>{{ chat.lastComment.date }}</p>
+                        <div class="notify-inbox" *ngIf="identity._id !== chat.lastUser && chat.notify"></div>
+                    </ng-container>
+                </li>
+            </ul>
+            <app-pagination 
+                *ngIf="page && totalPages" 
+                [page]="page" 
+                [totalPages]="totalPages"
+                [responsive]="true"
+                (back)="changePage($event)" 
+                (next)="changePage($event)"
+                (lastPage)="changePage($event)"
+            >
+            </app-pagination>
+        </div>
+    </div>
+    <div class="messages-right">
+        <h1 class="messages-right-tittle">
+            Chat <img src="../../../assets/email.png" alt="email.png">
+        </h1>
+        <ng-container *ngIf="chat">
+            <div class="inbox-chat-selected">
+
+                <div class="chat-selected-header" (click)="goProfile( chat.emmiter, chat.receiver );">
+                    <ng-container *ngIf="chat.emmiter._id === identity._id">
+                        <div class="image-border">
+                            <img src="{{ url + '/user/image/' + chat.receiver.image }}" alt="user.png">
+                        </div>
+                        <h4>{{ chat.receiver.username }}</h4>
+                        <i class="clock icon"></i>
+                        <p>{{ chat.lastComment.date }}</p>
+                        <div class="notify-inbox" *ngIf="identity._id !== chat.lastUser && chat.notify"></div>
+                    </ng-container>
+                    <ng-container *ngIf="chat.emmiter._id !== identity._id">
+                        <div class="image-border">
+                            <img src="{{ url + '/user/image/' + chat.emmiter.image }}" alt="user.png">
+                        </div>
+                        <h4>{{ chat.emmiter.username }}</h4>
+                        <i class="clock icon"></i>
+                        <p>{{ chat.lastComment.date }}</p>
+                        <div class="notify-inbox" *ngIf="identity._id !== chat.lastUser && chat.notify"></div>
+                    </ng-container>
+                </div>
+
+                <ul class="inbox-messages-list-selected">
+                    <app-commentlist *ngIf="showMessages" [type]="'chat'" [inbox]="true" [chat]="chat"></app-commentlist>
+                </ul>
+                
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="!chat">
+            <div class="inbox-chat-selected">
+                <div class="chat-selected-header" (click)="goProfile( chat.emmiter, chat.receiver );">
+                    <div class="image-border">
+                        <img src="../../../assets/gif/running-infinity.gif" alt="user.png">
+                    </div>
+                    <h4>Nombre de usuario</h4>
+                    <i class="clock icon"></i>
+                    <p>May 24th 2022, 8:31:34 pm</p>
+                    <div class="notify-inbox"></div>
+                </div>
+                <ul class="inbox-messages-list-not-selected">
+                    <div>
+                        <img src="../../../assets/gif/not-found-infinity.gif" alt="not-found.gif"><br>
+                        <h3>No se ha seleccionado ni un chat !</h3>
+                    </div>
+                </ul>
+                <div class="chat-selected-footer">
+                    <p>Enviar mensaje</p>
+                    <div class="chat-footer-right">
+                        <i class="image icon"></i>
+                        <p>Enviar</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="episodes">
+    <!-- Filters to Search Episodes -->
+    <div class="episodes-header">
+        <h1>Lista de episodios</h1>
+        <div class="filter-container">
+            <form [formGroup]="filterForm" (ngSubmit)="filterAnimes();">
+
+                <a type="menu" (click)="openCloseFilters('order-filters');">Orden: 
+                    <span *ngIf="order === '1'">
+                        Antiguos <i class="caret down icon"></i>
+                    </span>
+                    <span *ngIf="order !== '1'">
+                        Recientes <i class="caret down icon"></i>
+                    </span>
+                </a>
+
+                <button type="submit" id="filter-submit">Filtrar: <span><i class="filter icon"></i></span></button>
+
+                <div class="order-filters" id="order-filters">
+                    <div class="input-container">
+                        <input class="inp-cbx" id="order-antiguo" type="radio" formControlName="order" value="1" style="display: none;"/>
+                        <label class="cbx" for="order-antiguo">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>Antiguo</span>
+                        </label>
+                    </div>
+                    <div class="input-container">
+                        <input class="inp-cbx" id="order-reciente" type="radio" formControlName="order" value="-1" style="display: none;"/>
+                        <label class="cbx" for="order-reciente">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>Reciente</span>
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Episode List -->
+    <app-episodelist [episodes]="episodes" *ngIf="episodes"></app-episodelist>
+    <app-notfound *ngIf="!episodes" [message]="'No se han encontrado Episodios'"></app-notfound>
+
+    <app-pagination 
+        *ngIf="page && totalPages" 
+        [page]="page" 
+        [totalPages]="totalPages" 
+        (back)="changePage($event)" 
+        (next)="changePage($event)"
+        (lastPage)="changePage($event)"
+    >
+    </app-pagination>
+</div>

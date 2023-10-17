@@ -1,0 +1,37 @@
+<ul class="reactions">
+    <li (click)="createReaction('love');">
+        <img src="../../../assets/reactions/love.png" alt="love.png">
+        <span *ngIf="reactions && reactions.love">{{ reactions.love }}</span>
+        <span *ngIf="!reactions || !reactions.love">0</span>
+    </li>
+    <li (click)="createReaction('cute');">
+        <img src="../../../assets/reactions/cute.png" alt="cute.png">
+        <span *ngIf="reactions && reactions.cute">{{ reactions.cute }}</span>
+        <span *ngIf="!reactions || !reactions.cute">0</span>
+    </li>
+    <li (click)="createReaction('laughing');">
+        <img src="../../../assets/reactions/laughing.png" alt="laughing.png">
+        <span *ngIf="reactions && reactions.laughing">{{ reactions.laughing }}</span>
+        <span *ngIf="!reactions || !reactions.laughing">0</span>
+    </li>
+    <li (click)="createReaction('crying');">
+        <img src="../../../assets/reactions/crying.png" alt="crying.png">
+        <span *ngIf="reactions && reactions.crying">{{ reactions.crying }}</span>
+        <span *ngIf="!reactions || !reactions.crying">0</span>
+    </li>
+    <li (click)="createReaction('surprised');">
+        <img src="../../../assets/reactions/surprised.png" alt="surprised.png">
+        <span *ngIf="reactions && reactions.surprised">{{ reactions.surprised }}</span>
+        <span *ngIf="!reactions || !reactions.surprised">0</span>
+    </li>
+    <li (click)="createReaction('zzz');">
+        <img src="../../../assets/reactions/zzz.png" alt="zzz.png">
+        <span *ngIf="reactions && reactions.zzz">{{ reactions.zzz }}</span>
+        <span *ngIf="!reactions || !reactions.zzz">0</span>
+    </li>
+    <li (click)="createReaction('devil');">
+        <img src="../../../assets/reactions/devil.png" alt="devil.png">
+        <span *ngIf="reactions && reactions.devil">{{ reactions.devil }}</span>
+        <span *ngIf="!reactions || !reactions.devil">0</span>
+    </li>
+</ul>

@@ -1,0 +1,54 @@
+<div class="sign-in-out">
+    <div class="left">
+        <div class="align-center">
+            <h1 routerLink="/">animeet</h1>
+            <h5>Mira, comparte, conoce y habla sobre anime con la comunidad !</h5>
+        </div>
+    </div>
+    <div class="right">
+        <div class="form-sign">
+            <h2>Bienvenid@ a la mejor comundad de anime !</h2>
+            <form [formGroup]="forgotForm" (ngSubmit)="forgotPassword();">
+                <input
+                    type="email" 
+                    placeholder="Email: email@email.com"
+                    autocomplete="off" 
+                    formControlName="email" 
+                    [classList]="campoNoValido('email') ? 'error-input' : null"
+                    spellcheck="false"
+                />
+
+                <button type="submit" id="forgotSubmit">Restablecer Contraseña <i class="sign in icon"></i></button>
+                <p>¿Recordaste tu contraseña? <span routerLink="/auth/login">Iniciar Sesión</span></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="sign-in-out-movil">
+    <div class="welcome">
+        <h1 class="logo-title" routerLink="/">
+            <span>An</span><span>ime</span><span>et</span>
+            <img src="../../../assets/logos/menu.png" alt="logo.png">
+        </h1>
+        <div class="container-form">
+            <img src="../../../assets/2.jpg">
+            <div class="form-sign">
+                <form [formGroup]="forgotForm" (ngSubmit)="forgotPassword();">
+                    <input
+                        type="email" 
+                        placeholder="Email: email@email.com"
+                        autocomplete="off" 
+                        formControlName="email" 
+                        [classList]="campoNoValido('email') ? 'error-input' : null"
+                        spellcheck="false"
+                    />
+    
+                    <button type="submit" id="forgotSubmitMovil">Restablecer Contraseña <i class="sign in icon"></i></button>
+                    <p>¿Recordaste tu contraseña? <span routerLink="/auth/login">Iniciar Sesión</span></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

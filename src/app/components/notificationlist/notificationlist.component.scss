@@ -1,0 +1,184 @@
+@import '../../scss/colors.scss';
+
+.notification-list {
+    width: 320px;
+    height: 400px;
+    background-color: $white;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    z-index: 5;
+    border: 1px solid $border-light;
+    border-radius: 2px;
+    transform: scaleY(0);
+    transform-origin: top;
+    list-style: none;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    li {
+        width: 100%;
+        background-color: $body-color;
+        padding: 0 10px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        transition: $transition;
+
+        &:nth-of-type(odd) {
+            background-color: $white;
+        }
+
+        .section-notification {
+            flex: 0 0 25%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            &:nth-child(2) {
+                flex: 0 0 50%;
+            }
+
+            .emmiter-notification-img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            .body-notification {
+                width: 100%;
+                text-align: left;
+                font-size: 12px;
+                color: $font-dark;
+                transition: $transition;
+                position: relative;
+                
+                span {
+                    color: $purple;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    transition: $transition;
+                    display: inline-flex;
+                    max-width: 55px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+
+                img {
+                    position: absolute;
+                    right: 5px;
+                    width: 15px;
+                }
+            }
+
+            .publication-notification-img {
+                width: 45px;
+                height: 45px;
+                border-radius: 3px;
+                object-fit: cover;
+                margin-left: 5px;
+            }
+
+            .notification-text-content-img {
+                width: 30px;
+                margin-left: 13px;
+                filter: invert(60%) sepia(36%) saturate(952%) hue-rotate(206deg) brightness(81%) contrast(90%);
+                transition: $transition;
+            }
+
+            .follow-notification-img {
+                width: 38px;
+                height: 38px;
+                border-radius: 3px;
+                object-fit: cover;
+                margin-left: 5px;
+            }
+
+            .notification-dot {
+                position: absolute;
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background-color: $red;
+                left: 0px;
+            }
+        }
+
+        &:hover {
+            background-color: $purple;
+            .section-notification {
+                .body-notification {
+                    color: $font-white-light;
+                    span {
+                        color: $font-white;
+                    }
+                }
+                .notification-text-content-img {
+                    filter: invert( 100% );
+                }
+            }
+        }
+    }
+
+    button {
+        width: 180px;
+        padding: 10px;
+        border: 0;
+        border-radius: 2px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        text-align: left;
+        color: $font-white;
+        transition: $transition;
+        background-color: $purple;
+        margin: 20px auto;
+        
+        span {
+            margin-left: 10px;
+            float: right;
+        }
+
+        &:hover {
+            background-color: $purple;
+            box-shadow: $shadow;
+            color: $font-white;
+            border-color: $purple;
+        }
+    }
+
+    .not-found-notifications {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $purple;
+        letter-spacing: 1px;
+
+        p {
+            width: 100%;
+
+            i {
+                margin-left: 5px;
+            }
+        }
+    }
+}
+
+.notification-list-movil {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: scaleY(1) !important;
+    top: 0;
+    text-align: center;
+}

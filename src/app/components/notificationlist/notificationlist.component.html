@@ -1,0 +1,58 @@
+<ul class="notification-list" #notificationList>
+    <ng-container *ngIf="notifications && notifications.length > 0">
+
+        <li *ngFor="let notification of notifications" (click)="readNotification( notification._id );goTo( notification );">
+            <div class="section-notification">
+                <div class="notification-dot" *ngIf="!notification.read"></div>
+                <img class="emmiter-notification-img" src="{{ url + '/user/image/' + notification.emmiter.image }}" alt="profile_image.png">
+            </div>
+            <div class="section-notification">
+                <p class="body-notification" *ngIf="notification.type === 'reaction'">
+                    <span>{{ notification.emmiter.username }}</span> 
+                    ha reaccionado a tu publicación . . .
+                    <img src="{{ '../../../assets/reactions/' + notification.reaction.type + '.png'}}" alt="{{ notification.reaction.type + '.png'}}">
+                </p>
+
+                <p class="body-notification" *ngIf="notification.type === 'comment'">
+                    <span>{{ notification.emmiter.username }}</span> 
+                    ha comentado tu publicación . . .
+                    <img src="../../../assets/comments.png" alt="comments.png">
+                </p>
+
+                <p class="body-notification" *ngIf="notification.type === 'follow'">
+                    <span>{{ notification.emmiter.username }}</span> 
+                    ahora te esta siguiendo . . .
+                    <img src="../../../assets/add-user.png" alt="add-user.png">
+                </p>
+            </div>
+            <div class="section-notification">
+                <ng-container *ngIf="notification.type === 'reaction' || notification.type === 'comment'">
+                    <img 
+                        *ngIf="notification.publication && notification.publication.file"
+                        class="publication-notification-img" src="{{ url + '/publication/image/' + notification.publication.file }}" alt="publication_file.png"
+                    />
+                    <img 
+                        *ngIf="notification.publication && !notification.publication.file && notification.publication.content"
+                        src="../../../assets/quill.png" alt="quill.png"
+                        class="notification-text-content-img"
+                    />
+                </ng-container>
+                <ng-container *ngIf="notification.type === 'follow'">
+                    <img class="follow-notification-img" src="../../../assets/follow-notify.png" alt="follow.png">
+                </ng-container>
+            </div>
+        </li>
+    
+        <button *ngIf="notifications.length > 9 && nextPage" (click)="loadMore();">
+            Cargar mas <span><i class="plus circle icon"></i></span>
+        </button>
+
+    </ng-container>
+    <ng-container *ngIf="!notifications || notifications.length === 0">
+        <div class="not-found-notifications">
+            <p>Aún no tienes notificaciones
+                <i class="bell icon"></i>!!!
+            </p>
+        </div>
+    </ng-container>
+</ul>

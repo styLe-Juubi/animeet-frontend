@@ -1,0 +1,934 @@
+@import '../../scss/colors.scss';
+
+.ranking {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    user-select: none;
+
+    .inside {
+        flex: 0 0 30%;
+        margin-right: 16px;
+
+        h2 {
+            width: 100%;
+            padding: 10px 20px;
+            text-align: left;
+            letter-spacing: 1px;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0;
+            color: $font-dark;
+            background-color: $white;
+            border: 1px solid $border-light;
+
+            span {
+                float: right;
+
+                img {
+                    width: 30px;
+                    height: 30px;
+                    margin-top: -5px;
+                }
+            }
+        }
+
+        &:nth-of-type(1) {
+            border-right: 0;
+
+            .top-users-ul {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                list-style: none;
+                margin-top: 10px;
+    
+                li {
+                    width: 100%;
+                    position: relative;
+                    background-color: $white;
+                    border: 1px solid $border-light;
+                    margin-bottom: 10px;
+                    padding: 10px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                    cursor: pointer;
+                    transition: $transition;
+    
+                    &:hover {
+                        background-color: $purple;
+                        box-shadow: $shadow;
+                        border-color: $purple;
+                    }
+    
+                    &:hover .right-card h3,
+                    &:hover .right-card ul li,
+                    &:hover .right-card ul li span,
+                    &:hover .right-card ul h5 {
+                        color: $font-white;
+                    }
+    
+                    .left-card {
+                        flex: 0 0 40%;
+                        height: 220px;
+                        margin: 0;
+                        position: relative;
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        justify-content: center;
+    
+                        .background-image {
+                            width: 100%;
+                            position: absolute;
+                            height: 100%;
+                            object-fit: cover;
+                            z-index: 1;
+                            border-radius: 2px;
+                        }
+        
+                        .image-main {
+                            width: 100px;
+                            height: 100px;
+                            position: relative;
+                            object-fit: cover;
+                            border: 1px solid $border-light;
+                            border-radius: 50%;
+                            z-index: 2;
+                        }
+                    }
+    
+                    .right-card {
+                        flex: 0 0 60%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+    
+                        h3 {
+                            width: 220px;
+                            margin: 0;
+                            margin-left: 10px;
+                            letter-spacing: 1px;
+                            text-align: center;
+                            font-size: 16px;
+                            color: $font-dark;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            transition: $transition;
+                        }
+    
+                        ul {
+                            width: 100%;
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+            
+                            li {
+                                width: 100%;
+                                margin: 0;
+                                margin-bottom: 5px;
+                                letter-spacing: 1px;
+                                font-size: 13px;
+                                padding: 0px 10px;
+                                text-align: left;
+                                color: $font-gray;
+                                background-color: transparent;
+                                border: 0;
+                                transition: $transition;
+            
+                                span {
+                                    margin-left: auto;
+                                    float: right;
+                                    color: $purple;
+                                    transition: $transition;
+                                }
+    
+                                &:hover {
+                                    box-shadow: none;
+                                }
+                            }
+            
+                            h5 {
+                                width: 100%;
+                                margin: 0;
+                                text-align: center;
+                                letter-spacing: 1px;
+                                color: $purple;
+                                font-size: 14px;
+                                margin-bottom: 5px;
+                                transition: $transition;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &:nth-of-type(2) {
+            flex: 1 0 30%;
+            transform: scale(1.02);
+
+            h2 {
+                width: 100%;
+                background-color: $purple;
+                color: $font-white;
+                border: 0;
+            }
+
+            .related-search-ul {
+                width: 100%;
+                margin: 0;
+                min-height: 730px;
+                margin-top: 10px;
+                padding: 0;
+                list-style: none;
+                background-color: $white;
+                border: 1px solid $border-light;
+                
+                li {
+                    width: 100%;
+                    border-bottom: 1px solid $border-light;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                    padding: 5px 20px;
+                    transition: $transition;
+                    cursor: pointer;
+                    border-radius: 0;
+                    animation: fadeIn .5s;
+
+                    &:hover {
+                        background-color: $purple;
+                        border-color: $purple;
+                    }
+
+                    &:hover .content-search h4 {
+                        color: $font-white;
+                    }
+
+                    &:hover .content-search h4 span {
+                        color: $font-white !important;
+                    }
+
+                    &:hover .content-search p {
+                        color: $font-white;
+                    }
+
+                    &:last-child {
+                        border-bottom: 0;
+                    }
+
+                    &:first-child {
+                        border-bottom: 1px solid $border-light;
+                    }
+
+                    .image-search {
+                        width: 60px;
+                        height: 70px;
+                        text-align: center;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            background-color: $white;
+                            border: 1px solid $border-light;
+                            border-radius: 2px;
+                        }
+                    }
+
+                    .content-search {
+                        flex: 1 0 70%;
+                        height: 60px;
+                        padding: 0 10px;
+
+                        h4 {
+                            margin: 0;
+                            margin-top: -1px;
+                            letter-spacing: 1px;
+                            color: $font-gray;
+                            font-weight: 500;
+                            line-height: 13px;
+                            font-size: 13px;
+                            overflow: hidden;
+                            height: 13px;
+                            transition: $transition;
+                            padding-left: 5px;
+                            word-wrap: break-word;
+
+                            span {
+                                float: right;
+                            }
+                        }
+
+                        p {
+                            width: 100%;
+                            height: 40px;
+                            font-size: 11px;
+                            line-height: 13px;
+                            overflow: hidden;
+                            padding: 0 10px;
+                            margin-top: 7px;
+                            color: $font-gray;
+                        }
+                    }
+                }
+
+                button {
+                    width: 180px;
+                    padding: 10px;
+                    border: 0;
+                    border-radius: 2px;
+                    cursor: pointer;
+                    letter-spacing: 1px;
+                    text-align: left;
+                    color: $font-white;
+                    transition: $transition;
+                    background-color: $purple;
+                    margin: 20px auto;
+                    
+                    span {
+                        margin-left: 10px;
+                        float: right;
+                    }
+        
+                    &:hover {
+                        background-color: $purple !important;
+                        box-shadow: $shadow !important;
+                        color: $font-white !important;
+                        border-color: $purple !important;
+                    }
+                }
+            }
+        }
+
+        &:nth-of-type(3) {
+            border-left: 0;
+
+            .top-animes-ul {
+                width: 100%;
+                margin: 0;
+                margin-top: 10px;
+                padding: 0;
+                list-style: none;
+
+                li {
+                    width: 100%;
+                    height: 178.5px;
+                    margin-bottom: 10px;
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    position: relative;
+                    transition: $transition;
+                    cursor: pointer;
+                    border: 1px solid $border-light;
+
+                    &:hover {
+                        box-shadow: $shadow;
+                    }
+
+                    &:hover .over-coverImage-anime {
+                        background-color: $white;
+                    }
+
+                    &:hover .over-coverImage-anime .left-anime img {
+                        border-color: $border-light;
+                    }
+
+                    &:hover .over-coverImage-anime .right-anime h4 {
+                        color: $font-dark;
+                    }
+
+                    &:hover .over-coverImage-anime .right-anime p { 
+                        color: $font-gray;
+                    }
+
+                    .background-anime {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        z-index: 1;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    .over-coverImage-anime {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        background-color: rgba(0,0,0,.5);
+                        position: relative;
+                        z-index: 2;
+                        transition: $transition;
+
+                        .left-anime {
+                            flex: 0 0 40%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            img {
+                                width: 80%;
+                                height: 90%;
+                                object-fit: cover;
+                                border: 1px solid $font-gray;
+                                border-radius: 2px;
+                                transition: $transition;
+                            }
+                        }
+
+                        .right-anime {
+                            flex: 0 0 60%;
+                            height: 100%;
+
+                            h4 {
+                                width: 240px;
+                                font-size: 16px;
+                                letter-spacing: 1px;
+                                color: $font-white;
+                                margin: 0;
+                                margin-top: 10px;
+                                text-align: center;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                transition: $transition;
+                            }
+
+                            p {
+                                width: 100%;
+                                height: 115px;
+                                margin: 0;
+                                margin-top: 5px;
+                                font-size: 11px;
+                                letter-spacing: 1px;
+                                color: $font-white;
+                                line-height: 16px;
+                                overflow-y: scroll;
+                                padding-right: 10px;
+                                transition: $transition;
+
+                                &::-webkit-scrollbar {
+                                    display: none;
+                                }
+
+                                &:nth-of-type(2) {
+                                    width: 100%;
+                                    height: 20px;
+
+                                    span {
+                                        float: right;
+                                        font-size: 17px;
+
+                                        i {
+                                            color: $danger;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media ( max-width: 1013px ) {
+    .ranking {
+        display: none;
+    }
+    .ranking-movil {
+        width: 95%;
+        margin: 0 auto;
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 50px;
+        user-select: none;
+
+    .inside {
+        width: 100%;
+        margin-right: 16px;
+
+        &:nth-of-type(2) {
+            margin-top: -20px;
+        }
+
+            h2 {
+                width: 100%;
+                padding: 10px 20px;
+                text-align: left;
+                letter-spacing: 1px;
+                font-size: 16px;
+                font-weight: 500;
+                margin: 0;
+                color: $font-dark;
+                background-color: $white;
+                border: 1px solid $border-light;
+
+                span {
+                    float: right;
+
+                    img {
+                        width: 30px;
+                        height: 30px;
+                        margin-top: -5px;
+                    }
+                }
+            }
+
+            .top-users-ul {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                list-style: none;
+                margin-top: 10px !important;
+    
+                li {
+                    width: 100%;
+                    position: relative;
+                    background-color: $white;
+                    border: 1px solid $border-light;
+                    margin-bottom: 10px;
+                    padding: 10px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                    cursor: pointer;
+                    transition: $transition;
+    
+                    &:hover {
+                        background-color: $purple;
+                        box-shadow: $shadow;
+                        border-color: $purple;
+                    }
+    
+                    &:hover .right-card h3,
+                    &:hover .right-card ul li,
+                    &:hover .right-card ul li span,
+                    &:hover .right-card ul h5 {
+                        color: $white;
+                    }
+    
+                    .left-card {
+                        flex: 0 0 40%;
+                        height: 220px;
+                        margin: 0;
+                        position: relative;
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        justify-content: center;
+    
+                        .background-image {
+                            width: 100%;
+                            position: absolute;
+                            height: 100%;
+                            object-fit: cover;
+                            z-index: 1;
+                            border-radius: 2px;
+                        }
+        
+                        .image-main {
+                            width: 100px;
+                            height: 100px;
+                            position: relative;
+                            object-fit: cover;
+                            border: 1px solid $border-light;
+                            border-radius: 50%;
+                            z-index: 2;
+                        }
+                    }
+    
+                    .right-card {
+                        flex: 0 0 60%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+    
+                        h3 {
+                            width: 100%;
+                            margin: 0;
+                            margin-left: 10px;
+                            letter-spacing: 1px;
+                            text-align: center;
+                            font-size: 16px;
+                            height: 20px;
+                            color: $font-dark;
+                            overflow: hidden;
+                            transition: $transition;
+                        }
+    
+                        ul {
+                            width: 100%;
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+            
+                            li {
+                                width: 100%;
+                                margin: 0;
+                                margin-bottom: 5px;
+                                letter-spacing: 1px;
+                                font-size: 13px;
+                                padding: 0px 10px;
+                                text-align: left;
+                                color: $font-gray;
+                                background-color: transparent;
+                                border: 0;
+                                transition: $transition;
+            
+                                span {
+                                    margin-left: auto;
+                                    float: right;
+                                    color: $purple;
+                                    transition: $transition;
+                                }
+    
+                                &:hover {
+                                    box-shadow: none;
+                                }
+                            }
+            
+                            h5 {
+                                width: 100%;
+                                margin: 0;
+                                text-align: center;
+                                letter-spacing: 1px;
+                                color: $purple;
+                                font-size: 14px;
+                                margin-bottom: 5px;
+                                transition: $transition;
+                            }
+                        }
+                    }
+                }
+            }
+
+            h2 {
+                width: 100%;
+                background-color: $purple;
+                color: $font-white;
+                border: 0;
+            }
+
+            .related-search-ul {
+                width: 100%;
+                margin: 0;
+                min-height: 730px;
+                margin-top: 10px;
+                padding: 0;
+                list-style: none;
+                background-color: $white;
+                border: 1px solid $border-light;
+                
+                li {
+                    width: 100%;
+                    border-bottom: 1px solid $border-light;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                    padding: 5px 20px;
+                    transition: $transition;
+                    cursor: pointer;
+                    border-radius: 0;
+                    animation: fadeIn .5s;
+
+                    &:hover {
+                        background-color: $purple;
+                        border-color: $purple;
+                    }
+
+                    &:hover .content-search h4 {
+                        color: $font-white;
+                    }
+
+                    &:hover .content-search h4 span {
+                        color: $font-white !important;
+                    }
+
+                    &:hover .content-search p {
+                        color: $font-white;
+                    }
+
+                    &:last-child {
+                        border-bottom: 0;
+                    }
+
+                    &:first-child {
+                        border-bottom: 1px solid $border-light;
+                    }
+
+                    .image-search {
+                        width: 60px;
+                        height: 70px;
+                        text-align: center;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            background-color: $white;
+                            border: 1px solid $border-light;
+                            border-radius: 2px;
+                        }
+                    }
+
+                    .content-search {
+                        flex: 1 0 70%;
+                        height: 60px;
+                        padding: 0 10px;
+
+                        h4 {
+                            margin: 0;
+                            margin-top: -1px;
+                            letter-spacing: 1px;
+                            color: $font-gray;
+                            font-weight: 500;
+                            line-height: 13px;
+                            font-size: 13px;
+                            overflow: hidden;
+                            height: 13px;
+                            transition: $transition;
+                            padding-left: 5px;
+                            word-wrap: break-word;
+
+                            span {
+                                float: right;
+                            }
+                        }
+
+                        p {
+                            width: 100%;
+                            height: 40px;
+                            font-size: 11px;
+                            line-height: 13px;
+                            overflow: hidden;
+                            padding: 0 10px;
+                            margin-top: 7px;
+                            color: $font-gray;
+                        }
+                    }
+                }
+
+                button {
+                    width: 180px;
+                    padding: 10px;
+                    border: 0;
+                    border-radius: 2px;
+                    cursor: pointer;
+                    letter-spacing: 1px;
+                    text-align: left;
+                    color: $font-white;
+                    transition: $transition;
+                    background-color: $purple;
+                    margin: 20px auto;
+                    
+                    span {
+                        margin-left: 10px;
+                        float: right;
+                    }
+        
+                    &:hover {
+                        background-color: $purple !important;
+                        box-shadow: $shadow !important;
+                        color: $font-white !important;
+                        border-color: $purple !important;
+                    }
+                }
+            }
+
+            .top-animes-ul {
+                width: 100%;
+                margin: 0;
+                margin-top: 10px;
+                padding: 0;
+                list-style: none;
+
+                li {
+                    width: 100%;
+                    height: 178.5px;
+                    margin-bottom: 10px;
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    position: relative;
+                    transition: $transition;
+                    cursor: pointer;
+                    border: 1px solid $border-light;
+
+                    &:hover {
+                        box-shadow: $shadow;
+                    }
+
+                    &:hover .over-coverImage-anime {
+                        background-color: $white;
+                    }
+
+                    &:hover .over-coverImage-anime .left-anime img {
+                        border-color: $border-light;
+                    }
+
+                    &:hover .over-coverImage-anime .right-anime h4 {
+                        color: $font-dark;
+                    }
+
+                    &:hover .over-coverImage-anime .right-anime p { 
+                        color: $font-gray;
+                    }
+
+                    .background-anime {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        z-index: 1;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    .over-coverImage-anime {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        background-color: rgba(0,0,0,.5);
+                        position: relative;
+                        z-index: 2;
+                        transition: $transition;
+
+                        .left-anime {
+                            flex: 0 0 40%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            img {
+                                width: 80%;
+                                height: 90%;
+                                object-fit: cover;
+                                border: 1px solid $font-gray;
+                                border-radius: 2px;
+                                transition: $transition;
+                            }
+                        }
+
+                        .right-anime {
+                            flex: 0 0 60%;
+                            height: 100%;
+
+                            h4 {
+                                width: 100%;
+                                font-size: 16px;
+                                letter-spacing: 1px;
+                                color: $font-white;
+                                margin: 0;
+                                margin-top: 10px;
+                                text-align: center;
+                                overflow: hidden;
+                                height: 20px;
+                                transition: $transition;
+                            }
+
+                            p {
+                                width: 100%;
+                                height: 115px;
+                                margin: 0;
+                                margin-top: 5px;
+                                font-size: 11px;
+                                letter-spacing: 1px;
+                                color: $font-white;
+                                line-height: 16px;
+                                overflow-y: scroll;
+                                padding-right: 10px;
+                                transition: $transition;
+
+                                &::-webkit-scrollbar {
+                                    display: none;
+                                }
+
+                                &:nth-of-type(2) {
+                                    width: 100%;
+                                    height: 20px;
+
+                                    span {
+                                        float: right;
+                                        font-size: 17px;
+
+                                        i {
+                                            color: $danger;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        
+    }
+    }
+}
+
+@media ( min-width: 1014px ) {
+    .ranking {
+        width: 100%;
+        zoom: 70%;
+    }
+    .ranking-movil {
+        display: none;
+    }
+}
+
+@media ( min-width: 1260px ) {
+    .ranking {
+        zoom: 90%;
+        .inside {
+            &:nth-of-type(3) {
+                .top-animes-ul {
+                    li {
+                        .over-coverImage-anime {
+                            .right-anime {
+                                p {
+                                    height: 110px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media ( min-width: 1340px ) {
+    .ranking {
+        width: 96%;
+    }
+}
+
+@media ( min-width: 1590px ) {
+    .ranking {
+        zoom: 100%;
+    }
+}
+
+@media ( min-width: 1890px ) {
+    .ranking {
+        width: 80%;
+        zoom: 100%;
+    }
+}
